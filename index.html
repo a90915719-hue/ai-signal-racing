@@ -1,0 +1,3422 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>🚦 AI 신호등 가족 | 캡틴 & 김비서 실시간 전광판</title>
+  
+  <meta name="theme-color" content="#070B14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AI신호등">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700;900&family=Pretendard:wght@500;700;800;900&display=swap">
+  
+  <style>
+    :root {
+      --bg: #070B14;
+      --board-bg: #0D1426;
+      --panel: #131D36;
+      --border: #23355E;
+      --gold: #F59E0B;
+      --gold-light: #FDE68A;
+      --gold-glow: rgba(245, 158, 11, 0.4);
+      --green: #10B981;
+      --green-glow: rgba(16, 185, 129, 0.4);
+      --cyan: #06B6D4;
+      --cyan-glow: rgba(6, 182, 212, 0.4);
+      --red: #EF4444;
+      --purple: #8B5CF6;
+      --text: #F8FAFC;
+      --subtext: #94A3B8;
+
+      
+    /* 👑 서울경마 테마 (로열 블루/골드) */
+    .meet-seoul { border-left: 4px solid #3B82F6 !important; background: rgba(30, 58, 138, 0.15); }
+    .meet-seoul.active { border-left-color: #60A5FA !important; background: rgba(59, 130, 246, 0.28) !important; box-shadow: 0 0 16px rgba(59, 130, 246, 0.4); }
+    .time-seoul { background: linear-gradient(135deg, #1E3A8A, #3B82F6) !important; color: #fff !important; border: 1px solid #60A5FA !important; }
+
+    /* 🌊 부산경마 테마 (사파이어 블루) */
+      --busan-blue: #38BDF8;
+      --busan-border: #1E40AF;
+      --busan-bg: linear-gradient(135deg, #0C1E40, #081329);
+
+      /* 🍊 제주경마 테마 (선셋 탠저린 오렌지) */
+      --jeju-orange: #FB923C;
+      --jeju-border: #C2410C;
+      --jeju-bg: linear-gradient(135deg, #381A08, #200E03);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: radial-gradient(ellipse at 50% -10%, #1E294B 0%, #0A1020 60%, #03060D 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    .digital { font-family: 'Chakra Petch', monospace; }
+
+    /* 결과 확정 시 적중마 번쩍번쩍 네온 불꽃 애니메이션 (평소에는 불 꺼짐!) */
+    @keyframes hitGoldSparkle {
+      0%, 100% {
+        box-shadow: 0 0 15px #F59E0B, 0 0 35px #EF4444, inset 0 0 10px #FDE68A;
+        border-color: #F59E0B;
+        transform: scale(1.03);
+      }
+      50% {
+        box-shadow: 0 0 30px #FFFFFF, 0 0 60px #FBBF24, inset 0 0 20px #FFFFFF;
+        border-color: #FFFFFF;
+        transform: scale(1.1);
+      }
+    }
+    @keyframes hitSilverSparkle {
+      0%, 100% {
+        box-shadow: 0 0 15px #06B6D4, 0 0 30px #3B82F6, inset 0 0 10px #A5F3FC;
+        border-color: #06B6D4;
+        transform: scale(1.03);
+      }
+      50% {
+        box-shadow: 0 0 30px #FFFFFF, 0 0 55px #22D3EE, inset 0 0 20px #FFFFFF;
+        border-color: #FFFFFF;
+        transform: scale(1.09);
+      }
+    }
+    @keyframes hitBronzeSparkle {
+      0%, 100% {
+        box-shadow: 0 0 15px #10B981, 0 0 30px #059669, inset 0 0 10px #A7F3D0;
+        border-color: #10B981;
+        transform: scale(1.02);
+      }
+      50% {
+        box-shadow: 0 0 28px #34D399, 0 0 50px #10B981, inset 0 0 18px #FFFFFF;
+        border-color: #34D399;
+        transform: scale(1.08);
+      }
+    }
+    @keyframes timerPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.03); }
+    }
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    /* 상단 고정 헤더 */
+    .billboard-header {
+      background: linear-gradient(180deg, #162444 0%, #0D162C 100%);
+      border-bottom: 2px solid var(--gold);
+      padding: 12px 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.85);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .traffic-lamp {
+      display: flex;
+      gap: 5px;
+      background: #020617;
+      padding: 5px 8px;
+      border-radius: 20px;
+      border: 1px solid #334155;
+    }
+    .lamp { width: 11px; height: 11px; border-radius: 50%; opacity: 0.3; }
+    .lamp.red { background: #EF4444; opacity: 1; box-shadow: 0 0 10px #EF4444; }
+    .lamp.yellow { background: #F59E0B; opacity: 1; box-shadow: 0 0 10px #F59E0B; }
+    .lamp.green { background: #10B981; opacity: 1; box-shadow: 0 0 12px #10B981; }
+
+    .main-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 상단 액션 버튼 그룹 (카톡공유 / 홈화면추가 / 다크호스) */
+    .top-action-bar {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    /* 1. 카카오톡 1초 공유 버튼 */
+    .kakao-share-btn {
+      background: #FEE500;
+      color: #191919 !important;
+      font-weight: 900;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid #E6CF00;
+      box-shadow: 0 0 12px rgba(254, 229, 0, 0.4);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .kakao-share-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(254, 229, 0, 0.7);
+    }
+
+    /* 2. 폰 바탕화면 앱 설치 버튼 */
+    .install-pwa-btn {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #FFFFFF !important;
+      font-weight: 900;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid #6EE7B7;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .install-pwa-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.7);
+    }
+
+    /* 3. 다크호스 버튼 */
+    .darkhorse-btn {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #0B132B !important;
+      font-weight: 900;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid #FDE68A;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .darkhorse-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.7);
+    }
+
+    /* 실시간 시계 & 다음 발주 카운트다운 타이머 */
+    .timer-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 6, 23, 0.85);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .clock-live {
+      color: var(--green);
+      font-size: 13.5px;
+      font-weight: 900;
+    }
+    .countdown-box {
+      color: #FDE68A;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+    }
+
+    /* 상단 경주 퀵 리본 네비게이션 */
+    .quick-ribbon-container {
+      margin-top: 4px;
+    }
+    .track-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .track-tab-btn {
+      background: #1E293B;
+      color: var(--subtext);
+      border: 1px solid #334155;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .track-tab-btn.active {
+      background: linear-gradient(135deg, #2563EB, #1D4ED8);
+      color: #FFFFFF;
+      border-color: #60A5FA;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.6);
+    }
+    .track-tab-btn.tab-busan.active {
+      background: linear-gradient(135deg, #0284C7, #0369A1);
+      border-color: #38BDF8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+    }
+    .track-tab-btn.tab-jeju.active {
+      background: linear-gradient(135deg, #EA580C, #C2410C);
+      border-color: #FB923C;
+      box-shadow: 0 0 10px rgba(251, 146, 60, 0.6);
+    }
+
+    .quick-ribbon {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-top: 14px;
+      padding-bottom: 6px;
+      scroll-behavior: smooth;
+    }
+    .quick-ribbon::-webkit-scrollbar { height: 4px; }
+    .quick-ribbon::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* 리본 아이템 - 부산(파랑) / 제주(주황) */
+    .ribbon-item {
+      flex: 0 0 auto;
+      border-radius: 8px;
+      padding: 5px 9px;
+      text-align: center;
+      cursor: pointer;
+      min-width: 82px;
+      transition: all 0.15s;
+    }
+    .ribbon-item.meet-busan { background: #0B1933; border: 1.5px solid #1E40AF; }
+    .ribbon-item.meet-busan:hover { border-color: #38BDF8; }
+    .ribbon-item.meet-busan.active {
+      background: linear-gradient(135deg, #1E3A8A, #0C1E40);
+      border-color: #38BDF8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+    }
+    .ribbon-item.meet-jeju { background: #251307; border: 1.5px solid #C2410C; }
+    .ribbon-item.meet-jeju:hover { border-color: #FB923C; }
+    .ribbon-item.meet-jeju.active {
+      background: linear-gradient(135deg, #7C2D12, #2D1408);
+      border-color: #FB923C;
+      box-shadow: 0 0 12px rgba(251, 146, 60, 0.6);
+    }
+
+    .ribbon-name { font-size: 11.5px; font-weight: 900; }
+    .ribbon-item.meet-busan .ribbon-name { color: #BAE6FD; }
+    .ribbon-item.meet-jeju .ribbon-name { color: #FED7AA; }
+
+    .ribbon-time {
+      font-size: 10.5px;
+      font-family: 'Chakra Petch', monospace;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin: 1px 0;
+    }
+    .ribbon-countdown {
+      font-size: 9px;
+      font-weight: 800;
+      border-radius: 4px;
+      padding: 1px 4px;
+      display: inline-block;
+    }
+    .cd-upcoming { background: rgba(59, 130, 246, 0.25); color: #93C5FD; }
+    .cd-urgent { background: rgba(239, 68, 68, 0.35); color: #FCA5A5; animation: none !important; }
+    .cd-past { background: rgba(100, 116, 139, 0.2); color: #94A3B8; }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+
+    /* 메인 전광판 디스플레이 */
+    .billboard-display {
+      background: linear-gradient(155deg, #101935 0%, #080D1D 50%, #040711 100%);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 25px rgba(245, 158, 11, 0.2);
+    }
+    .bb-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .bb-action-badge {
+      font-size: 13.5px;
+      font-weight: 900;
+      padding: 6px 14px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .action-go {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #fff;
+      box-shadow: 0 0 20px var(--green-glow);
+      border: 1px solid #6EE7B7;
+    }
+    .action-high {
+      background: linear-gradient(135deg, #EF4444, #F59E0B);
+      color: #fff;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.7);
+      border: 1px solid #FDE68A;
+      animation: none !important;
+    }
+    .action-pass {
+      background: #334155;
+      color: #94A3B8;
+      border: 1px solid #475569;
+    }
+
+    .bb-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    /* 발주 시간 & 실시간 카운트다운 타이머 바 */
+    .time-timer-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .big-time-badge {
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .time-busan {
+      background: linear-gradient(135deg, #0284C7, #0369A1);
+      border: 1.5px solid #38BDF8;
+      color: #FFFFFF;
+    }
+    .time-jeju {
+      background: linear-gradient(135deg, #EA580C, #C2410C);
+      border: 1.5px solid #FB923C;
+      color: #FFFFFF;
+    }
+
+    .race-live-timer-badge {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1.5px solid var(--green);
+      color: #6EE7B7;
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+    }
+
+    /* 다크호스 실시간 확정 착순 현황 카드 */
+    .darkhorse-result-banner {
+      background: linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%);
+      border: 1.5px solid #8B5CF6;
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* 출격 판정 배너 */
+    .decision-banner {
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .decision-banner.go {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1.5px solid #10B981;
+      color: #A7F3D0;
+    }
+    .decision-banner.pass {
+      background: rgba(148, 163, 184, 0.1);
+      border: 1px solid #475569;
+      color: #CBD5E1;
+    }
+
+    /* 적중 축하 배너 */
+    .hit-celebrate-banner {
+      display: none;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(16, 185, 129, 0.25));
+      border: 2px solid #F59E0B;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      font-weight: 900;
+      color: #FDE68A;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+      animation: none !important;
+      text-align: center;
+    }
+
+    /* 단계별 카드 섹션 */
+    .stage-section {
+      background: rgba(13, 20, 38, 0.85);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .stage-title {
+      font-size: 14px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .picks-grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .picks-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .pick-cell {
+      background: #0B132B;
+      border: 1.5px solid #334155;
+      border-radius: 14px;
+      padding: 10px 6px;
+      text-align: center;
+      position: relative;
+      transition: all 0.25s;
+    }
+    .pick-cell.axis {
+      border-color: rgba(16, 185, 129, 0.6);
+      background: linear-gradient(180deg, #063C2E 0%, #031B15 100%);
+    }
+    .pick-cell.interest {
+      border-color: rgba(245, 158, 11, 0.6);
+      background: linear-gradient(180deg, #4A2805 0%, #291402 100%);
+    }
+
+    /* 🔥 결과 확정 후 적중에 성공했을 때만 켜지는 네온 불꽃 점등! */
+    .pick-cell.hit-rank-1 {
+      border: 3.5px solid #F59E0B !important;
+      box-shadow: 0 0 25px #F59E0B, 0 0 45px rgba(245, 158, 11, 0.9), inset 0 0 15px #FDE68A !important;
+      background: rgba(245, 158, 11, 0.28) !important;
+      z-index: 10 !important;
+    }
+    .pick-cell.hit-rank-2 {
+      border: 3.5px solid #06B6D4 !important;
+      box-shadow: 0 0 25px #06B6D4, 0 0 45px rgba(6, 182, 212, 0.9), inset 0 0 15px #A5F3FC !important;
+      background: rgba(6, 182, 212, 0.28) !important;
+      z-index: 10 !important;
+    }
+    .pick-cell.hit-rank-3 {
+      border: 3.5px solid #10B981 !important;
+      box-shadow: 0 0 25px #10B981, 0 0 45px rgba(16, 185, 129, 0.9), inset 0 0 15px #A7F3D0 !important;
+      background: rgba(16, 185, 129, 0.28) !important;
+      z-index: 10 !important;
+    }
+    .pick-cell.hit-rank-1 .horse-circle,
+    .pick-cell.hit-rank-2 .horse-circle,
+    .pick-cell.hit-rank-3 .horse-circle {
+      box-shadow: 0 0 20px #FFFFFF, 0 0 35px currentColor !important;
+      font-weight: 900 !important;
+    }
+    .hit-rank-badge {
+      position: absolute;
+      top: -9px;
+      right: -6px;
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 2px 6px;
+      border-radius: 12px;
+      animation: none !important;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    .badge-r1 { background: linear-gradient(135deg, #EF4444, #F59E0B); box-shadow: 0 0 10px rgba(245,158,11,0.9); }
+    .badge-r2 { background: linear-gradient(135deg, #0284C7, #06B6D4); box-shadow: 0 0 10px rgba(6,182,212,0.9); }
+    .badge-r3 { background: linear-gradient(135deg, #059669, #10B981); box-shadow: 0 0 10px rgba(16,185,129,0.9); }
+
+    .horse-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      margin: 6px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      border: 2px solid rgba(255,255,255,0.4);
+    }
+    .cell-tag { font-size: 11px; font-weight: 800; color: #94A3B8; }
+    .cell-sub { font-size: 10.5px; font-weight: 700; color: #CBD5E1; margin-top: 2px; }
+
+    .stage-desc {
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* 삼복·삼쌍 조합 카드 */
+    .combo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (max-width: 600px) { .combo-grid { grid-template-columns: 1fr; } }
+    .combo-box {
+      background: linear-gradient(145deg, #16203D 0%, #0D1429 100%);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .combo-tag { font-size: 12px; font-weight: 900; color: var(--gold); margin-bottom: 6px; }
+    .combo-val { font-size: 15px; font-weight: 900; color: #FFFFFF; line-height: 1.4; word-break: keep-all; }
+
+    /* 🏁 하단 부산 & 제주 실시간 경주 결과 세로 2열 현황판 */
+    .vertical-results-section {
+      background: #0B1326;
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    }
+    .vr-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .vr-columns-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 640px) {
+      .vr-columns-container { grid-template-columns: 1fr; }
+    }
+    .vr-col {
+      background: rgba(13, 20, 38, 0.7);
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .vr-col.col-busan { border: 1.5px solid var(--busan-border); }
+    .vr-col.col-jeju { border: 1.5px solid var(--jeju-border); }
+
+    .vr-col-title {
+      font-size: 13.5px;
+      font-weight: 900;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .col-title-busan { background: rgba(30, 64, 175, 0.3); color: #38BDF8; }
+    .col-title-jeju { background: rgba(194, 65, 12, 0.3); color: #FB923C; }
+
+    .vr-row {
+      display: table-row !important;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .vr-row:hover { border-color: var(--gold); transform: translateX(2px); }
+    .vr-row.active {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, #1E293B, #0F172A);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+    }
+    .vr-left { display: flex; align-items: center; gap: 7px; }
+    .vr-rc-name { font-size: 12px; font-weight: 900; color: #F8FAFC; }
+    .vr-rc-time { font-size: 10.5px; color: #94A3B8; font-family: 'Chakra Petch', monospace; }
+    .vr-cd-badge { font-size: 9px; padding: 1px 4px; border-radius: 4px; font-weight: 800; }
+    .vr-right { font-size: 11.5px; font-weight: 800; }
+    .vr-confirmed { color: #FDE68A; display: flex; align-items: center; gap: 4px; }
+    .vr-waiting { color: #64748B; font-size: 10.5px; }
+
+    /* 리모컨 그리드 카드 */
+    .remote-card {
+      background: #0B1326;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .grid-label {
+      font-size: 13.5px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .race-button-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 540px) {
+      .race-button-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .r-btn {
+      border-radius: 10px;
+      padding: 10px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .r-btn.meet-busan { background: #0B1933; border: 1.5px solid #1E40AF; }
+    .r-btn.meet-busan:hover { border-color: #38BDF8; transform: translateY(-1px); }
+    .r-btn.meet-busan.active {
+      background: linear-gradient(135deg, #1E3A8A, #0C1E40);
+      border-color: #38BDF8;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+    }
+    .r-btn.meet-jeju { background: #251307; border: 1.5px solid #C2410C; }
+    .r-btn.meet-jeju:hover { border-color: #FB923C; transform: translateY(-1px); }
+    .r-btn.meet-jeju.active {
+      background: linear-gradient(135deg, #7C2D12, #2D1408);
+      border-color: #FB923C;
+      box-shadow: 0 0 15px rgba(251, 146, 60, 0.6);
+    }
+    .r-btn-name { font-size: 13px; font-weight: 900; color: #fff; }
+    .r-btn-time {
+      font-size: 11px;
+      color: #38BDF8;
+      font-family: 'Chakra Petch', monospace;
+      font-weight: 800;
+      margin: 2px 0;
+    }
+    .r-btn.meet-jeju .r-btn-time { color: #FB923C; }
+    .r-btn-sub { font-size: 10.5px; font-weight: 800; }
+
+    /* 팝업 모달 & 토스트 메시지 스타일 */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      backdrop-filter: blur(4px);
+    }
+    .modal-box {
+      background: #0F172A;
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      max-width: 440px;
+      width: 100%;
+      padding: 22px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.9);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: #94A3B8;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .modal-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: #FDE68A;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-step {
+      background: #1E293B;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .modal-step strong { color: #38BDF8; }
+
+    .toast-msg {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(16, 185, 129, 0.95);
+      color: #FFFFFF;
+      font-weight: 900;
+      font-size: 13px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      z-index: 2000;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* 캡틴 수칙 */
+    .policy-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #CBD5E1;
+    }
+  
+    /* 텍스트 흔들림/회전 완전 제거 및 정적 안정화 */
+    .digital, .countdown-box, .clock-live, .timer-strip, .billboard-header {
+      font-variant-numeric: tabular-nums;
+      -webkit-font-smoothing: antialiased;
+    }
+    * {
+      animation-play-state: paused !important; /* 모든 불필요한 떨림/회전 애니메이션 정지 */
+    }
+    /* 단, 토스트 알림만 가볍게 페이드인 허용 */
+    .toast-msg {
+      animation-play-state: running !important;
+    }
+
+
+    /* 100% 완전 정적 고정 스타일 (회전, 떨림, 박동 일체 박멸) */
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
+    }
+    .digital, .countdown-box, .clock-live, .timer-strip {
+      font-variant-numeric: tabular-nums;
+    }
+
+
+    /* 🔥 캡틴 하명: 현재 진행 경주 강력 네온 조명 (밋밋함 100% 탈피!) */
+    .ribbon-item.active {
+      border: 3px solid #FCD34D !important;
+      box-shadow: 0 0 20px #F59E0B, 0 0 35px rgba(245, 158, 11, 0.85), inset 0 0 10px #FDE68A !important;
+      background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%) !important;
+      position: relative !important;
+      z-index: 10 !important;
+      transform: none !important; /* 무회전 고정 */
+    }
+    .ribbon-item.active .ribbon-name {
+      color: #FFFFFF !important;
+      font-size: 13px !important;
+      font-weight: 900 !important;
+      text-shadow: 0 0 10px #FCD34D !important;
+    }
+    .ribbon-item.active .ribbon-time {
+      color: #FDE68A !important;
+      font-weight: 900 !important;
+    }
+    .ribbon-item.active::before {
+      content: '[진행중]';
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%) !important;
+      background: linear-gradient(135deg, #EF4444, #F59E0B);
+      color: #FFFFFF;
+      font-size: 9.5px;
+      font-weight: 900;
+      padding: 1px 7px;
+      border-radius: 8px;
+      white-space: nowrap;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.95);
+      border: 1px solid #FFFFFF;
+    }
+    .live-active-tag {
+      background: linear-gradient(135deg, #EF4444, #F59E0B);
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-left: 8px;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+
+    /* ====== 김비서 실시간 진행 경주 하이라이트 & 자동전환 네온 ====== */
+    @keyframes liveGlow {
+      0% {
+        box-shadow: 0 0 4px rgba(245, 158, 11, 0.5), inset 0 0 4px rgba(245, 158, 11, 0.2);
+        border-color: #F59E0B;
+      }
+      50% {
+        box-shadow: 0 0 16px 4px rgba(245, 158, 11, 0.9), inset 0 0 8px rgba(245, 158, 11, 0.4);
+        border-color: #FDE047;
+      }
+      100% {
+        box-shadow: 0 0 4px rgba(245, 158, 11, 0.5), inset 0 0 4px rgba(245, 158, 11, 0.2);
+        border-color: #F59E0B;
+      }
+    }
+
+    .r-btn.is-live {
+      border: 2px solid #F59E0B !important;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(15, 23, 42, 0.95)) !important;
+      animation: liveGlow 1.8s infinite ease-in-out !important;
+      transform: translateY(-2px);
+    }
+    .r-btn.is-live .r-btn-name {
+      color: #FDE047 !important;
+      font-weight: 900 !important;
+      text-shadow: 0 0 8px rgba(245, 158, 11, 0.8);
+    }
+    .r-btn .live-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #EF4444, #F59E0B);
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 1px 5px;
+      border-radius: 4px;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+      margin-top: 2px;
+    }
+    .r-btn .done-badge {
+      display: inline-block;
+      color: #34D399;
+      font-size: 10px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .ribbon-item.is-live {
+      border: 2px solid #F59E0B !important;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(30, 41, 59, 0.95)) !important;
+      animation: liveGlow 1.8s infinite ease-in-out !important;
+    }
+    .ribbon-item.is-live .ribbon-name {
+      color: #FDE047 !important;
+      font-weight: 900 !important;
+      text-shadow: 0 0 8px rgba(245, 158, 11, 0.8);
+    }
+    .ribbon-item .ribbon-live-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #EF4444, #F59E0B);
+      color: #FFFFFF;
+      font-size: 9.5px;
+      font-weight: 900;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-bottom: 2px;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+    }
+    .ribbon-item .ribbon-done-badge {
+      display: inline-block;
+      color: #34D399;
+      font-size: 9.5px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .btn-return-live {
+      display: none;
+      align-items: center;
+      gap: 5px;
+      background: linear-gradient(135deg, #F59E0B, #EF4444);
+      color: #FFFFFF;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+      animation: liveGlow 2s infinite ease-in-out;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .btn-return-live:hover {
+      filter: brightness(1.15);
+    }
+
+  
+    /* ====== 캡틴 하명: 마번 특대형 확대 (가시성 300% 극대화) & 이모티콘 100% 제거 ====== */
+    .horse-circle {
+      width: 72px !important;
+      height: 72px !important;
+      border-radius: 50% !important;
+      margin: 8px auto !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 40px !important;
+      font-weight: 950 !important;
+      line-height: 1 !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6) !important;
+      border: 3px solid rgba(255,255,255,0.7) !important;
+      letter-spacing: -1.5px !important;
+      font-family: 'Pretendard', 'SF Pro Display', -apple-system, sans-serif !important;
+    }
+
+    .pick-cell {
+      padding: 12px 6px !important;
+      min-height: 145px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      position: relative !important;
+    }
+
+    .cell-tag {
+      font-size: 13.5px !important;
+      font-weight: 800 !important;
+      color: #F8FAFC !important;
+      margin-bottom: 2px !important;
+      letter-spacing: -0.3px !important;
+    }
+
+    .cell-sub {
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      color: #94A3B8 !important;
+      margin-top: 2px !important;
+    }
+
+    .hit-rank-badge {
+      position: absolute !important;
+      top: -12px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      font-size: 12px !important;
+      font-weight: 900 !important;
+      padding: 3px 8px !important;
+      border-radius: 6px !important;
+      white-space: nowrap !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6) !important;
+      z-index: 10 !important;
+      letter-spacing: -0.2px !important;
+    }
+
+    .badge-r1 { background: #D97706 !important; color: #FFFFFF !important; border: 1.5px solid #FDE68A !important; }
+    .badge-r2 { background: #0284C7 !important; color: #FFFFFF !important; border: 1.5px solid #BAE6FD !important; }
+    .badge-r3 { background: #059669 !important; color: #FFFFFF !important; border: 1.5px solid #A7F3D0 !important; }
+
+    /* 대형 결과 표시 상자 */
+    .res-num-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+    .res-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1.5px solid #475569;
+    }
+    .res-pill.r1 { border-color: #F59E0B; background: rgba(245, 158, 11, 0.2); }
+    .res-pill.r2 { border-color: #38BDF8; background: rgba(56, 189, 248, 0.2); }
+    .res-pill.r3 { border-color: #10B981; background: rgba(16, 185, 129, 0.2); }
+    .res-pill-label { font-size: 13.5px; font-weight: 800; }
+    .res-pill.r1 .res-pill-label { color: #FDE68A; }
+    .res-pill.r2 .res-pill-label { color: #BAE6FD; }
+    .res-pill.r3 .res-pill-label { color: #A7F3D0; }
+    .res-pill-num {
+      font-size: 32px;
+      font-weight: 950;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    /* 하단 수직 결과표 마번도 선명하게 확대 */
+    .vr-h-circle {
+      width: 32px !important;
+      height: 32px !important;
+      font-size: 19px !important;
+      font-weight: 950 !important;
+      line-height: 32px !important;
+      margin: 2px !important;
+    }
+
+    @media (max-width: 600px) {
+      .picks-grid-4 .horse-circle {
+        width: 62px !important;
+        height: 62px !important;
+        font-size: 35px !important;
+      }
+      .picks-grid-5 .horse-circle {
+        width: 52px !important;
+        height: 52px !important;
+        font-size: 29px !important;
+      }
+      .pick-cell {
+        padding: 8px 3px !important;
+        min-height: 125px !important;
+      }
+      .res-pill {
+        padding: 3px 6px;
+        gap: 4px;
+      }
+      .res-pill-num {
+        font-size: 26px;
+      }
+    }
+
+  
+    /* ====== 캡틴 하명: 발주카운트다운 & 발주임박 특대형 네온 레드 시인성 극대화 ====== */
+    .next-race-banner {
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.4), rgba(15, 23, 42, 0.98)) !important;
+      border: 2px solid #EF4444 !important;
+      box-shadow: 0 0 18px rgba(239, 68, 68, 0.5) !important;
+      font-size: 16.5px !important;
+      font-weight: 850 !important;
+      padding: 9px 18px !important;
+      border-radius: 12px !important;
+      color: #FFFFFF !important;
+    }
+
+    .bb-race-timer {
+      font-size: 20px !important;
+      font-weight: 950 !important;
+      padding: 10px 18px !important;
+      border-radius: 12px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      letter-spacing: -0.5px !important;
+      font-family: 'Pretendard', 'SF Pro Display', -apple-system, sans-serif !important;
+      transition: all 0.25s ease !important;
+    }
+
+    /* 발주 임박 (10분 이내): 강력한 네온 레드 펄스 */
+    .timer-urgent-red {
+      background: linear-gradient(135deg, #DC2626, #991B1B) !important;
+      border: 3px solid #FCA5A5 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.95), inset 0 0 10px rgba(255, 255, 255, 0.4) !important;
+      animation: pulseUrgentRed 1.2s infinite ease-in-out !important;
+    }
+
+    /* 대기 중: 눈에 확 띄는 선명한 레드 테마 */
+    .timer-upcoming-red {
+      background: linear-gradient(135deg, #991B1B, #450A0A) !important;
+      border: 2.5px solid #EF4444 !important;
+      color: #FEE2E2 !important;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.5) !important;
+    }
+
+    @keyframes pulseUrgentRed {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.7), inset 0 0 6px rgba(255, 255, 255, 0.3);
+        border-color: #EF4444;
+      }
+      50% {
+        transform: scale(1.025);
+        box-shadow: 0 0 35px 8px rgba(239, 68, 68, 1), inset 0 0 14px rgba(255, 255, 255, 0.6);
+        border-color: #FFFFFF;
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.7), inset 0 0 6px rgba(255, 255, 255, 0.3);
+        border-color: #EF4444;
+      }
+    }
+
+  
+    /* ====== 캡틴 하명: 적중 마번 네온 불꽃 점등 & 초강력 펄스 발광 애니메이션 ====== */
+    @keyframes neonGlowR1 {
+      0% {
+        box-shadow: 0 0 25px #FBBF24, 0 0 50px #F59E0B, inset 0 0 15px #FEF3C7 !important;
+        transform: scale(1.02);
+      }
+      50% {
+        box-shadow: 0 0 45px #F59E0B, 0 0 85px #D97706, inset 0 0 25px #FDE68A !important;
+        transform: scale(1.07);
+      }
+      100% {
+        box-shadow: 0 0 25px #FBBF24, 0 0 50px #F59E0B, inset 0 0 15px #FEF3C7 !important;
+        transform: scale(1.02);
+      }
+    }
+    @keyframes neonGlowR2 {
+      0% {
+        box-shadow: 0 0 25px #38BDF8, 0 0 50px #0284C7, inset 0 0 15px #E0F2FE !important;
+        transform: scale(1.02);
+      }
+      50% {
+        box-shadow: 0 0 45px #0284C7, 0 0 85px #0369A1, inset 0 0 25px #BAE6FD !important;
+        transform: scale(1.07);
+      }
+      100% {
+        box-shadow: 0 0 25px #38BDF8, 0 0 50px #0284C7, inset 0 0 15px #E0F2FE !important;
+        transform: scale(1.02);
+      }
+    }
+    @keyframes neonGlowR3 {
+      0% {
+        box-shadow: 0 0 25px #34D399, 0 0 50px #059669, inset 0 0 15px #D1FAE5 !important;
+        transform: scale(1.02);
+      }
+      50% {
+        box-shadow: 0 0 45px #059669, 0 0 85px #047857, inset 0 0 25px #A7F3D0 !important;
+        transform: scale(1.07);
+      }
+      100% {
+        box-shadow: 0 0 25px #34D399, 0 0 50px #059669, inset 0 0 15px #D1FAE5 !important;
+        transform: scale(1.02);
+      }
+    }
+
+    .pick-cell.hit-rank-1 {
+      border: 4px solid #F59E0B !important;
+      background: rgba(245, 158, 11, 0.32) !important;
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.95), inset 0 0 20px rgba(253, 230, 138, 0.5) !important;
+      z-index: 25 !important;
+    }
+    .pick-cell.hit-rank-1 .horse-circle {
+      border: 4.5px solid #FFFFFF !important;
+      animation: neonGlowR1 1.3s infinite ease-in-out !important;
+    }
+
+    .pick-cell.hit-rank-2 {
+      border: 4px solid #0284C7 !important;
+      background: rgba(2, 132, 199, 0.32) !important;
+      box-shadow: 0 0 35px rgba(2, 132, 199, 0.95), inset 0 0 20px rgba(186, 230, 253, 0.5) !important;
+      z-index: 25 !important;
+    }
+    .pick-cell.hit-rank-2 .horse-circle {
+      border: 4.5px solid #FFFFFF !important;
+      animation: neonGlowR2 1.3s infinite ease-in-out !important;
+    }
+
+    .pick-cell.hit-rank-3 {
+      border: 4px solid #059669 !important;
+      background: rgba(5, 150, 105, 0.32) !important;
+      box-shadow: 0 0 35px rgba(5, 150, 105, 0.95), inset 0 0 20px rgba(167, 243, 208, 0.5) !important;
+      z-index: 25 !important;
+    }
+    .pick-cell.hit-rank-3 .horse-circle {
+      border: 4.5px solid #FFFFFF !important;
+      animation: neonGlowR3 1.3s infinite ease-in-out !important;
+    }
+
+  
+    /* ====== 캡틴 하명: 상단 리본 경주 박스 크기 차등화 (지난경주 축소 / 현 진행경주 특대형 확대) ====== */
+    .ribbon-item.is-done {
+      min-width: 52px !important;
+      max-width: 62px !important;
+      padding: 3px 2px !important;
+      opacity: 0.55 !important;
+      border-width: 1px !important;
+      transition: all 0.2s !important;
+    }
+    .ribbon-item.is-done:hover {
+      opacity: 0.95 !important;
+      transform: scale(1.05) !important;
+    }
+    .ribbon-item.is-done .ribbon-name {
+      font-size: 10px !important;
+      letter-spacing: -0.5px !important;
+    }
+    .ribbon-item.is-done .ribbon-time {
+      font-size: 9px !important;
+      color: #94A3B8 !important;
+      margin: 0 !important;
+    }
+    .ribbon-item.is-done .ribbon-countdown {
+      display: none !important;
+    }
+    .ribbon-item.is-done .ribbon-done-badge {
+      font-size: 8px !important;
+      padding: 1px 3px !important;
+      background: rgba(52, 211, 153, 0.15) !important;
+      color: #34D399 !important;
+      border: 1px solid rgba(52, 211, 153, 0.4) !important;
+      border-radius: 3px !important;
+      margin-bottom: 1px !important;
+    }
+
+    .ribbon-item.is-live {
+      min-width: 145px !important;
+      padding: 9px 12px !important;
+      border: 3.5px solid #EF4444 !important;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.5), rgba(245, 158, 11, 0.4), #0F172A) !important;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.95), 0 0 45px rgba(245, 158, 11, 0.6), inset 0 0 15px rgba(254, 202, 202, 0.5) !important;
+      transform: scale(1.08) !important;
+      margin: 0 6px !important;
+      z-index: 20 !important;
+      animation: liveGlow 1.4s infinite alternate ease-in-out !important;
+    }
+    .ribbon-item.is-live .ribbon-name {
+      font-size: 14.5px !important;
+      font-weight: 950 !important;
+      color: #FFFFFF !important;
+      text-shadow: 0 0 10px #EF4444 !important;
+    }
+    .ribbon-item.is-live .ribbon-time {
+      font-size: 13.5px !important;
+      font-weight: 900 !important;
+      color: #FDE047 !important;
+    }
+    .ribbon-item.is-live .ribbon-countdown {
+      font-size: 11px !important;
+      font-weight: 900 !important;
+      background: #EF4444 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 0 8px #EF4444 !important;
+      padding: 2px 6px !important;
+    }
+    .ribbon-item.is-live .ribbon-live-badge {
+      display: inline-block !important;
+      background: #EF4444 !important;
+      color: #FFFFFF !important;
+      font-size: 10.5px !important;
+      font-weight: 950 !important;
+      padding: 2px 8px !important;
+      border-radius: 4px !important;
+      margin-bottom: 3px !important;
+      box-shadow: 0 0 10px #EF4444 !important;
+      animation: pulseBadge 0.9s infinite alternate ease-in-out !important;
+    }
+
+    /* ====== 캡틴 하명: 하단 세로줄 종합 결과표 스타일 ====== */
+    .vr-master-card {
+      background: #0B1326;
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.8);
+    }
+    .vr-master-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-bottom: 1.5px solid rgba(245, 158, 11, 0.3);
+      padding-bottom: 12px;
+    }
+    .vr-filter-tabs {
+      display: flex;
+      gap: 6px;
+    }
+    .vr-tab-btn {
+      background: #1E293B;
+      border: 1px solid #334155;
+      color: #94A3B8;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .vr-tab-btn.active {
+      background: var(--gold);
+      color: #000000;
+      border-color: var(--gold);
+      font-weight: 900;
+    }
+    .vr-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .vr-master-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .vr-master-table th {
+      background: #101935;
+      color: #F8FAFC;
+      font-weight: 900;
+      padding: 10px 8px;
+      border-bottom: 2px solid #334155;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .vr-master-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #1E293B;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .vr-row {
+      display: table-row !important;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .vr-row:hover {
+      background: rgba(30, 41, 59, 0.7) !important;
+    }
+    .vr-row.active {
+      background: rgba(245, 158, 11, 0.18) !important;
+      border-left: 4px solid var(--gold) !important;
+    }
+    .vr-row-live {
+      background: rgba(239, 68, 68, 0.15) !important;
+      border-left: 4px solid #EF4444 !important;
+    }
+    .vr-row-live td {
+      color: #FFFFFF !important;
+    }
+    .vr-rc-badge {
+      font-size: 13.5px;
+      font-weight: 900;
+      display: inline-block;
+    }
+    .vr-rc-busan { color: #38BDF8; }
+    .vr-rc-jeju { color: #FB923C; }
+    .vr-time {
+      font-size: 11px;
+      color: #94A3B8;
+      font-family: 'Chakra Petch', monospace;
+      font-weight: 700;
+    }
+    .vr-ai-circles {
+      display: inline-flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+    }
+    .vr-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    }
+    .vr-circle.hit-1 {
+      box-shadow: 0 0 10px #F59E0B, 0 0 20px #F59E0B !important;
+      border: 2px solid #FFFFFF !important;
+      animation: neonGlowR1 1.2s infinite ease-in-out !important;
+    }
+    .vr-circle.hit-2 {
+      box-shadow: 0 0 10px #0284C7, 0 0 20px #0284C7 !important;
+      border: 2px solid #FFFFFF !important;
+      animation: neonGlowR2 1.2s infinite ease-in-out !important;
+    }
+    .vr-circle.hit-3 {
+      box-shadow: 0 0 10px #059669, 0 0 20px #059669 !important;
+      border: 2px solid #FFFFFF !important;
+      animation: neonGlowR3 1.2s infinite ease-in-out !important;
+    }
+    .vr-res-pill {
+      font-size: 13px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin: 1px;
+    }
+    .vr-pill-r1 { background: #D97706; color: #FFFFFF; border: 1px solid #FDE68A; }
+    .vr-pill-r2 { background: #0284C7; color: #FFFFFF; border: 1px solid #BAE6FD; }
+    .vr-pill-r3 { background: #059669; color: #FFFFFF; border: 1px solid #A7F3D0; }
+    .vr-hit-badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 900;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+    .vr-hit-badge.gold {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #000000;
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.8);
+    }
+    .vr-hit-badge.green {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #FFFFFF;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+    }
+    .vr-hit-badge.blue {
+      background: linear-gradient(135deg, #38BDF8, #0284C7);
+      color: #FFFFFF;
+    }
+
+  
+    /* ====== 캡틴 하명: 세로줄 결과표 4열 완벽 정렬 보장 CSS ====== */
+    .vr-master-table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      table-layout: fixed !important;
+    }
+    .vr-master-table tr.vr-row {
+      display: table-row !important;
+      width: 100% !important;
+    }
+    .vr-master-table th,
+    .vr-master-table td {
+      display: table-cell !important;
+      text-align: center !important;
+      vertical-align: middle !important;
+      padding: 10px 6px !important;
+      box-sizing: border-box !important;
+    }
+    .vr-master-table th:nth-child(1), .vr-master-table td:nth-child(1) { width: 25% !important; }
+    .vr-master-table th:nth-child(2), .vr-master-table td:nth-child(2) { width: 45% !important; }
+    .vr-master-table th:nth-child(3), .vr-master-table td:nth-child(3) { width: 30% !important; }
+
+  </style>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AI신호등경마">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+
+</head>
+<body>
+
+  <!-- 상단 네온 헤더 -->
+  <header class="billboard-header">
+    <div class="header-top">
+      <div class="logo-box">
+        <div class="traffic-lamp">
+          <div class="lamp red"></div>
+          <div class="lamp yellow"></div>
+          <div class="lamp green"></div>
+        </div>
+        <div class="main-title">
+          <span>캡틴 & 김비서</span>
+          <span style="color:var(--gold);">AI 신호등</span>
+        </div>
+      </div>
+      <!-- 상단 액션 버튼 그룹 -->
+      <div class="top-action-bar">
+        <!-- 캡틴 하명: 동생/가족 카톡 전송용 추천문구 원클릭 1초 복사 버튼 -->
+        <button onclick="copyKakaoMessageOnly()" class="kakao-share-btn" style="background:#FEE500 !important; color:#191919 !important; font-weight:950 !important; font-size:12.5px !important; padding:6px 13px !important; border:none !important; border-radius:8px !important; box-shadow:0 0 12px rgba(254,229,0,0.7) !important; cursor:pointer !important; display:inline-flex !important; align-items:center !important; gap:5px !important;" title="동생 및 지인에게 보낼 카톡 추천 메시지 1초 복사">
+          <span style="font-size:15px;">💬</span> <strong>동생 카톡 추천문구 복사</strong>
+        </button>
+        <button onclick="clickInstallPwa()" id="topPwaBtn" class="install-pwa-btn" title="스마트폰 바탕화면에 앱으로 설치">
+          <span>📲 폰 / 🖥️ PC 앱설치</span>
+        </button>
+        <a href="http://www.darkhs.com" target="_blank" class="darkhorse-btn" title="다크호스 실시간 인기도/배당/착순 새창 열기">
+          <span>📊 다크호스 ↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 실시간 시계 & 다음 경주 카운트다운 타이머 -->
+    <div class="timer-strip">
+      <div style="display:flex; align-items:center; gap:6px;">
+        <span style="color:#94A3B8;">⏰ 현재 시각</span>
+        <span class="digital clock-live" id="topClock">--:--:--</span>
+      </div>
+      <div class="countdown-box digital" id="nextRaceCountdown">
+        <span>다음 발주 계산 중...</span>
+      </div>
+    </div>
+
+    <!-- 상단 퀵 트랙 리본 (부산 / 제주 / 타임 한눈에!) -->
+    <div class="quick-ribbon-container">
+      <div class="track-tabs">
+        <button class="track-tab-btn active" onclick="filterTrack('ALL', event)">🌟 전체 17경주</button>
+        <button class="track-tab-btn" onclick="filterTrack('GO', event)">출격승부(15R)</button>
+        <button class="track-tab-btn tab-busan" onclick="filterTrack('서울', event)">서울경마(11R)</button>
+        <button class="track-tab-btn tab-jeju" onclick="filterTrack('제주', event)">제주경마(6R)</button>
+      </div>
+      <div class="quick-ribbon" id="quickRibbon"></div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- 메인 전광판 디스플레이 -->
+    <div class="billboard-display">
+      <div class="bb-top-bar">
+        <div id="bb-action" class="bb-action-badge action-go">출격 승부 (베팅 GO)</div>
+        <div id="bb-payout" style="font-size:12px; font-weight:800; color:var(--gold);">[중·고배당 경주]</div>
+      </div>
+
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+        <div class="bb-title" id="bb-title">부산 9R (1600m · 메인 중·고배당승부)</div>
+        <button id="btnReturnLive" onclick="resetToLiveRace()" class="btn-return-live" style="display:none;">실시간 경주로 복귀</button>
+      </div>
+      
+      <!-- 발주 시간 & 실시간 카운트다운 타이머 바 -->
+      <div class="time-timer-strip">
+        <div class="big-time-badge time-busan digital" id="bb-time-badge">
+          <span>발주</span>
+          <span id="bb-post-time" style="font-size:19px; font-weight:900;">11:00</span>
+        </div>
+        <div class="race-live-timer-badge digital" id="bb-race-timer">
+          <span>⏱️ 계산 중...</span>
+        </div>
+      </div>
+
+      <!-- 다크호스 확정 착순 현황바 -->
+      <div class="darkhorse-result-banner">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:13px; font-weight:900; color:#FDE68A;">🏁 다크호스 결과:</span>
+          <span id="bb-result-display" style="font-size:12.5px; font-weight:800; color:#CBD5E1;">⏱️ 발주 대기 중 (경주 종료 5분 내 확정 착순 수신)</span>
+        </div>
+        <div style="font-size:11px; color:#A5B4FC;">
+          ※ 결과 확정 시 적중 마번에만 자동으로 네온 불꽃이 점등됩니다.
+        </div>
+      </div>
+
+      <!-- 출격 판정 배너 -->
+      <div id="bb-decision" class="decision-banner go">
+        <span style="font-size:18px;">🎯</span>
+        <span id="bb-decision-text">오늘 캡틴 출격 승부!</span>
+      </div>
+
+      <!-- 적중 시에만 나타나는 대형 축하 배너 -->
+      <div id="bb-hit-celebrate" class="hit-celebrate-banner">
+        🎉 [대적중 성공!] 축마 및 추천마가 1·2·3착 착순에 진입하여 번쩍번쩍 네온 불꽃이 점등되었습니다!
+      </div>
+
+      <!-- 1단계: 외부 전문가 / AI99 실시간 예상지 5두 마번 -->
+      <div class="stage-section" style="border-color: rgba(245,158,11,0.6);">
+        <div class="stage-header">
+          <div class="stage-title" style="color:var(--gold);">
+            <span>📊 [1단계] 외부 전문가 / AI99 실시간 예상지 5두</span>
+          </div>
+          <span style="font-size:11px; color:#94A3B8;">확정 착순 진입 시 불꽃 점등</span>
+        </div>
+        <div class="picks-grid-5" id="bb-exp-grid"></div>
+        <div class="stage-desc" id="bb-exp-desc">--</div>
+      </div>
+
+      <!-- 2단계: 김비서 AI팀 분석 4두 칼압축 마번 -->
+      <div class="stage-section" style="border-color: rgba(16,185,129,0.7);">
+        <div class="stage-header">
+          <div class="stage-title" style="color:var(--green);">
+            <span>🤖 [2단계] 김비서 AI팀 분석 4두 칼압축 마번 (기둥축마 + 주력 + 복병)</span>
+          </div>
+          <span style="font-size:11px; color:#A7F3D0;">결과 1·2·3착 적중 시 자동 점등</span>
+        </div>
+        <div class="picks-grid-4" id="bb-ai-grid"></div>
+        <div class="stage-desc" id="bb-ai-desc" style="color:#A7F3D0;">--</div>
+      </div>
+
+      <!-- 3단계: 삼복·삼쌍 최소 구멍 수 조합 -->
+      <div class="combo-grid">
+        <div class="combo-box" style="border-color: rgba(16,185,129,0.4);">
+          <div class="combo-tag">🎯 삼복승 초압축 (단 3구멍)</div>
+          <div class="combo-val digital" id="bb-combo-bok">--</div>
+        </div>
+        <div class="combo-box" style="border-color: rgba(245,158,11,0.4);">
+          <div class="combo-tag">🔥 삼쌍승 고배당 (단 6구멍)</div>
+          <div class="combo-val digital" id="bb-combo-ssang">--</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 캡틴 하명: 전 경주 세로줄 실시간 확정 결과표 (중복 버튼 완전 제거 & 세로 테이블 승격) -->
+    <div class="vr-master-card" id="verticalResultsSection">
+      <div class="vr-master-head">
+        <div style="font-size:16px; font-weight:900; color:#FDE68A; display:flex; align-items:center; gap:8px;">
+          <span>토요경마 확정 착순표 (서울 · 제주 2열 세로 분리 / 3두 마번 요약)</span>
+          <span style="font-size:11px; background:rgba(16,185,129,0.25); color:#34D399; padding:2px 8px; border-radius:12px; border:1px solid #10B981;">실시간 갱신</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <button style="background:#FEE500; color:#191919; font-weight:950; font-size:13px; padding:6px 13px; border:none; border-radius:8px; cursor:pointer; box-shadow:0 0 10px rgba(254,229,0,0.6); display:inline-flex; align-items:center; gap:5px;" onclick="copyKakaoMessageOnly()" title="동생에게 보낼 카톡 추천 메시지 1초 복사">
+            <span style="font-size:14px;">💬</span> <strong>동생 카톡 추천문구 복사</strong>
+          </button>
+          <button style="background:linear-gradient(135deg, #F59E0B, #D97706); color:#000; font-weight:900; font-size:13px; padding:6px 14px; border:none; border-radius:8px; cursor:pointer; box-shadow:0 0 10px rgba(245,158,11,0.5); display:inline-flex; align-items:center; gap:5px;" onclick="copyResultsSummaryText()">
+            <span>📋</span> <strong>결과표 1초 복사 (붙여넣기용)</strong>
+          </button>
+        </div>
+      </div>
+
+      <!-- 캡틴 하명: 이모티콘 100% 제거 & 서울 / 제주 2열 세로 분리 배치 -->
+      <div class="vr-dual-container" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <!-- 좌측: 서울 11경주 세로 표 -->
+        <div class="vr-meet-box" style="background:#0F172A; border:1.5px solid #1E40AF; border-radius:12px; padding:12px;">
+          <div style="font-size:14.5px; font-weight:900; color:#38BDF8; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #1E40AF; display:flex; justify-content:space-between; align-items:center;">
+            <span>👑 서울경마 (총 11경주)</span>
+            <span style="font-size:11px; color:#94A3B8;">확정 3두 마번</span>
+          </div>
+          <table style="width:100%; border-collapse:collapse; font-size:12.5px;">
+            <thead>
+              <tr style="border-bottom:1px solid #334155; color:#94A3B8; font-size:11.5px;">
+                <th style="width:30%; padding:6px 2px; text-align:left;">경주 (발주)</th>
+                <th style="width:42%; padding:6px 2px; text-align:center;">확정 마번 (3두)</th>
+                <th style="width:28%; padding:6px 2px; text-align:right;">상태 / 성과</th>
+              </tr>
+            </thead>
+            <tbody id="vr-tbody-seoul"></tbody>
+          </table>
+        </div>
+
+        <!-- 우측: 제주 6경주 세로 표 -->
+        <div class="vr-meet-box" style="background:#0F172A; border:1.5px solid #C2410C; border-radius:12px; padding:12px;">
+          <div style="font-size:14.5px; font-weight:900; color:#FB923C; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #C2410C; display:flex; justify-content:space-between; align-items:center;">
+            <span>🍊 제주경마 (총 6경주)</span>
+            <span style="font-size:11px; color:#34D399; font-weight:800;">[전 경주 종료]</span>
+          </div>
+          <table style="width:100%; border-collapse:collapse; font-size:12.5px;">
+            <thead>
+              <tr style="border-bottom:1px solid #334155; color:#94A3B8; font-size:11.5px;">
+                <th style="width:30%; padding:6px 2px; text-align:left;">경주 (발주)</th>
+                <th style="width:42%; padding:6px 2px; text-align:center;">확정 마번 (3두)</th>
+                <th style="width:28%; padding:6px 2px; text-align:right;">상태 / 성과</th>
+              </tr>
+            </thead>
+            <tbody id="vr-tbody-jeju"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 복사용 텍스트 미리보기 박스 -->
+      <div id="copySummaryBox" style="margin-top:14px; background:#0F172A; border:1px solid #334155; border-radius:10px; padding:12px; display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span style="font-size:12px; font-weight:800; color:#FDE68A;">📋 복사된 확정 결과 텍스트 (다른 사이트/카톡 붙여넣기용)</span>
+          <button style="background:#334155; color:#94A3B8; border:none; padding:2px 8px; border-radius:4px; font-size:11px; cursor:pointer;" onclick="document.getElementById('copySummaryBox').style.display='none'">닫기</button>
+        </div>
+        <textarea id="resultsTextarea" readonly style="width:100%; height:120px; background:#080D1A; color:#E2E8F0; border:1px solid #1E293B; border-radius:6px; font-size:12px; font-family:monospace; padding:8px; resize:none;"></textarea>
+      </div>
+
+      <div style="margin-top:10px; font-size:11.5px; color:#94A3B8; text-align:right;">
+        ※ 경주 행을 클릭하시면 상단 전광판 상세 분석으로 즉시 이동합니다
+      </div>
+    </div>
+
+    <!-- 캡틴 영구 필승 수칙 -->
+    <div class="policy-box">
+      <strong style="color:#FDE68A; font-size:13px;">👑 [캡틴 영구 승부 지침 요약]</strong><br>
+      1. <b>하루 17경주 중 오직 『제주 1R / 부산 4·9·10R 등 중·고배당 승부경주』만 선별 타격!</b> 저배당 경주는 무조건 관망(패스).<br>
+      2. <b>오직 삼복승 & 삼쌍승만 집중:</b> 단 3구멍(삼복) / 단 6구멍(삼쌍)으로 환수율 극대화.<br>
+      3. <b>1등 최유력마를 축으로 고정:</b> 흔들림 없는 1착 기둥축 선정.<br>
+      4. <b>경주 종료 후 다크호스 확정 착순이 수신되면 적중 마번에만 네온 불꽃이 점등됩니다!</b>
+    </div>
+
+  </div>
+
+  <!-- 📲 스마트폰 홈 화면(바탕화면) 설치 안내 모달 -->
+  
+  <!-- 📲 스마트폰 홈 화면(바탕화면) 설치 안내 모달 -->
+  <div id="installModal" class="modal-overlay" onclick="closeInstallModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeInstallModal()">&times;</button>
+      <div class="modal-title">
+        <span>📲 스마트폰 & 🖥️ PC 바탕화면에 앱 설치하기</span>
+      </div>
+      <p style="font-size:12.5px; color:#CBD5E1; margin-bottom:14px; line-height:1.5;">
+        스마트폰 바탕화면에 추가하시면 주소 입력 없이 <strong>앱처럼 1초 만에 즉시 열립니다!</strong>
+      </p>
+
+      <!-- 자동 설치 버튼 (Android Chrome/Samsung Internet 감지 시 활성화) -->
+      <button id="pwaAutoBtn" style="display:none; width:100%; background:linear-gradient(135deg,#10B981,#059669); color:#fff; font-weight:900; font-size:15px; padding:13px; border:none; border-radius:10px; margin-bottom:14px; cursor:pointer; box-shadow:0 0 15px rgba(16,185,129,0.5);" onclick="triggerNativeInstall()">
+        ⚡ 지금 바로 홈 화면에 자동 설치하기
+      </button>
+
+      <!-- 카카오톡 인앱 브라우저 탈출 버튼 -->
+      <div id="kakaoInAppGuide" style="display:none; background:rgba(245,158,11,0.15); border:1px solid #F59E0B; border-radius:10px; padding:12px; margin-bottom:12px;">
+        <div style="font-weight:900; color:#FDE68A; font-size:13px; margin-bottom:6px;">⚠️ 카카오톡 내부 브라우저 접속 중</div>
+        <div style="font-size:11.5px; color:#E2E8F0; line-height:1.4; margin-bottom:8px;">
+          카톡 내부에서는 보안상 홈 화면 설치가 제한됩니다. 아래 버튼을 눌러 크롬/기본 인터넷으로 여시면 즉시 자동 설치가 가능합니다!
+        </div>
+        <button style="width:100%; background:#F59E0B; color:#111827; font-weight:900; font-size:13.5px; padding:10px; border:none; border-radius:8px; cursor:pointer;" onclick="openExternalBrowser()">
+          🌐 크롬 / 기본 브라우저로 열기 (자동 설치)
+        </button>
+      </div>
+
+      <!-- 🖥️ PC 크롬/엣지 전용 안내 -->
+      <div class="modal-step" style="border-left: 3px solid #38BDF8; background: rgba(56, 189, 248, 0.08); margin-bottom: 10px;">
+        <strong style="color:#38BDF8;">🖥️ PC 컴퓨터 (크롬 / 엣지 바탕화면 단독 앱 설치):</strong><br>
+        1. 브라우저 주소창 맨 오른쪽 끝의 <strong>[컴퓨터 모니터 ⬇ (앱 설치)]</strong> 아이콘을 누릅니다.<br>
+        2. 또는 브라우저 우측 상단 메뉴 <strong>[⋮]</strong> ➔ <strong>[저장 및 공유]</strong> ➔ <strong>[AI 신호등 앱 설치]</strong>를 누르시면 윈도우 작업표시줄과 바탕화면에 <strong>진짜 독립 실행 앱</strong>으로 생성됩니다!<br>
+        <span style="font-size:11px; color:#94A3B8;">※ 로컬 파일(file://)로 열었을 때는 설치가 안 되며, 인터넷 웹 주소로 열었을 때만 설치 버튼이 활성화됩니다.</span>
+      </div>
+
+      <div class="modal-step">
+        <strong>📱 안드로이드 폰 (갤럭시 / 크롬 / 삼성인터넷):</strong><br>
+        1. 인터넷 브라우저 우측 상단 또는 하단의 <strong>[메뉴(⋮ 또는 ≡)]</strong>를 누릅니다.<br>
+        2. 메뉴 목록에서 <strong>[홈 화면에 추가]</strong> 또는 <strong>[현재 페이지 추가 ➔ 홈 화면]</strong>을 누르시면 완료!
+      </div>
+
+      <div class="modal-step">
+        <strong>🍎 아이폰 (사파리 Safari):</strong><br>
+        1. 사파리 브라우저 화면 하단 중앙의 <strong>[공유 버튼 (네모 위 화살표 ⬆)]</strong>을 누릅니다.<br>
+        2. 아래로 조금 내려 <strong>[홈 화면에 추가]</strong>를 누르시면 완료!
+      </div>
+
+      <button style="width:100%; background:#334155; color:#fff; font-weight:800; font-size:13px; padding:11px; border:none; border-radius:10px; margin-top:12px; cursor:pointer;" onclick="closeInstallModal()">
+        닫기
+      </button>
+    </div>
+  </div>
+
+  <!-- 💬 카카오톡 공유 & 전송 전용 모달 -->
+  <div id="kakaoModal" class="modal-overlay" onclick="closeKakaoModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeKakaoModal()">&times;</button>
+      <div class="modal-title">
+        <span>💬 동생/지인 카카오톡 1초 전송</span>
+      </div>
+      <p style="font-size:12px; color:#CBD5E1; margin-bottom:12px; line-height:1.4;">
+        원하시는 전송 방식을 선택해 주세요. 스마트폰에서는 카카오톡이 즉시 실행됩니다!
+      </p>
+
+      <!-- 1. 카카오톡 앱 즉시 실행 버튼 -->
+      <button style="width:100%; background:#FEE500; color:#191919; font-weight:900; font-size:14.5px; padding:13px; border:none; border-radius:10px; margin-bottom:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 12px rgba(254,229,0,0.3);" onclick="launchKakaoTalkApp()">
+        <span style="font-size:18px;">🟡</span> <strong>카카오톡 앱 즉시 실행</strong>
+      </button>
+
+      <!-- 2. 스마트폰 시스템 공유창 열기 -->
+      <button style="width:100%; background:#38BDF8; color:#0F172A; font-weight:900; font-size:13.5px; padding:11px; border:none; border-radius:10px; margin-bottom:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="triggerNativeShare()">
+        <span>📲</span> <strong>스마트폰 공유창으로 보내기</strong>
+      </button>
+
+      <!-- 3. 추천 문구 복사 -->
+      <button style="width:100%; background:#334155; color:#F8FAFC; font-weight:800; font-size:13px; padding:10px; border:none; border-radius:10px; margin-bottom:14px; cursor:pointer;" onclick="copyKakaoMessageOnly()">
+        📋 추천 문구 및 링크 복사하기
+      </button>
+
+      <!-- 추천 문구 미리보기 -->
+      <div style="background:#0F172A; border:1px solid #334155; border-radius:8px; padding:10px; font-size:11px; color:#94A3B8; line-height:1.5; max-height:110px; overflow-y:auto; text-align:left; word-break:break-all;">
+        <strong style="color:#FDE68A;">[전송 문구 미리보기]</strong><br>
+        🏇 [AI 신호등 가족] 오늘 토요경마(서울 11R + 제주 6R) 실시간 4두압축 전광판!<br>
+        형이 정밀 분석해서 완성한 실시간 라이브 전광판이다.<br>
+        🔗 [실시간 전광판]: <span id="previewLink">--</span><br>
+        🔥 오늘 4대 중·고배당 집중 승부: 제주1R, 부산4R, 부산9R(메인), 부산10R
+      </div>
+
+      <button style="width:100%; background:#1E293B; color:#94A3B8; font-weight:700; font-size:12px; padding:9px; border:none; border-radius:8px; margin-top:12px; cursor:pointer;" onclick="closeKakaoModal()">
+        닫기
+      </button>
+    </div>
+  </div>
+
+  <!-- 토스트 안내 알림 -->
+  <div id="toastMsg" class="toast-msg"></div>
+
+  <script>
+    let userManuallySelected = false;
+    let manualResetTimer = null;
+
+    
+    function copyKakaoLinkOnly() {
+      copyKakaoMessageOnly();
+    }
+
+    function fallbackCopyKakao(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast("💬 카톡 전송용 주소 복사 완료! 카톡 대화방에 [붙여넣기(Ctrl+V)] 하세요!");
+      } catch (err) {
+        showToast("주소 복사 실패: " + err);
+      }
+      document.body.removeChild(ta);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toastMsg");
+      if (!t) return;
+      t.innerText = msg;
+      t.style.display = "block";
+      setTimeout(() => {
+        t.style.display = "none";
+      }, 2500);
+    }
+
+    const RACES = [
+  {
+    "id": "서울_1",
+    "meet": "서울",
+    "rcNo": 1,
+    "time": "10:35",
+    "dist": "1000m",
+    "grade": "국6등급 2세",
+    "title": "서울 1R (1000m · 국6등급 2세 신예)",
+    "shortTitle": "서울 1R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "5",
+      "1",
+      "8",
+      "11",
+      "6"
+    ],
+    "expInterest": "10",
+    "expInterestDesc": "10번 세내불리 (별대박 추천 1000m 기습 복병마)",
+    "expComment": "1번 금빛코드 선행 최유력 vs 5번 사이버타이거 서승운 안장 추입",
+    "ai": {
+      "h1": "5",
+      "h2": "1",
+      "h3": "8",
+      "h4": "10"
+    },
+    "aiReason": "1번 금빛코드 1게이트 이점 단독선행 기둥축 고정 + 5번 사이버타이거 주력 동반입상 공략",
+    "combos": {
+      "sambok": "[축 5번] - [1, 8, 10번] (단 3구멍)",
+      "samssang": "[1착: 5번] ➔ [2착: 1, 8, 10] ➔ [3착: 1, 8, 10] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_2",
+    "meet": "서울",
+    "rcNo": 2,
+    "time": "11:00",
+    "dist": "1200m",
+    "grade": "국6등급 2세",
+    "title": "서울 2R (1200m · 국6등급 2세루키)",
+    "shortTitle": "서울 2R",
+    "isRec": false,
+    "isOur": false,
+    "badgeType": "NONE",
+    "payoutType": "저배당",
+    "expH": [
+      "4",
+      "7",
+      "10",
+      "5",
+      "3"
+    ],
+    "expInterest": "3",
+    "expInterestDesc": "4번 와와삭스 (종반 탄력 우수 복병)",
+    "expComment": "7번 나르샤스톰 마이아 안장 기량 우위 vs 3번 인페르노 맞대결",
+    "ai": {
+      "h1": "4",
+      "h2": "7",
+      "h3": "10",
+      "h4": "3"
+    },
+    "aiReason": "7번 나르샤스톰 축마 안정적이나 저배당 압축 흐름으로 소액 분산 타격",
+    "combos": {
+      "sambok": "[축 4번] - [7, 10, 3번] (단 3구멍)",
+      "samssang": "[1착: 4번] ➔ [2착: 7, 10, 3] ➔ [3착: 7, 10, 3] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_3",
+    "meet": "서울",
+    "rcNo": 3,
+    "time": "11:25",
+    "dist": "1200m",
+    "grade": "국6등급 연령오픈",
+    "title": "서울 3R (1200m · 국6등급)",
+    "shortTitle": "서울 3R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "11",
+      "1",
+      "6",
+      "9",
+      "7"
+    ],
+    "expInterest": "7",
+    "expInterestDesc": "9번 레이스파티 (최범현 기수 습보 조교 완료)",
+    "expComment": "6번 비트스타 장추열 안장 우세 vs 11번 시티오브드림 서승운 안장",
+    "ai": {
+      "h1": "11",
+      "h2": "6",
+      "h3": "9",
+      "h4": "7"
+    },
+    "aiReason": "6번 비트스타 순발력 우위 기둥축 + 11번 외곽 극복 주력 및 9번 폭탄마 방어",
+    "combos": {
+      "sambok": "[축 11번] - [6, 9, 7번] (단 3구멍)",
+      "samssang": "[1착: 11번] ➔ [2착: 6, 9, 7] ➔ [3착: 6, 9, 7] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "제주_1",
+    "meet": "제주",
+    "rcNo": 1,
+    "time": "12:05",
+    "dist": "900m",
+    "grade": "제6등급",
+    "title": "제주 1R (900m · 제6등급 제주개막)",
+    "shortTitle": "제주 1R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "3",
+      "7",
+      "8",
+      "4",
+      "10"
+    ],
+    "expInterest": "4",
+    "expInterestDesc": "4번 가속항호 (김준호 기수 기습 추입 복병)",
+    "expComment": "3번 전승자 압도적 인기 34% vs 7번 태양신천 문현진 안장",
+    "ai": {
+      "h1": "3",
+      "h2": "7",
+      "h3": "8",
+      "h4": "4"
+    },
+    "aiReason": "함수율 17% 불량주로 선행력 최강 3번 전승자 기둥축 + 4번 복병 투입",
+    "combos": {
+      "sambok": "[축 3번] - [7, 8, 4번] (단 3구멍)",
+      "samssang": "[1착: 3번] ➔ [2착: 7, 8, 4] ➔ [3착: 7, 8, 4] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_4",
+    "meet": "서울",
+    "rcNo": 4,
+    "time": "12:45",
+    "dist": "1300m",
+    "grade": "국6등급",
+    "title": "서울 4R (1300m · 국6등급)",
+    "shortTitle": "서울 4R",
+    "isRec": false,
+    "isOur": false,
+    "badgeType": "NONE",
+    "payoutType": "저배당",
+    "expH": [
+      "7",
+      "3",
+      "2",
+      "5",
+      "1"
+    ],
+    "expInterest": "1",
+    "expInterestDesc": "7번 불패의여왕 (조한별 안장)",
+    "expComment": "3번 피엔에스러너 다실바 vs 5번 세명하이디 조상범",
+    "ai": {
+      "h1": "7",
+      "h2": "3",
+      "h3": "2",
+      "h4": "1"
+    },
+    "aiReason": "3번 피엔에스러너 다실바 기수 안장 기둥축 안정적 저배당 관망 권고",
+    "combos": {
+      "sambok": "[축 7번] - [3, 2, 1번] (단 3구멍)",
+      "samssang": "[1착: 7번] ➔ [2착: 3, 2, 1] ➔ [3착: 3, 2, 1] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "제주_2",
+    "meet": "제주",
+    "rcNo": 2,
+    "time": "13:10",
+    "dist": "1000m",
+    "grade": "제5등급 2세이상",
+    "title": "제주 2R (1000m · 제5등급)",
+    "shortTitle": "제주 2R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "7",
+      "4",
+      "3",
+      "2",
+      "5"
+    ],
+    "expInterest": "3",
+    "expInterestDesc": "3번마 (강수환 기수 직조 단축습보 최상 복병)",
+    "expComment": "5번 광풍만리 김홍권 선행 vs 1번 황금대박 김준호 맞불",
+    "ai": {
+      "h1": "7",
+      "h2": "4",
+      "h3": "3",
+      "h4": "2"
+    },
+    "aiReason": "7번 신천황 축 + 조교 특A급 3번 복병과 4번·2번 압축",
+    "combos": {
+      "sambok": "[축 7번] - [4, 3, 2번] (단 3구멍)",
+      "samssang": "[1착: 7번] ➔ [2착: 4, 3, 2] ➔ [3착: 4, 3, 2] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_5",
+    "meet": "서울",
+    "rcNo": 5,
+    "time": "13:35",
+    "dist": "1200m",
+    "grade": "국5등급",
+    "title": "서울 5R (1200m · 국5등급 핸디캡)",
+    "shortTitle": "서울 5R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "2",
+      "3",
+      "8",
+      "6",
+      "11"
+    ],
+    "expInterest": "7",
+    "expInterestDesc": "7번 그래이고 (별대박 삼복승 배당 노림수 복병)",
+    "expComment": "11번 슈퍼땅콩 서승운 vs 1번 어플리트런 이동하",
+    "ai": {
+      "h1": "2",
+      "h2": "3",
+      "h3": "8",
+      "h4": "7"
+    },
+    "aiReason": "11번 슈퍼땅콩 서승운 안장 탄력 발군 1착 고정 + 1번 인코스 어플리트런 주력",
+    "combos": {
+      "sambok": "[축 2번] - [3, 8, 7번] (단 3구멍)",
+      "samssang": "[1착: 2번] ➔ [2착: 3, 8, 7] ➔ [3착: 3, 8, 7] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "제주_3",
+    "meet": "제주",
+    "rcNo": 3,
+    "time": "14:00",
+    "dist": "1000m",
+    "grade": "제4등급 2세이상",
+    "title": "제주 3R (1000m · 제4등급 제주승부)",
+    "shortTitle": "제주 3R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "7",
+      "8",
+      "6",
+      "2",
+      "3"
+    ],
+    "expInterest": "6",
+    "expInterestDesc": "6번마 (불량주로 뒷심 과감한 노림수 복병)",
+    "expComment": "8번 멋진선택 박성광 안장 단독 찬스 vs 7번 비상질주 문현진",
+    "ai": {
+      "h1": "7",
+      "h2": "8",
+      "h3": "6",
+      "h4": "2"
+    },
+    "aiReason": "불안한 인기마 배제, 7번 축에 6번 복병 과감 투입",
+    "combos": {
+      "sambok": "[축 7번] - [8, 6, 2번] (단 3구멍)",
+      "samssang": "[1착: 7번] ➔ [2착: 8, 6, 2] ➔ [3착: 8, 6, 2] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_6",
+    "meet": "서울",
+    "rcNo": 6,
+    "time": "14:25",
+    "dist": "1400m",
+    "grade": "국5등급 연령오픈",
+    "title": "서울 6R (1400m · 국5등급 서울출격)",
+    "shortTitle": "서울 6R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "8",
+      "11",
+      "5",
+      "4",
+      "1"
+    ],
+    "expInterest": "1",
+    "expInterestDesc": "3번 어디든지 (다실바 기수 안장 기습 전개)",
+    "expComment": "1번 베스트프리덤 마이아 안장 vs 5번 킹스파이시 조재로",
+    "ai": {
+      "h1": "8",
+      "h2": "1",
+      "h3": "5",
+      "h4": "4"
+    },
+    "aiReason": "1번 베스트프리덤 1게이트 마이아 완벽 선행축 + 5번·4번 주력 공략",
+    "combos": {
+      "sambok": "[축 8번] - [1, 5, 4번] (단 3구멍)",
+      "samssang": "[1착: 8번] ➔ [2착: 1, 5, 4] ➔ [3착: 1, 5, 4] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "제주_4",
+    "meet": "제주",
+    "rcNo": 4,
+    "time": "14:50",
+    "dist": "1110m",
+    "grade": "제4등급 2세이상",
+    "title": "제주 4R (1110m · 제4등급)",
+    "shortTitle": "제주 4R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "9",
+      "1",
+      "4",
+      "10",
+      "3"
+    ],
+    "expInterest": "9",
+    "expInterestDesc": "9번 늘찬 (강태풍 추천 대혼전 고배당 복병)",
+    "expComment": "4번 경성윈드 박성광 vs 1번 진한파도 전현준",
+    "ai": {
+      "h1": "9",
+      "h2": "1",
+      "h3": "4",
+      "h4": "10"
+    },
+    "aiReason": "강태풍 A급 승부: 4번 대가리 불안, 9번 늘찬·1번 지난파도·10번 팔호 배당 노림",
+    "combos": {
+      "sambok": "[축 9번] - [1, 4, 10번] (단 3구멍)",
+      "samssang": "[1착: 9번] ➔ [2착: 1, 4, 10] ➔ [3착: 1, 4, 10] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_7",
+    "meet": "서울",
+    "rcNo": 7,
+    "time": "15:15",
+    "dist": "1700m",
+    "grade": "국5등급",
+    "title": "서울 7R (1700m · 국5등급 장거리)",
+    "shortTitle": "서울 7R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "6",
+      "2",
+      "5",
+      "9",
+      "10"
+    ],
+    "expInterest": "10",
+    "expInterestDesc": "9번 더선커밍 (조한별 안장 막판 탄력)",
+    "expComment": "4번 블랙러시안 코지 vs 11번 위너삭스 다실바",
+    "ai": {
+      "h1": "6",
+      "h2": "2",
+      "h3": "5",
+      "h4": "10"
+    },
+    "aiReason": "4번 블랙러시안 1700m 코스 경험 풍부 기둥축 + 11번 위너삭스 주력 압축",
+    "combos": {
+      "sambok": "[축 6번] - [2, 5, 10번] (단 3구멍)",
+      "samssang": "[1착: 6번] ➔ [2착: 2, 5, 10] ➔ [3착: 2, 5, 10] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "제주_5",
+    "meet": "제주",
+    "rcNo": 5,
+    "time": "15:40",
+    "dist": "1200m",
+    "grade": "제3등급",
+    "title": "제주 5R (1200m · 제3등급 준메인)",
+    "shortTitle": "제주 5R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "MAIN",
+    "payoutType": "중·고배당",
+    "expH": [
+      "8",
+      "2",
+      "4",
+      "10",
+      "3"
+    ],
+    "expInterest": "8",
+    "expInterestDesc": "8번 몬딱 (강태풍 A급 추천 배당마) & 2번 태극성",
+    "expComment": "3번 제이킹 박성광 vs 1번 명품최강 문현진",
+    "ai": {
+      "h1": "8",
+      "h2": "2",
+      "h3": "4",
+      "h4": "10"
+    },
+    "aiReason": "강태풍 A급 승부: 3번 제이킹 대가리 위험 지적! 8번 몬딱·2번 태극성·4번 전설무적 폭탄마 결합",
+    "combos": {
+      "sambok": "[축 8번] - [2, 4, 10번] (단 3구멍)",
+      "samssang": "[1착: 8번] ➔ [2착: 2, 4, 10] ➔ [3착: 2, 4, 10] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_8",
+    "meet": "서울",
+    "rcNo": 8,
+    "time": "16:05",
+    "dist": "1800m",
+    "grade": "국4등급 연령오픈",
+    "title": "서울 8R (1800m · 국4등급 서울후반승부)",
+    "shortTitle": "서울 8R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "STRIKE",
+    "payoutType": "중·고배당",
+    "expH": [
+      "9",
+      "2",
+      "8",
+      "7",
+      "10"
+    ],
+    "expInterest": "10",
+    "expInterestDesc": "5번 금아포모스트 (장추열 안장 뚝심마)",
+    "expComment": "9번 프리메로 조재로 vs 8번 포에버길 최범현",
+    "ai": {
+      "h1": "9",
+      "h2": "8",
+      "h3": "2",
+      "h4": "10"
+    },
+    "aiReason": "9번 프리메로 1800m 적임 기둥축 + 8번 포에버길 주력 동반입상",
+    "combos": {
+      "sambok": "[축 9번] - [8, 2, 10번] (단 3구멍)",
+      "samssang": "[1착: 9번] ➔ [2착: 8, 2, 10] ➔ [3착: 8, 2, 10] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "제주_6",
+    "meet": "제주",
+    "rcNo": 6,
+    "time": "16:30",
+    "dist": "1400m",
+    "grade": "제1등급 2세이상",
+    "title": "제주 6R (1400m · 제1등급 제주피날레 메인특급)",
+    "shortTitle": "제주 6R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "MAIN",
+    "payoutType": "중·고배당",
+    "expH": [
+      "1",
+      "6",
+      "5",
+      "3",
+      "8"
+    ],
+    "expInterest": "6",
+    "expInterestDesc": "6번 새벽질주 (부중 높으나 앞선 무너질 때 추입 복병)",
+    "expComment": "1번 멘탈 박성광 1등급 패권 vs 2번 최대공약수 전현준",
+    "ai": {
+      "h1": "1",
+      "h2": "6",
+      "h3": "5",
+      "h4": "3"
+    },
+    "aiReason": "17개월 휴양마 4번 전격 제외! 1게이트 1번 멘탈 인코스 선행축 + 6번·5번·3번 압축",
+    "combos": {
+      "sambok": "[축 1번] - [6, 5, 3번] (단 3구멍)",
+      "samssang": "[1착: 1번] ➔ [2착: 6, 5, 3] ➔ [3착: 6, 5, 3] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_9",
+    "meet": "서울",
+    "rcNo": 9,
+    "time": "16:55",
+    "dist": "1200m",
+    "grade": "혼4등급 연령오픈",
+    "title": "서울 9R (1200m · 혼4등급 서울특급승부)",
+    "shortTitle": "서울 9R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "MAIN",
+    "payoutType": "중·고배당",
+    "expH": [
+      "8",
+      "7",
+      "6",
+      "9",
+      "5"
+    ],
+    "expInterest": "8",
+    "expInterestDesc": "8번 라온더게이샤 (강태풍 메인 프리미엄 강력 노림수)",
+    "expComment": "5번 팡팡대로 장추열 vs 7번 싱싱모닝 유승완",
+    "ai": {
+      "h1": "8",
+      "h2": "7",
+      "h3": "6",
+      "h4": "9"
+    },
+    "aiReason": "강태풍 메인 프리미엄: 인기 1위 5번 팡팡대로 근성 부족 배제, 8번 라온더게이샤·7번 싱싱모닝·9번 폭탄 타격",
+    "combos": {
+      "sambok": "[축 8번] - [7, 6, 9번] (단 3구멍)",
+      "samssang": "[1착: 8번] ➔ [2착: 7, 6, 9] ➔ [3착: 7, 6, 9] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_10",
+    "meet": "서울",
+    "rcNo": 10,
+    "time": "17:25",
+    "dist": "1200m",
+    "grade": "2등급",
+    "title": "서울 10R (1200m · 2등급 서울준메인 특급승부)",
+    "shortTitle": "서울 10R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "MAIN",
+    "payoutType": "중·고배당",
+    "expH": [
+      "4",
+      "1",
+      "2",
+      "9",
+      "7"
+    ],
+    "expInterest": "4",
+    "expInterestDesc": "4번 스타트랙 (강태풍 메인 하이라이트 단독선행 찬스마)",
+    "expComment": "2번 라온플로렌스 최범현 vs 4번 스타트렉 푸르칸",
+    "ai": {
+      "h1": "4",
+      "h2": "1",
+      "h3": "2",
+      "h4": "9"
+    },
+    "aiReason": "강태풍 메인 하이라이트: 공백기 긴 7번 배제, 4번 스타트랙 단독선행 축 + 1번 마이티조이·9번 디아나 고배당 공략",
+    "combos": {
+      "sambok": "[축 4번] - [1, 2, 9번] (단 3구멍)",
+      "samssang": "[1착: 4번] ➔ [2착: 1, 2, 9] ➔ [3착: 1, 2, 9] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "서울_11",
+    "meet": "서울",
+    "rcNo": 11,
+    "time": "17:55",
+    "dist": "1400m",
+    "grade": "혼3등급",
+    "title": "서울 11R (1400m · 혼3등급 토요 최종피날레 메인승부)",
+    "shortTitle": "서울 11R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "MAIN",
+    "payoutType": "중·고배당",
+    "expH": [
+      "10",
+      "2",
+      "11",
+      "9",
+      "6"
+    ],
+    "expInterest": "8",
+    "expInterestDesc": "8번 바로나은 (별대박 강력 추천 푸르칸 초고배당 복병)",
+    "expComment": "9번 짜릿한행복 임다빈 vs 11번 마이티코드 마이아",
+    "ai": {
+      "h1": "10",
+      "h2": "9",
+      "h3": "11",
+      "h4": "8"
+    },
+    "aiReason": "👑 [토요경마 최종 피날레 메인승부] 9번 짜릿한행복 1착 기둥축 + 11번 마이티코드 주력 한방",
+    "combos": {
+      "sambok": "[축 10번] - [9, 11, 8번] (단 3구멍)",
+      "samssang": "[1착: 10번] ➔ [2착: 9, 11, 8] ➔ [3착: 9, 11, 8] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  }
+];
+
+    // 한국마사회 공식 기수복 마번 배색
+    function getHorseColor(numStr) {
+      const n = parseInt(numStr, 10);
+      switch(n) {
+        case 1:  return { bg: '#FFFFFF', color: '#111827', border: '#CBD5E1', shadow: 'rgba(255,255,255,0.7)' };
+        case 2:  return { bg: '#FACC15', color: '#111827', border: '#EAB308', shadow: 'rgba(250,204,21,0.7)' };
+        case 3:  return { bg: '#DC2626', color: '#FFFFFF', border: '#B91C1C', shadow: 'rgba(220,38,38,0.7)' };
+        case 4:  return { bg: '#2563EB', color: '#FFFFFF', border: '#1D4ED8', shadow: 'rgba(37,99,235,0.7)' };
+        case 5:  return { bg: '#EAB308', color: '#1E3A8A', border: '#CA8A04', shadow: 'rgba(234,179,8,0.7)' };
+        case 6:  return { bg: '#16A34A', color: '#FFFFFF', border: '#15803D', shadow: 'rgba(22,163,74,0.7)' };
+        case 7:  return { bg: '#92400E', color: '#FFFFFF', border: '#78350F', shadow: 'rgba(146,64,14,0.7)' };
+        case 8:  return { bg: '#EC4899', color: '#111827', border: '#DB2777', shadow: 'rgba(236,72,153,0.7)' };
+        case 9:  return { bg: '#8B5CF6', color: '#FFFFFF', border: '#7C3AED', shadow: 'rgba(139,92,246,0.7)' };
+        case 10: return { bg: '#84CC16', color: '#111827', border: '#65A30D', shadow: 'rgba(132,204,22,0.7)' };
+        case 11: return { bg: '#06B6D4', color: '#FFFFFF', border: '#0891B2', shadow: 'rgba(6,182,212,0.7)' };
+        case 12: return { bg: '#F97316', color: '#FFFFFF', border: '#EA580C', shadow: 'rgba(249,115,22,0.7)' };
+        default: return { bg: '#334155', color: '#FFFFFF', border: '#475569', shadow: 'rgba(100,116,139,0.5)' };
+      }
+    }
+
+    let currentKey = "서울_1";
+    let currentFilter = "ALL";
+    // ====== PWA 설치 및 모바일 최적화 엔진 ======
+    let deferredInstallPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      const autoBtn = document.getElementById('pwaAutoBtn');
+      if (autoBtn) autoBtn.style.display = 'block';
+      const topBtn = document.getElementById('topPwaBtn');
+      if (topBtn) topBtn.style.border = '2px solid #10B981';
+    });
+
+    window.addEventListener('appinstalled', () => {
+      showToast('AI 신호등 앱이 홈 화면에 설치되었습니다.');
+      deferredInstallPrompt = null;
+    });
+
+    function isKakaoInApp() {
+      const ua = navigator.userAgent || '';
+      return ua.indexOf('KAKAOTALK') > -1;
+    }
+
+    function clickInstallPwa() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choice) => {
+          if (choice.outcome === 'accepted') {
+            showToast('홈 화면에 앱이 추가되었습니다.');
+          }
+          deferredInstallPrompt = null;
+        });
+      } else {
+        showInstallModal();
+      }
+    }
+
+    function showInstallModal() {
+      const modal = document.getElementById('installModal');
+      if (modal) modal.style.display = 'flex';
+
+      const kakaoGuide = document.getElementById('kakaoInAppGuide');
+      if (kakaoGuide) {
+        kakaoGuide.style.display = isKakaoInApp() ? 'block' : 'none';
+      }
+
+      const autoBtn = document.getElementById('pwaAutoBtn');
+      if (autoBtn && deferredInstallPrompt) {
+        autoBtn.style.display = 'block';
+      }
+    }
+
+    function closeInstallModal(e) {
+      if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('modal-close')) return;
+      const modal = document.getElementById('installModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function triggerNativeInstall() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choice) => {
+          if (choice.outcome === 'accepted') {
+            showToast('홈 화면에 앱이 추가되었습니다.');
+            closeInstallModal();
+          }
+          deferredInstallPrompt = null;
+        });
+      } else {
+        showToast('ℹ️ 브라우저 메뉴(점 3개)에서 [홈 화면에 추가]를 눌러주세요.');
+      }
+    }
+
+    
+    // 카카오톡 인앱 브라우저 체크 및 1초 크롬 열기
+    function checkKakaoInAppBanner() {
+      if (isKakaoInApp()) {
+        const banner = document.getElementById("topKakaoNotice");
+        if (banner) banner.style.display = "block";
+      }
+    }
+    window.addEventListener("DOMContentLoaded", checkKakaoInAppBanner);
+
+    function openExternalBrowser() {
+      const currentUrl = window.location.href;
+      // Android Intent scheme to force open Chrome
+      const intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+      window.location.href = intentUrl;
+    }
+
+    // ====== 카카오톡 스마트 공유 엔진 ======
+    function getKakaoShareText() {
+      const liveLink = window.location.href;
+      return `[AI 신호등 가족 | 캡틴 & 김비서 실시간 디지털 전광판]
+
+동생아, 오늘 토요경마(서울 11R + 제주 6R)는 이 사이트 딱 켜놓고 봐라!
+형이 김비서랑 밤새 정밀 분석해서 만든 실시간 라이브 전광판이다.
+로그인 없이 누르면 스마트폰에서 바로 열린다.
+
+🔗 [실시간 전광판 바로열기]:
+${liveLink}
+
+🔥 [오늘 캡틴의 핵심 중·고배당 승부처]:
+1. 제주 1R (12:05): ⚡제주 개막 승부!
+2. 제주 3R (14:00): ⚡제주 4등급 승부!
+3. 서울 6R (14:25): ⚡서울 1400m 출격!
+4. 제주 6R (16:30): 👑제주 1등급 피날레 메인 특급승부!
+5. 서울 8R (16:05): ⚡서울 1800m 후반 승부!
+6. 서울 10R (17:25): 👑서울 2등급 준메인 특급승부!
+7. 서울 11R (17:55): 👑토요 최종 피날레 메인승부!
+
+📲 [스마트폰 홈화면에 1초 앱 설치하는 법]:
+• 갤럭시(크롬): 위 링크 누르고 우측 상단 점 3개 [⋮] ➔ [홈 화면에 추가] 누르면 스마트폰 바탕화면에 앱 아이콘 바로 생성!
+• 아이폰(사파리): 화면 하단 중앙 공유버튼 [⬆] ➔ [홈 화면에 추가] 누르면 끝!
+(※ 카톡에서 열렸을 때는 우측 상단 점 3개 [⋮] ➔ [다른 브라우저로 열기] 누르면 바로 설치됨!)
+
+⏱️ 전광판 켜두면 각 경기마다 몇 분 남았는지 실시간 카운트다운 가동!
+오늘 중·고배당 승부경주 꽉 잡아서 대박 나자!`;
+    }
+
+    function openKakaoModal() {
+      const previewLink = document.getElementById('previewLink');
+      if (previewLink) previewLink.innerText = window.location.href;
+      const modal = document.getElementById('kakaoModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeKakaoModal(e) {
+      if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('modal-close')) return;
+      const modal = document.getElementById('kakaoModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function launchKakaoTalkApp() {
+      const shareText = getKakaoShareText();
+      copyToClipboard(shareText, false);
+      showToast('✅ 추천 문구 복사 완료! 카카오톡 대화방에서 [붙여넣기] 하세요.');
+      setTimeout(() => {
+        window.location.href = 'kakaotalk://';
+      }, 500);
+    }
+
+    function triggerNativeShare() {
+      const liveLink = window.location.href;
+      const shareText = getKakaoShareText();
+      if (navigator.share) {
+        navigator.share({
+          title: '[AI 신호등 가족] 실시간 전광판',
+          text: shareText,
+          url: liveLink
+        }).then(() => {
+          showToast('✅ 공유 창이 열렸습니다!');
+          closeKakaoModal();
+        }).catch(() => {
+          // User cancelled or share error
+        });
+      } else {
+        copyKakaoMessageOnly();
+      }
+    }
+
+    function copyKakaoMessageOnly() {
+      const shareText = getKakaoShareText();
+      copyToClipboard(shareText, true);
+    }
+
+    function copyToClipboard(text, notify) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          if (notify) showToast('카톡 추천 문구가 복사되었습니다! 대화방에 붙여넣기(Ctrl+V) 하세요.');
+        }).catch(() => {
+          execCopy(text, notify);
+        });
+      } else {
+        execCopy(text, notify);
+      }
+    }
+
+    function execCopy(text, notify) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        if (notify) showToast('카톡 추천 문구가 복사되었습니다! 대화방에 붙여넣기(Ctrl+V) 하세요.');
+      } catch (e) {
+        if (notify) showToast('링크: ' + window.location.href);
+      }
+      document.body.removeChild(ta);
+    }
+
+    // Service Worker 등록
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    // 잔여시간 계산 함수
+    function calcTimeDiff(postTimeStr) {
+      if (!postTimeStr) return { status: 'none', text: '', short: '', diffMs: 0, m: 0, s: 0, h: 0 };
+      const now = new Date();
+      const [ph, pm] = postTimeStr.split(":").map(Number);
+      const target = new Date();
+      target.setHours(ph, pm, 0, 0);
+
+      const diffMs = target.getTime() - now.getTime();
+      if (diffMs > 0) {
+        const totalSec = Math.floor(diffMs / 1000);
+        const h = Math.floor(totalSec / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = totalSec % 60;
+        
+        const secStr = String(s).padStart(2, '0');
+        const minStr = String(m).padStart(2, '0');
+        
+        let text = "";
+        if (h > 0) {
+          text = `${h}시간 ${minStr}분 ${secStr}초`;
+        } else {
+          text = `${minStr}분 ${secStr}초`;
+        }
+        const short = h > 0 ? `${h}h ${m}m` : `${minStr}분 ${secStr}초`;
+        const isUrgent = (diffMs <= 600000); // 10분 이내 발주 임박
+        return { status: isUrgent ? 'urgent' : 'upcoming', text, short, diffMs, m, s, h };
+      } else if (diffMs > -900000) { // 발주 후 15분간 경주 진행 및 확정 대기
+        return { status: 'running', text: '경주 진행 중 (결과 대기)', short: '진행중', diffMs };
+      } else {
+        return { status: 'past', text: '경주 마감', short: '마감', diffMs };
+      }
+    }
+
+    function filterTrack(track, ev) {
+      currentFilter = track;
+      document.querySelectorAll(".track-tab-btn").forEach(b => b.classList.remove("active"));
+      if (ev && ev.target) ev.target.classList.add("active");
+      renderQuickRibbon();
+    }
+
+    let vrMasterFilter = "ALL";
+
+    function filterMasterTable(filter, btn) {
+      vrMasterFilter = filter;
+      document.querySelectorAll(".vr-tab-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      renderMasterTable();
+    }
+
+    function renderQuickRibbon() {
+      const ribbon = document.getElementById("quickRibbon");
+      if (!ribbon) return;
+      ribbon.innerHTML = "";
+
+      let filtered = RACES;
+      if (currentFilter === "서울") filtered = RACES.filter(r => r.meet === "서울");
+      else if (currentFilter === "제주") filtered = RACES.filter(r => r.meet === "제주");
+      else if (currentFilter === "GO") filtered = RACES.filter(r => r.payoutType === "중·고배당");
+
+      const liveRace = getNextUpcomingRace();
+
+      filtered.forEach(r => {
+        const item = document.createElement("div");
+        const isSeoul = (r.meet === "서울");
+        const td = calcTimeDiff(r.time);
+        const isLive = (liveRace && liveRace.id === r.id);
+        const isDone = (r.results && r.results.status === '확정');
+
+        let cdCls = "cd-upcoming";
+        if (td.status === "urgent") cdCls = "cd-urgent";
+        else if (td.status === "past" || td.status === "running") cdCls = "cd-past";
+
+        let liveBadgeHtml = "";
+        if (isLive) {
+          liveBadgeHtml = '<div class="ribbon-live-badge">🔥 LIVE 실시간</div>';
+        } else if (isDone) {
+          liveBadgeHtml = '<div class="ribbon-done-badge">[확정]</div>';
+        }
+
+        item.className = `ribbon-item ${isSeoul ? 'meet-seoul' : 'meet-jeju'} ${r.id === currentKey ? 'active' : ''} ${isLive ? 'is-live' : ''} ${isDone ? 'is-done' : ''}`;
+        item.id = "ribbon-" + r.id;
+        item.onclick = () => selectRace(r.id, true);
+
+        item.innerHTML = `
+          ${liveBadgeHtml}
+          <div class="ribbon-name">${r.shortTitle}</div>
+          <div class="ribbon-time">${r.time}</div>
+          <div class="ribbon-countdown ${cdCls}" id="rb-cd-${r.id}">${td.short}</div>
+        `;
+        ribbon.appendChild(item);
+      });
+    }
+
+    function copyResultsSummaryText() {
+      let lines = [];
+      lines.push("[AI신호등 경마] 오늘 경주 확정 결과");
+      lines.push("================================");
+      lines.push("【 서울경마 】");
+
+      let seoulList = RACES.filter(r => r.meet === "서울");
+      let seoulDone = 0;
+      seoulList.forEach(r => {
+        const res = r.results || {};
+        if (res.status === "확정" && res.r1 && res.r2 && res.r3) {
+          seoulDone++;
+          lines.push(`${r.shortTitle} (${r.time}): ${res.r1} - ${res.r2} - ${res.r3}`);
+        }
+      });
+      if (seoulDone === 0) lines.push("(아직 확정 경주 없음)");
+
+      lines.push("--------------------------------");
+      lines.push("【 제주경마 (종료) 】");
+      let jejuList = RACES.filter(r => r.meet === "제주");
+      let jejuDone = 0;
+      jejuList.forEach(r => {
+        const res = r.results || {};
+        if (res.status === "확정" && res.r1 && res.r2 && res.r3) {
+          jejuDone++;
+          lines.push(`${r.shortTitle} (${r.time}): ${res.r1} - ${res.r2} - ${res.r3}`);
+        }
+      });
+      lines.push("================================");
+      lines.push(`총 ${seoulDone + jejuDone}개 경주 확정 완료`);
+
+      const textToCopy = lines.join("\n");
+
+      const box = document.getElementById("copySummaryBox");
+      const area = document.getElementById("resultsTextarea");
+      if (box && area) {
+        box.style.display = "block";
+        area.value = textToCopy;
+        area.select();
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          showToast("확정 결과 텍스트가 복사되었습니다! (붙여넣기 가능)");
+        }).catch(() => {
+          showToast("텍스트가 선택되었습니다. Ctrl+C로 복사하세요.");
+        });
+      } else {
+        showToast("텍스트가 선택되었습니다. 복사해서 사용하세요.");
+      }
+    }
+
+    function renderMasterTable() {
+      const seoulTbody = document.getElementById("vr-tbody-seoul");
+      const jejuTbody = document.getElementById("vr-tbody-jeju");
+      if (!seoulTbody || !jejuTbody) return;
+
+      seoulTbody.innerHTML = "";
+      jejuTbody.innerHTML = "";
+
+      const liveRace = getNextUpcomingRace();
+
+      RACES.forEach(r => {
+        const isSeoul = (r.meet === "서울");
+        const tbody = isSeoul ? seoulTbody : jejuTbody;
+        const res = r.results || {};
+        const isConfirmed = (res.status === "확정" && res.r1 && res.r2 && res.r3);
+        const isLive = (liveRace && liveRace.id === r.id);
+        const isGo = (r.payoutType === "중·고배당");
+        const td = calcTimeDiff(r.time);
+        const ai = r.ai || {};
+        const aiPicks = [ai.h1, ai.h2, ai.h3, ai.h4];
+
+        const row = document.createElement("tr");
+        row.id = "vr-row-" + r.id;
+        row.style.borderBottom = "1px solid #1E293B";
+        row.style.cursor = "pointer";
+        row.style.transition = "all 0.15s";
+        if (r.id === currentKey) row.style.background = "rgba(245, 158, 11, 0.18)";
+        if (isLive) row.style.background = "rgba(239, 68, 68, 0.2)";
+
+        row.onmouseover = () => { row.style.background = "rgba(30, 41, 59, 0.8)"; };
+        row.onmouseout = () => {
+          row.style.background = (r.id === currentKey) ? "rgba(245, 158, 11, 0.18)" : (isLive ? "rgba(239, 68, 68, 0.2)" : "transparent");
+        };
+
+        row.onclick = () => {
+          selectRace(r.id, true);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // 캡틴 하명: 이모티콘 100% 제거 & 마번만 3두 깔끔하게 표출!
+        let result3HorsesHtml = "";
+        if (isConfirmed) {
+          result3HorsesHtml = `
+            <div style="font-size:19px; font-weight:950; letter-spacing:2px; text-align:center; font-family:'Chakra Petch', Pretendard, monospace; line-height:1.2;">
+              <span style="color:#FDE047; font-weight:950; text-shadow:0 0 8px rgba(253,224,71,0.5);">${res.r1}</span>
+              <span style="color:#64748B; margin:0 4px; font-size:15px;">-</span>
+              <span style="color:#38BDF8; font-weight:950; text-shadow:0 0 8px rgba(56,189,248,0.5);">${res.r2}</span>
+              <span style="color:#64748B; margin:0 4px; font-size:15px;">-</span>
+              <span style="color:#34D399; font-weight:950; text-shadow:0 0 8px rgba(52,211,153,0.5);">${res.r3}</span>
+            </div>
+          `;
+        } else if (isLive) {
+          result3HorsesHtml = `<span style="color:#EF4444; font-weight:900; font-size:12px; text-align:center; display:block;">[진행중]</span>`;
+        } else {
+          result3HorsesHtml = `<span style="color:#64748B; font-size:12px; text-align:center; display:block;">대기 (${td.short})</span>`;
+        }
+
+        // 상태 및 적중 성과 (이모티콘 제거)
+        let hitResultHtml = "";
+        if (isConfirmed) {
+          let hitCount = 0;
+          let r1Hit = aiPicks.includes(res.r1);
+          let r2Hit = aiPicks.includes(res.r2);
+          let r3Hit = aiPicks.includes(res.r3);
+          if (r1Hit) hitCount++;
+          if (r2Hit) hitCount++;
+          if (r3Hit) hitCount++;
+
+          if (hitCount === 3) {
+            hitResultHtml = '<span style="background:#D97706; color:#fff; font-size:10.5px; font-weight:900; padding:2px 5px; border-radius:4px;">[올킬적중]</span>';
+          } else if (r1Hit && r2Hit) {
+            hitResultHtml = '<span style="background:#D97706; color:#fff; font-size:10.5px; font-weight:900; padding:2px 5px; border-radius:4px;">[복·쌍적중]</span>';
+          } else if (hitCount >= 2) {
+            hitResultHtml = `<span style="background:#059669; color:#fff; font-size:10.5px; font-weight:900; padding:2px 5px; border-radius:4px;">[${hitCount}두적중]</span>`;
+          } else if (r1Hit) {
+            hitResultHtml = '<span style="background:#0284C7; color:#fff; font-size:10.5px; font-weight:900; padding:2px 5px; border-radius:4px;">[축마적중]</span>';
+          } else if (hitCount === 1) {
+            hitResultHtml = '<span style="background:#334155; color:#93C5FD; font-size:10.5px; font-weight:800; padding:2px 5px; border-radius:4px;">[입상적중]</span>';
+          } else {
+            hitResultHtml = '<span style="color:#64748B; font-size:11px;">[확정]</span>';
+          }
+        } else if (isLive) {
+          hitResultHtml = '<span style="background:#EF4444; color:#fff; font-weight:900; padding:2px 6px; border-radius:4px; font-size:11px;">[출격진행]</span>';
+        } else {
+          hitResultHtml = `<span style="color:${isGo ? 'var(--green)' : '#64748B'}; font-size:11px; font-weight:800;">${r.badgeType === "HIGH" ? "[메인출격]" : (isGo ? "[출격]" : "[패스]")}</span>`;
+        }
+
+        row.innerHTML = `
+          <td style="padding:8px 4px; text-align:left;">
+            <div style="font-weight:900; color:${isSeoul ? '#38BDF8' : '#FB923C'}; font-size:12.5px;">${r.shortTitle}</div>
+            <div style="font-size:10.5px; color:#94A3B8; font-family:'Chakra Petch', monospace;">${r.time}</div>
+          </td>
+          <td style="padding:8px 4px; text-align:center;">${result3HorsesHtml}</td>
+          <td style="padding:8px 4px; text-align:right;">${hitResultHtml}</td>
+        `;
+
+        tbody.appendChild(row);
+      });
+    }
+
+    function resetToLiveRace() {
+      userManuallySelected = false;
+      const live = getNextUpcomingRace();
+      if (live) selectRace(live.id, false);
+      const btn = document.getElementById("btnReturnLive");
+      if (btn) btn.style.display = "none";
+    }
+
+    function getNextUpcomingRace() {
+      let bestRace = null;
+      let minDiff = Infinity;
+      for (let r of RACES) {
+        const res = r.results || {};
+        if (res.status === "확정") continue;
+        const td = calcTimeDiff(r.time);
+        if (td.diffMs > -900000 && td.diffMs < minDiff) {
+          minDiff = td.diffMs;
+          bestRace = r;
+        }
+      }
+      return bestRace || RACES[0];
+    }
+
+    function selectRace(id, isManual = false) {
+      if (isManual) {
+        userManuallySelected = true;
+        if (manualResetTimer) clearTimeout(manualResetTimer);
+        // 수동 선택 후 3분간 조작 없으면 실시간 경주로 자동 복귀
+        manualResetTimer = setTimeout(() => {
+          userManuallySelected = false;
+          const live = getNextUpcomingRace();
+          if (live && live.id !== currentKey) {
+            selectRace(live.id, false);
+          }
+          const btn = document.getElementById("btnReturnLive");
+          if (btn) btn.style.display = "none";
+        }, 180000);
+
+        const btn = document.getElementById("btnReturnLive");
+        if (btn) btn.style.display = "inline-flex";
+      } else {
+        const btn = document.getElementById("btnReturnLive");
+        if (btn) btn.style.display = "none";
+      }
+
+      currentKey = id;
+      const r = RACES.find(x => x.id === id);
+      if (!r) return;
+
+      const isSeoul = (r.meet === "서울");
+
+      // 액티브 스타일 갱신
+      document.querySelectorAll(".r-btn").forEach(b => b.classList.remove("active"));
+      const targetBtn = document.getElementById("btn-" + id);
+      if (targetBtn) targetBtn.classList.add("active");
+
+      document.querySelectorAll(".ribbon-item").forEach(b => b.classList.remove("active"));
+      const ribbonBtn = document.getElementById("ribbon-" + id);
+      if (ribbonBtn) {
+        ribbonBtn.classList.add("active");
+        ribbonBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      document.querySelectorAll(".vr-row").forEach(b => b.classList.remove("active"));
+      const vrRow = document.getElementById("vr-row-" + id);
+      if (vrRow) vrRow.classList.add("active");
+
+      // 헤더 정보
+      const liveRace = getNextUpcomingRace();
+      const isCurrentLive = (liveRace && liveRace.id === r.id);
+      document.getElementById("bb-title").innerHTML = `${r.title} ${isCurrentLive ? '<span class="live-active-tag">[실시간 출격]</span>' : ''}`;
+      document.getElementById("bb-post-time").innerText = `${r.time}`;
+
+      const timeBadge = document.getElementById("bb-time-badge");
+      timeBadge.className = `big-time-badge ${isSeoul ? 'time-seoul' : 'time-jeju'} digital`;
+
+      const isGo = (r.payoutType === "중·고배당");
+      const actionEl = document.getElementById("bb-action");
+      const payoutEl = document.getElementById("bb-payout");
+      const decEl = document.getElementById("bb-decision");
+      const decText = document.getElementById("bb-decision-text");
+
+      if (isGo) {
+        actionEl.className = r.badgeType === "HIGH" ? "bb-action-badge action-high" : "bb-action-badge action-go";
+        actionEl.innerHTML = r.badgeType === "HIGH" ? "[캡틴 메인 출격!] (필승)" : "[캡틴 승부 출격!] (베팅 GO)";
+        payoutEl.innerText = "[중·고배당 승부경주]";
+        payoutEl.style.color = "#F59E0B";
+
+        decEl.className = "decision-banner go";
+        decText.innerHTML = `<strong>[오늘 캡틴 출격 승부!]</strong> ${r.aiReason}`;
+      } else {
+        actionEl.className = "bb-action-badge action-pass";
+        actionEl.innerHTML = "[관망 및 패스] (금지)";
+        payoutEl.innerText = "[저배당 안정 경주]";
+        payoutEl.style.color = "#94A3B8";
+
+        decEl.className = "decision-banner pass";
+        decText.innerHTML = `<strong>[관망 및 패스 권고]</strong> 저배당 편성으로 배당 메리트 부족. 무리한 베팅 금지 및 관망/소액 방어.`;
+      }
+
+      // 다크호스 결과 상태 확인
+      const res = r.results || {};
+      const isConfirmed = (res.status === "확정" && res.r1 && res.r2 && res.r3);
+      const resDisplay = document.getElementById("bb-result-display");
+      const expH = r.expH || [];
+      const ai = r.ai || {};
+
+      const celebrateEl = document.getElementById("bb-hit-celebrate");
+      let totalHits = 0;
+      if (isConfirmed) {
+        const ranks = [res.r1, res.r2, res.r3];
+        expH.forEach(n => { if (ranks.includes(n)) totalHits++; });
+      }
+      if (isConfirmed && totalHits > 0) {
+        celebrateEl.style.display = "block";
+        celebrateEl.innerHTML = `<strong>[적중 성공! 총 ${totalHits}두 착순 진입]</strong> 1·2·3착 적중 마번에 선명한 테두리 불빛이 켜졌습니다.`;
+      } else {
+        celebrateEl.style.display = "none";
+      }
+
+      if (isConfirmed) {
+        resDisplay.innerHTML = `
+          <div class="res-num-box">
+            <div class="res-pill r1"><span class="res-pill-label">1착</span><span class="res-pill-num">${res.r1}</span></div>
+            <div class="res-pill r2"><span class="res-pill-label">2착</span><span class="res-pill-num">${res.r2}</span></div>
+            <div class="res-pill r3"><span class="res-pill-label">3착</span><span class="res-pill-num">${res.r3}</span></div>
+            <span style="color:#94A3B8; font-size:12.5px; margin-left:8px; font-weight:700;">(삼복: ${res.trio || "확정"}배 / 삼쌍: ${res.tri || "확정"}배)</span>
+          </div>
+        `;
+      } else {
+        resDisplay.innerHTML = `<span style="font-size:14px; color:#94A3B8; font-weight:700;">발주 대기 중 (경주 종료 5분 내 확정 착순 자동 수신)</span>`;
+        celebrateEl.style.display = "none";
+      }
+
+      // 1단: 전문가 5두 표출
+      const expGrid = document.getElementById("bb-exp-grid");
+      expGrid.innerHTML = expH.map((n, idx) => {
+        const isInterest = (idx === 4);
+        const colorStyle = getHorseColor(n);
+
+        let hitClass = "";
+        let hitBadge = "";
+        if (isConfirmed) {
+          if (n === res.r1) { hitClass = "hit-rank-1"; hitBadge = '<div class="hit-rank-badge badge-r1">1착 적중</div>'; }
+          else if (n === res.r2) { hitClass = "hit-rank-2"; hitBadge = '<div class="hit-rank-badge badge-r2">2착 적중</div>'; }
+          else if (n === res.r3) { hitClass = "hit-rank-3"; hitBadge = '<div class="hit-rank-badge badge-r3">3착 적중</div>'; }
+        }
+
+        return `
+          <div class="pick-cell ${hitClass} ${(!hitClass && isInterest) ? 'interest' : ''}">
+            ${hitBadge}
+            <div class="cell-tag">${isInterest ? '5픽 (관심)' : (idx+1)+'픽'}</div>
+            <div class="horse-circle digital" style="background:${colorStyle.bg}; color:${colorStyle.color}; border-color:${colorStyle.border}; box-shadow:0 0 10px ${colorStyle.shadow};">
+              ${n}
+            </div>
+            <div class="cell-sub">${isInterest ? '관심마' : (idx===0?'추천':'대항')}</div>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("bb-exp-desc").innerHTML = `
+        <strong>예상가 총평:</strong> ${r.expComment}<br>
+        <strong>끝자리 관심마 핵심:</strong> <span style="color:var(--gold); font-weight:bold;">${r.expInterestDesc}</span>
+      `;
+
+      // 2단: 김비서 AI팀 4두 표출
+      let hitCount = 0;
+      const aiGrid = document.getElementById("bb-ai-grid");
+      const aiList = [
+        { num: ai.h1, tag: "1순위 (축)", sub: "1등 최유력", cls: "axis" },
+        { num: ai.h2, tag: "2순위 (주력)", sub: "주력 승부", cls: "" },
+        { num: ai.h3, tag: "3순위 (대항)", sub: "연계 대항", cls: "" },
+        { num: ai.h4, tag: "4순위 (복병)", sub: "고배당 복병", cls: "interest" }
+      ];
+
+      aiGrid.innerHTML = aiList.map(item => {
+        const colorStyle = getHorseColor(item.num);
+
+        let hitClass = "";
+        let hitBadge = "";
+        if (isConfirmed) {
+          if (item.num === res.r1) { hitClass = "hit-rank-1"; hitBadge = '<div class="hit-rank-badge badge-r1">1착 적중</div>'; hitCount++; }
+          else if (item.num === res.r2) { hitClass = "hit-rank-2"; hitBadge = '<div class="hit-rank-badge badge-r2">2착 적중</div>'; hitCount++; }
+          else if (item.num === res.r3) { hitClass = "hit-rank-3"; hitBadge = '<div class="hit-rank-badge badge-r3">3착 적중</div>'; hitCount++; }
+        }
+
+        return `
+          <div class="pick-cell ${hitClass} ${(!hitClass && item.cls) ? item.cls : ''}">
+            ${hitBadge}
+            <div class="cell-tag">${item.tag}</div>
+            <div class="horse-circle digital" style="background:${colorStyle.bg}; color:${colorStyle.color}; border-color:${colorStyle.border}; box-shadow:0 0 10px ${colorStyle.shadow};">
+              ${item.num || '-'}
+            </div>
+            <div class="cell-sub">${item.sub}</div>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("bb-ai-desc").innerHTML = `
+        <strong>AI팀 정밀 분석:</strong> ${r.aiReason}
+      `;
+
+      if (isConfirmed && hitCount >= 2) {
+        celebrateEl.style.display = "block";
+        celebrateEl.innerHTML = `<strong>[적중 성공!]</strong> 김비서 AI팀 추천마 중 <b>총 ${hitCount}두 착순 진입 적중!</b>`;
+      } else {
+        celebrateEl.style.display = "none";
+      }
+
+      // 3단: 조합표
+      const combos = r.combos || {};
+      document.getElementById("bb-combo-bok").innerText = combos.sambok || "-";
+      document.getElementById("bb-combo-ssang").innerText = combos.samssang || "-";
+
+      updateCurrentRaceTimer();
+    }
+
+    function updateCurrentRaceTimer() {
+      const cur = RACES.find(x => x.id === currentKey);
+      if (!cur) return;
+      const td = calcTimeDiff(cur.time);
+      const timerEl = document.getElementById("bb-race-timer");
+      if (!timerEl) return;
+
+      if (cur.results && cur.results.status === '확정') {
+        timerEl.className = "bb-race-timer";
+        timerEl.style.background = "rgba(16, 185, 129, 0.15)";
+        timerEl.style.border = "2px solid #10B981";
+        timerEl.style.color = "#6EE7B7";
+        timerEl.innerHTML = `<span style="font-size:18px; font-weight:900;">[결과 확정 완료]</span>`;
+        return;
+      }
+
+      if (td.status === 'urgent') {
+        timerEl.className = "bb-race-timer timer-urgent-red digital";
+        timerEl.innerHTML = `<span style="background:#FFFFFF; color:#DC2626; padding:3px 10px; border-radius:6px; font-weight:950; font-size:17px;">[발주 임박]</span> <span style="font-size:26px; font-weight:950; color:#FFFFFF; text-shadow:0 0 12px rgba(255,255,255,0.9);">${td.text} 남음</span>`;
+      } else if (td.status === 'upcoming') {
+        timerEl.className = "bb-race-timer timer-upcoming-red digital";
+        timerEl.innerHTML = `<span style="background:#EF4444; color:#FFFFFF; padding:3px 10px; border-radius:6px; font-weight:900; font-size:15px;">발주 카운트다운</span> <span style="font-size:24px; font-weight:950; color:#FFFFFF;">${td.text} 남음</span>`;
+      } else if (td.status === 'running') {
+        timerEl.className = "bb-race-timer";
+        timerEl.style.background = "#78350F";
+        timerEl.style.border = "2px solid #F59E0B";
+        timerEl.style.color = "#FEF08A";
+        timerEl.innerHTML = `<span style="font-size:20px; font-weight:900;">[발주 완료] 경주 진행 중</span>`;
+      } else {
+        timerEl.className = "bb-race-timer";
+        timerEl.style.background = "#1E293B";
+        timerEl.style.border = "2px solid #475569";
+        timerEl.style.color = "#94A3B8";
+        timerEl.innerHTML = `<span style="font-size:18px; font-weight:800;">경주 마감</span>`;
+      }
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      const topClockEl = document.getElementById("topClock");
+      if (topClockEl) topClockEl.innerText = `${h}:${m}`;
+
+      updateCurrentRaceTimer();
+
+      const liveRace = getNextUpcomingRace();
+
+      // 자동 넘김: 사용자가 특정 경주를 수동으로 보고 있지 않을 때, 경주가 끝나면 자동으로 다음 경주로 전환!
+      if (!userManuallySelected && liveRace && liveRace.id !== currentKey) {
+        selectRace(liveRace.id, false);
+      }
+
+      // 리본 및 리모컨 카운트다운 및 상태 갱신
+      RACES.forEach(r => {
+        const td = calcTimeDiff(r.time);
+        const rbEl = document.getElementById("rb-cd-" + r.id);
+        if (rbEl) rbEl.innerText = td.short;
+
+        const vrEl = document.getElementById("vr-cd-" + r.id);
+        if (vrEl) vrEl.innerText = td.short;
+      });
+
+      // 리본 및 버튼 라이브 클래스 동적 갱신
+      renderQuickRibbon();
+      
+
+      const countdownEl = document.getElementById("nextRaceCountdown");
+      if (countdownEl) {
+        if (liveRace) {
+          const isSeoul = (liveRace.meet === "서울");
+          const td = calcTimeDiff(liveRace.time);
+          countdownEl.innerHTML = `다음 발주: <b style="color:${isSeoul ? '#38BDF8' : '#FB923C'};">${liveRace.shortTitle} (${liveRace.time})</b> [${td.text}]`;
+        } else {
+          countdownEl.innerHTML = `오늘의 모든 경주가 마감되었습니다`;
+        }
+      }
+    }
+
+    // 초기화
+    renderQuickRibbon();
+    
+    renderMasterTable();
+    const initRace = getNextUpcomingRace();
+    selectRace(initRace ? initRace.id : "서울_1", false);
+    updateClock();
+    setInterval(updateClock, 1000); // 10초마다 시계 및 자동 전환 체크
+  </script>
+</body>
+</html>
