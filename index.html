@@ -2075,7 +2075,7 @@
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
+    "payoutType": "고배당",
     "expH": [
       "1",
       "7",
@@ -2213,7 +2213,7 @@
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
+    "payoutType": "고배당",
     "expH": [
       "6",
       "4",
@@ -2259,7 +2259,7 @@
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
+    "payoutType": "고배당",
     "expH": [
       "9",
       "5",
@@ -2351,7 +2351,7 @@
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
+    "payoutType": "고배당",
     "expH": [
       "7",
       "4",
@@ -2489,7 +2489,7 @@
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
+    "payoutType": "고배당",
     "expH": [
       "4",
       "11",
@@ -2581,7 +2581,7 @@
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
+    "payoutType": "고배당",
     "expH": [
       "9",
       "6",
@@ -2627,7 +2627,7 @@
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
+    "payoutType": "고배당",
     "expH": [
       "3",
       "11",
@@ -2673,7 +2673,7 @@
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
+    "payoutType": "고배당",
     "expH": [
       "5",
       "8",
@@ -2994,7 +2994,7 @@ ${liveLink}
       let filtered = RACES;
       if (currentFilter === "서울") filtered = RACES.filter(r => r.meet === "부산");
       else if (currentFilter === "제주") filtered = RACES.filter(r => r.meet === "제주");
-      else if (currentFilter === "GO") filtered = RACES.filter(r => r.payoutType === "중·고배당");
+      else if (currentFilter === "GO") filtered = RACES.filter(r => r.payoutType === "고배당" || r.payoutType === "중·고배당");
 
       const liveRace = getNextUpcomingRace();
 
@@ -3023,7 +3023,7 @@ ${liveLink}
         item.innerHTML = `
           ${liveBadgeHtml}
           <div class="ribbon-name">${r.shortTitle}</div>
-          <div style="font-size:13px; font-weight:950; padding:3px 7px; border-radius:6px; margin:3px 0; white-space:nowrap; background:${r.payoutType === '중·고배당' ? '#DC2626' : '#334155'}; color:${r.payoutType === '중·고배당' ? '#FFFFFF' : '#F8FAFC'}; border:1.5px solid ${r.payoutType === '중·고배당' ? '#FCA5A5' : '#94A3B8'}; box-shadow:${r.payoutType === '중·고배당' ? '0 0 10px rgba(239,68,68,0.65)' : 'none'};">${r.payoutType === '중·고배당' ? '중·고배당 예상' : '저배당 예상'}</div>
+          <div style="font-size:13px; font-weight:950; padding:3px 7px; border-radius:6px; margin:3px 0; white-space:nowrap; background:${r.payoutType === '고배당' ? '#DC2626' : (r.payoutType === '중·고배당' ? '#F59E0B' : '#334155')}; color:${r.payoutType === '고배당' ? '#FFFFFF' : (r.payoutType === '중·고배당' ? '#0B132B' : '#F8FAFC')}; border:1.5px solid ${r.payoutType === '고배당' ? '#FCA5A5' : (r.payoutType === '중·고배당' ? '#FEF08A' : '#94A3B8')}; box-shadow:${r.payoutType === '고배당' ? '0 0 10px rgba(239,68,68,0.65)' : (r.payoutType === '중·고배당' ? '0 0 8px rgba(245,158,11,0.55)' : 'none')};">${r.payoutType === '고배당' ? '고배당 예상' : (r.payoutType === '중·고배당' ? '중·고배당 예상' : '저배당 예상')}</div>
           <div class="ribbon-time">${r.time}</div>
           <div class="ribbon-countdown ${cdCls}" id="rb-cd-${r.id}">${td.short}</div>
         `;
@@ -3099,7 +3099,7 @@ ${liveLink}
         const res = r.results || {};
         const isConfirmed = (res.status === "확정" && res.r1 && res.r2 && res.r3);
         const isLive = (liveRace && liveRace.id === r.id);
-        const isGo = (r.payoutType === "중·고배당");
+        const isGo = (r.payoutType === "고배당" || r.payoutType === "중·고배당");
         const td = calcTimeDiff(r.time);
         const ai = r.ai || {};
         const aiPicks = [ai.h1, ai.h2, ai.h3].filter(Boolean);
@@ -3167,7 +3167,7 @@ ${liveLink}
         } else if (isLive) {
           hitResultHtml = '<span style="background:#EF4444; color:#fff; font-weight:900; padding:2px 6px; border-radius:4px; font-size:11px;">[출격진행]</span>';
         } else {
-          hitResultHtml = `<span style="display:inline-block; padding:4px 9px; border-radius:6px; font-size:13.5px; font-weight:950; white-space:nowrap; background:${isGo ? '#DC2626' : '#334155'}; color:${isGo ? '#FFFFFF' : '#F8FAFC'}; border:1.5px solid ${isGo ? '#FCA5A5' : '#94A3B8'}; box-shadow:${isGo ? '0 0 8px rgba(239,68,68,0.55)' : 'none'};">${isGo ? '중·고배당 예상' : '저배당 예상'}</span>`;
+          hitResultHtml = `<span style="display:inline-block; padding:4px 9px; border-radius:6px; font-size:13.5px; font-weight:950; white-space:nowrap; background:${r.payoutType === '고배당' ? '#DC2626' : (r.payoutType === '중·고배당' ? '#F59E0B' : '#334155')}; color:${r.payoutType === '고배당' ? '#FFFFFF' : (r.payoutType === '중·고배당' ? '#0B132B' : '#F8FAFC')}; border:1.5px solid ${r.payoutType === '고배당' ? '#FCA5A5' : (r.payoutType === '중·고배당' ? '#FEF08A' : '#94A3B8')}; box-shadow:${r.payoutType === '고배당' ? '0 0 8px rgba(239,68,68,0.55)' : (r.payoutType === '중·고배당' ? '0 0 8px rgba(245,158,11,0.5)' : 'none')};">${r.payoutType === '고배당' ? '고배당 예상' : (r.payoutType === '중·고배당' ? '중·고배당 예상' : '저배당 예상')}</span>`;
         }
 
         row.innerHTML = `
@@ -3259,20 +3259,30 @@ ${liveLink}
       const timeBadge = document.getElementById("bb-time-badge");
       timeBadge.className = `big-time-badge ${isSeoul ? 'time-seoul' : 'time-jeju'} digital`;
 
-      const isGo = (r.payoutType === "중·고배당");
+      const isHigh = (r.payoutType === "고배당");
+      const isMidHigh = (r.payoutType === "중·고배당");
+      const isGo = (isHigh || isMidHigh);
       const actionEl = document.getElementById("bb-action");
       const payoutEl = document.getElementById("bb-payout");
       const decEl = document.getElementById("bb-decision");
       const decText = document.getElementById("bb-decision-text");
 
-      if (isGo) {
-        actionEl.className = r.badgeType === "HIGH" ? "bb-action-badge action-high" : "bb-action-badge action-go";
-        actionEl.innerHTML = r.badgeType === "HIGH" ? "[캡틴 메인 출격!] (필승)" : "[캡틴 승부 출격!] (베팅 GO)";
-        payoutEl.innerHTML = "🔥 중·고배당 예상";
+      if (isHigh) {
+        actionEl.className = "bb-action-badge action-high";
+        actionEl.innerHTML = "[캡틴 고배당 메인 출격!] (필승)";
+        payoutEl.innerHTML = "🔥 고배당 예상";
         payoutEl.style.cssText = "font-size:21px; font-weight:950; padding:7px 16px; border-radius:10px; background:linear-gradient(135deg,#DC2626,#EF4444); color:#FFFFFF; border:2px solid #FCA5A5; box-shadow:0 0 20px rgba(239,68,68,0.85); letter-spacing:0.5px;";
 
         decEl.className = "decision-banner go";
-        decText.innerHTML = `<strong>[오늘 캡틴 출격 승부!]</strong> ${r.aiReason}`;
+        decText.innerHTML = `<strong>[오늘 캡틴 고배당 핵심 승부!]</strong> ${r.aiReason}`;
+      } else if (isMidHigh) {
+        actionEl.className = "bb-action-badge action-go";
+        actionEl.innerHTML = "[캡틴 중·고배당 출격!] (베팅 GO)";
+        payoutEl.innerHTML = "⚡ 중·고배당 예상";
+        payoutEl.style.cssText = "font-size:21px; font-weight:950; padding:7px 16px; border-radius:10px; background:linear-gradient(135deg,#F59E0B,#D97706); color:#0B132B; border:2px solid #FEF08A; box-shadow:0 0 18px rgba(245,158,11,0.75); letter-spacing:0.5px;";
+
+        decEl.className = "decision-banner go";
+        decText.innerHTML = `<strong>[오늘 캡틴 중·고배당 승부!]</strong> ${r.aiReason}`;
       } else {
         actionEl.className = "bb-action-badge action-pass";
         actionEl.innerHTML = "[저배당 예상 · 관망]";
