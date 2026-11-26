@@ -1604,9 +1604,9 @@
     <div class="quick-ribbon-container">
       <div class="track-tabs">
         <button class="track-tab-btn active" onclick="filterTrack('ALL', event)">🌟 전체 17경주</button>
-        <button class="track-tab-btn" onclick="filterTrack('GO', event)">출격승부(15R)</button>
-        <button class="track-tab-btn tab-busan" onclick="filterTrack('서울', event)">서울경마(11R)</button>
-        <button class="track-tab-btn tab-jeju" onclick="filterTrack('제주', event)">제주경마(6R)</button>
+        <button class="track-tab-btn" onclick="filterTrack('GO', event)">출격승부(14R)</button>
+        <button class="track-tab-btn tab-busan" onclick="filterTrack('부산', event)">부산(영남)(10R)</button>
+        <button class="track-tab-btn tab-jeju" onclick="filterTrack('제주', event)">제주경마(7R)</button>
       </div>
       <div class="quick-ribbon" id="quickRibbon"></div>
     </div>
@@ -1663,7 +1663,7 @@
       <div class="stage-section" style="border-color: rgba(245,158,11,0.6);">
         <div class="stage-header">
           <div class="stage-title" style="color:var(--gold);">
-            <span>📊 [1단계] 외부 전문가 / AI99 실시간 예상지 5두</span>
+            <span>📊 [1단계] 다크호스 공식 사전 인기도 TOP 5두 (99 예상 교체 대기)</span>
           </div>
           <span style="font-size:11px; color:#94A3B8;">확정 착순 진입 시 불꽃 점등</span>
         </div>
@@ -1700,7 +1700,7 @@
     <div class="vr-master-card" id="verticalResultsSection">
       <div class="vr-master-head">
         <div style="font-size:16px; font-weight:900; color:#FDE68A; display:flex; align-items:center; gap:8px;">
-          <span>토요경마 확정 착순표 (서울 · 제주 2열 세로 분리 / 3두 마번 요약)</span>
+          <span>11/27(금) 금요경마 확정 착순표 (부산(영남) 10R · 제주 7R / 3두 마번 요약)</span>
           <span style="font-size:11px; background:rgba(16,185,129,0.25); color:#34D399; padding:2px 8px; border-radius:12px; border:1px solid #10B981;">실시간 갱신</span>
         </div>
         <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
@@ -1718,7 +1718,7 @@
         <!-- 좌측: 서울 11경주 세로 표 -->
         <div class="vr-meet-box" style="background:#0F172A; border:1.5px solid #1E40AF; border-radius:12px; padding:12px;">
           <div style="font-size:14.5px; font-weight:900; color:#38BDF8; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #1E40AF; display:flex; justify-content:space-between; align-items:center;">
-            <span>👑 서울경마 (총 11경주)</span>
+            <span>🌊 부산(영남)경마 (총 10경주)</span>
             <span style="font-size:11px; color:#94A3B8;">확정 3두 마번</span>
           </div>
           <table style="width:100%; border-collapse:collapse; font-size:12.5px;">
@@ -1736,8 +1736,8 @@
         <!-- 우측: 제주 6경주 세로 표 -->
         <div class="vr-meet-box" style="background:#0F172A; border:1.5px solid #C2410C; border-radius:12px; padding:12px;">
           <div style="font-size:14.5px; font-weight:900; color:#FB923C; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #C2410C; display:flex; justify-content:space-between; align-items:center;">
-            <span>🍊 제주경마 (총 6경주)</span>
-            <span style="font-size:11px; color:#34D399; font-weight:800;">[전 경주 종료]</span>
+            <span>🍊 제주경마 (총 7경주)</span>
+            <span style="font-size:11px; color:#34D399; font-weight:800;">[11/27 금요 대기]</span>
           </div>
           <table style="width:100%; border-collapse:collapse; font-size:12.5px;">
             <thead>
@@ -1861,7 +1861,7 @@
       <!-- 추천 문구 미리보기 -->
       <div style="background:#0F172A; border:1px solid #334155; border-radius:8px; padding:10px; font-size:11px; color:#94A3B8; line-height:1.5; max-height:110px; overflow-y:auto; text-align:left; word-break:break-all;">
         <strong style="color:#FDE68A;">[전송 문구 미리보기]</strong><br>
-        🏇 [AI 신호등 가족] 오늘 토요경마(서울 11R + 제주 6R) 실시간 4두압축 전광판!<br>
+        🏇 [AI 신호등 가족] 11/27(금) 금요경마(부산 10R + 제주 7R) 실시간 4두압축 전광판!<br>
         형이 정밀 분석해서 완성한 실시간 라이브 전광판이다.<br>
         🔗 [실시간 전광판]: <span id="previewLink">--</span><br>
         🔥 오늘 4대 중·고배당 집중 승부: 제주1R, 부산4R, 부산9R(메인), 부산10R
@@ -1911,124 +1911,38 @@
 
     const RACES = [
   {
-    "id": "서울_1",
-    "meet": "서울",
+    "id": "부산_1",
+    "meet": "부산",
     "rcNo": 1,
-    "time": "10:35",
-    "dist": "1000m",
+    "time": "10:45",
+    "dist": "1200m",
     "grade": "국6등급 2세",
-    "title": "서울 1R (1000m · 국6등급 2세 신예)",
-    "shortTitle": "서울 1R",
+    "title": "부산 1R (1200m · 국6등급 2세 개막)",
+    "shortTitle": "부산 1R",
     "isRec": true,
     "isOur": true,
     "badgeType": "STRIKE",
     "payoutType": "중·고배당",
     "expH": [
-      "5",
-      "1",
+      "7",
       "8",
-      "11",
+      "9",
+      "1",
       "6"
     ],
-    "expInterest": "10",
-    "expInterestDesc": "10번 세내불리 (별대박 추천 1000m 기습 복병마)",
-    "expComment": "1번 금빛코드 선행 최유력 vs 5번 사이버타이거 서승운 안장 추입",
+    "expInterest": "6",
+    "expInterestDesc": "6번 퀸즈엘레강스 (다크호스 ※복병 7%)",
+    "expComment": "7번 하이캔디(서승운 31%) vs 8번 해담이(22%) · 9번 금강캐처(20%) 3파전",
     "ai": {
-      "h1": "5",
-      "h2": "1",
-      "h3": "8",
-      "h4": "10"
-    },
-    "aiReason": "1번 금빛코드 1게이트 이점 단독선행 기둥축 고정 + 5번 사이버타이거 주력 동반입상 공략",
-    "combos": {
-      "sambok": "[축 5번] - [1, 8, 10번] (단 3구멍)",
-      "samssang": "[1착: 5번] ➔ [2착: 1, 8, 10] ➔ [3착: 1, 8, 10] (단 6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "서울_2",
-    "meet": "서울",
-    "rcNo": 2,
-    "time": "11:00",
-    "dist": "1200m",
-    "grade": "국6등급 2세",
-    "title": "서울 2R (1200m · 국6등급 2세루키)",
-    "shortTitle": "서울 2R",
-    "isRec": false,
-    "isOur": false,
-    "badgeType": "NONE",
-    "payoutType": "저배당",
-    "expH": [
-      "4",
-      "7",
-      "10",
-      "5",
-      "3"
-    ],
-    "expInterest": "3",
-    "expInterestDesc": "4번 와와삭스 (종반 탄력 우수 복병)",
-    "expComment": "7번 나르샤스톰 마이아 안장 기량 우위 vs 3번 인페르노 맞대결",
-    "ai": {
-      "h1": "4",
-      "h2": "7",
-      "h3": "10",
-      "h4": "3"
-    },
-    "aiReason": "7번 나르샤스톰 축마 안정적이나 저배당 압축 흐름으로 소액 분산 타격",
-    "combos": {
-      "sambok": "[축 4번] - [7, 10, 3번] (단 3구멍)",
-      "samssang": "[1착: 4번] ➔ [2착: 7, 10, 3] ➔ [3착: 7, 10, 3] (단 6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "서울_3",
-    "meet": "서울",
-    "rcNo": 3,
-    "time": "11:25",
-    "dist": "1200m",
-    "grade": "국6등급 연령오픈",
-    "title": "서울 3R (1200m · 국6등급)",
-    "shortTitle": "서울 3R",
-    "isRec": true,
-    "isOur": true,
-    "badgeType": "STRIKE",
-    "payoutType": "중·고배당",
-    "expH": [
-      "11",
-      "1",
-      "6",
-      "9",
-      "7"
-    ],
-    "expInterest": "7",
-    "expInterestDesc": "9번 레이스파티 (최범현 기수 습보 조교 완료)",
-    "expComment": "6번 비트스타 장추열 안장 우세 vs 11번 시티오브드림 서승운 안장",
-    "ai": {
-      "h1": "11",
-      "h2": "6",
+      "h1": "7",
+      "h2": "8",
       "h3": "9",
-      "h4": "7"
+      "h4": "6"
     },
-    "aiReason": "6번 비트스타 순발력 우위 기둥축 + 11번 외곽 극복 주력 및 9번 폭탄마 방어",
+    "aiReason": "7번 하이캔디 서승운 기수 기둥축 + 8·9번 주력 + 6번 ※복병마 압축",
     "combos": {
-      "sambok": "[축 11번] - [6, 9, 7번] (단 3구멍)",
-      "samssang": "[1착: 11번] ➔ [2착: 6, 9, 7] ➔ [3착: 6, 9, 7] (단 6구멍)"
+      "sambok": "[축 7번] - [8, 9, 6번] (단 3구멍)",
+      "samssang": "[1착: 7번] ➔ [2착: 8, 9, 6] ➔ [3착: 8, 9, 6] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2043,9 +1957,9 @@
     "id": "제주_1",
     "meet": "제주",
     "rcNo": 1,
-    "time": "12:05",
+    "time": "11:10",
     "dist": "900m",
-    "grade": "제6등급",
+    "grade": "제6등급 4세이하",
     "title": "제주 1R (900m · 제6등급 제주개막)",
     "shortTitle": "제주 1R",
     "isRec": true,
@@ -2053,25 +1967,25 @@
     "badgeType": "STRIKE",
     "payoutType": "중·고배당",
     "expH": [
-      "3",
       "7",
       "8",
-      "4",
-      "10"
+      "3",
+      "9",
+      "4"
     ],
     "expInterest": "4",
-    "expInterestDesc": "4번 가속항호 (김준호 기수 기습 추입 복병)",
-    "expComment": "3번 전승자 압도적 인기 34% vs 7번 태양신천 문현진 안장",
+    "expInterestDesc": "4번 엔딩요정 (다크호스 ※복병 11%)",
+    "expComment": "7번 철웅(박성광 32%) 선두 유력 vs 8번 무림출격(18%) · 3번 위대한야망(13%)",
     "ai": {
-      "h1": "3",
-      "h2": "7",
-      "h3": "8",
+      "h1": "7",
+      "h2": "8",
+      "h3": "3",
       "h4": "4"
     },
-    "aiReason": "함수율 17% 불량주로 선행력 최강 3번 전승자 기둥축 + 4번 복병 투입",
+    "aiReason": "7번 철웅 강력 축마 + 8·3번 상대마 + 4번 엔딩요정 ※복병 조합",
     "combos": {
-      "sambok": "[축 3번] - [7, 8, 4번] (단 3구멍)",
-      "samssang": "[1착: 3번] ➔ [2착: 7, 8, 4] ➔ [3착: 7, 8, 4] (단 6구멍)"
+      "sambok": "[축 7번] - [8, 3, 4번] (단 3구멍)",
+      "samssang": "[1착: 7번] ➔ [2착: 8, 3, 4] ➔ [3착: 8, 3, 4] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2083,38 +1997,38 @@
     }
   },
   {
-    "id": "서울_4",
-    "meet": "서울",
-    "rcNo": 4,
-    "time": "12:45",
-    "dist": "1300m",
-    "grade": "국6등급",
-    "title": "서울 4R (1300m · 국6등급)",
-    "shortTitle": "서울 4R",
+    "id": "부산_2",
+    "meet": "부산",
+    "rcNo": 2,
+    "time": "11:35",
+    "dist": "1400m",
+    "grade": "국6등급 2세",
+    "title": "부산 2R (1400m · 국6등급 2세)",
+    "shortTitle": "부산 2R",
     "isRec": false,
     "isOur": false,
     "badgeType": "NONE",
     "payoutType": "저배당",
     "expH": [
-      "7",
-      "3",
-      "2",
+      "10",
       "5",
-      "1"
+      "11",
+      "8",
+      "2"
     ],
-    "expInterest": "1",
-    "expInterestDesc": "7번 불패의여왕 (조한별 안장)",
-    "expComment": "3번 피엔에스러너 다실바 vs 5번 세명하이디 조상범",
+    "expInterest": "2",
+    "expInterestDesc": "2번 클러치포터 (다크호스 ※복병 6%)",
+    "expComment": "10번 페가수스여왕(31%) vs 5번 우한륭(28%) · 11번 판타스틱호프(서승운 18%)",
     "ai": {
-      "h1": "7",
-      "h2": "3",
-      "h3": "2",
-      "h4": "1"
+      "h1": "10",
+      "h2": "5",
+      "h3": "11",
+      "h4": "2"
     },
-    "aiReason": "3번 피엔에스러너 다실바 기수 안장 기둥축 안정적 저배당 관망 권고",
+    "aiReason": "10·5번 양강 구도 + 11번 서승운 추입 + 2번 ※복병 소액 방어",
     "combos": {
-      "sambok": "[축 7번] - [3, 2, 1번] (단 3구멍)",
-      "samssang": "[1착: 7번] ➔ [2착: 3, 2, 1] ➔ [3착: 3, 2, 1] (단 6구멍)"
+      "sambok": "[축 10번] - [5, 11, 2번] (단 3구멍)",
+      "samssang": "[1착: 10번] ➔ [2착: 5, 11, 2] ➔ [3착: 5, 11, 2] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2129,35 +2043,35 @@
     "id": "제주_2",
     "meet": "제주",
     "rcNo": 2,
-    "time": "13:10",
+    "time": "12:15",
     "dist": "1000m",
     "grade": "제5등급 2세이상",
     "title": "제주 2R (1000m · 제5등급)",
     "shortTitle": "제주 2R",
-    "isRec": true,
-    "isOur": true,
-    "badgeType": "STRIKE",
-    "payoutType": "중·고배당",
+    "isRec": false,
+    "isOur": false,
+    "badgeType": "NONE",
+    "payoutType": "저배당",
     "expH": [
+      "1",
       "7",
-      "4",
-      "3",
-      "2",
-      "5"
+      "6",
+      "9",
+      "2"
     ],
-    "expInterest": "3",
-    "expInterestDesc": "3번마 (강수환 기수 직조 단축습보 최상 복병)",
-    "expComment": "5번 광풍만리 김홍권 선행 vs 1번 황금대박 김준호 맞불",
+    "expInterest": "2",
+    "expInterestDesc": "2번 기탄 (다크호스 ※복병 6%)",
+    "expComment": "1번 제우스(29%) vs 7번 칭기스(박성광 29%) 치열한 선두 다툼",
     "ai": {
-      "h1": "7",
-      "h2": "4",
-      "h3": "3",
+      "h1": "1",
+      "h2": "7",
+      "h3": "6",
       "h4": "2"
     },
-    "aiReason": "7번 신천황 축 + 조교 특A급 3번 복병과 4번·2번 압축",
+    "aiReason": "1번 제우스·7번 칭기스 양축 압축 + 6번 사계절 주력 + 2번 ※복병",
     "combos": {
-      "sambok": "[축 7번] - [4, 3, 2번] (단 3구멍)",
-      "samssang": "[1착: 7번] ➔ [2착: 4, 3, 2] ➔ [3착: 4, 3, 2] (단 6구멍)"
+      "sambok": "[축 1번] - [7, 6, 2번] (단 3구멍)",
+      "samssang": "[1착: 1번] ➔ [2착: 7, 6, 2] ➔ [3착: 7, 6, 2] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2169,38 +2083,38 @@
     }
   },
   {
-    "id": "서울_5",
-    "meet": "서울",
-    "rcNo": 5,
-    "time": "13:35",
+    "id": "부산_3",
+    "meet": "부산",
+    "rcNo": 3,
+    "time": "12:55",
     "dist": "1200m",
-    "grade": "국5등급",
-    "title": "서울 5R (1200m · 국5등급 핸디캡)",
-    "shortTitle": "서울 5R",
-    "isRec": true,
-    "isOur": true,
-    "badgeType": "STRIKE",
-    "payoutType": "중·고배당",
+    "grade": "혼4등급",
+    "title": "부산 3R (1200m · 혼4등급 7두)",
+    "shortTitle": "부산 3R",
+    "isRec": false,
+    "isOur": false,
+    "badgeType": "NONE",
+    "payoutType": "저배당",
     "expH": [
+      "5",
       "2",
-      "3",
-      "8",
-      "6",
-      "11"
+      "7",
+      "1",
+      "4"
     ],
-    "expInterest": "7",
-    "expInterestDesc": "7번 그래이고 (별대박 삼복승 배당 노림수 복병)",
-    "expComment": "11번 슈퍼땅콩 서승운 vs 1번 어플리트런 이동하",
+    "expInterest": "4",
+    "expInterestDesc": "4번 엘스타윈 (다크호스 ※복병 8%)",
+    "expComment": "5번 그레이트영(서승운 31%) vs 2번 아너스페셜(조인권 27%) · 7번 글로벌칸(17%)",
     "ai": {
-      "h1": "2",
-      "h2": "3",
-      "h3": "8",
-      "h4": "7"
+      "h1": "5",
+      "h2": "2",
+      "h3": "7",
+      "h4": "4"
     },
-    "aiReason": "11번 슈퍼땅콩 서승운 안장 탄력 발군 1착 고정 + 1번 인코스 어플리트런 주력",
+    "aiReason": "7두 소출전 압축 경주 · 5번 그레이트영 축 + 2·7·4번 정밀 압축",
     "combos": {
-      "sambok": "[축 2번] - [3, 8, 7번] (단 3구멍)",
-      "samssang": "[1착: 2번] ➔ [2착: 3, 8, 7] ➔ [3착: 3, 8, 7] (단 6구멍)"
+      "sambok": "[축 5번] - [2, 7, 4번] (단 3구멍)",
+      "samssang": "[1착: 5번] ➔ [2착: 2, 7, 4] ➔ [3착: 2, 7, 4] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2215,35 +2129,35 @@
     "id": "제주_3",
     "meet": "제주",
     "rcNo": 3,
-    "time": "14:00",
+    "time": "13:20",
     "dist": "1000m",
-    "grade": "제4등급 2세이상",
-    "title": "제주 3R (1000m · 제4등급 제주승부)",
+    "grade": "제5등급 2세이상",
+    "title": "제주 3R (1000m · 제5등급)",
     "shortTitle": "제주 3R",
     "isRec": true,
     "isOur": true,
     "badgeType": "STRIKE",
     "payoutType": "중·고배당",
     "expH": [
-      "7",
-      "8",
-      "6",
       "2",
-      "3"
+      "6",
+      "3",
+      "5",
+      "10"
     ],
-    "expInterest": "6",
-    "expInterestDesc": "6번마 (불량주로 뒷심 과감한 노림수 복병)",
-    "expComment": "8번 멋진선택 박성광 안장 단독 찬스 vs 7번 비상질주 문현진",
+    "expInterest": "10",
+    "expInterestDesc": "10번 선봉황후 (다크호스 ※복병 6%)",
+    "expComment": "2번 비상천하(32%) vs 6번 소록태풍(박성광 25%) · 3번 아름나(14%)",
     "ai": {
-      "h1": "7",
-      "h2": "8",
-      "h3": "6",
-      "h4": "2"
+      "h1": "2",
+      "h2": "6",
+      "h3": "3",
+      "h4": "10"
     },
-    "aiReason": "불안한 인기마 배제, 7번 축에 6번 복병 과감 투입",
+    "aiReason": "2번 비상천하 +4kg 부중 변수 체크 · 6번 소록태풍 동반 주력 + 10번 ※복병",
     "combos": {
-      "sambok": "[축 7번] - [8, 6, 2번] (단 3구멍)",
-      "samssang": "[1착: 7번] ➔ [2착: 8, 6, 2] ➔ [3착: 8, 6, 2] (단 6구멍)"
+      "sambok": "[축 2번] - [6, 3, 10번] (단 3구멍)",
+      "samssang": "[1착: 2번] ➔ [2착: 6, 3, 10] ➔ [3착: 6, 3, 10] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2255,38 +2169,38 @@
     }
   },
   {
-    "id": "서울_6",
-    "meet": "서울",
-    "rcNo": 6,
-    "time": "14:25",
-    "dist": "1400m",
-    "grade": "국5등급 연령오픈",
-    "title": "서울 6R (1400m · 국5등급 서울출격)",
-    "shortTitle": "서울 6R",
+    "id": "부산_4",
+    "meet": "부산",
+    "rcNo": 4,
+    "time": "13:45",
+    "dist": "1200m",
+    "grade": "국6등급 오픈",
+    "title": "부산 4R (1200m · 국6등급 혼전)",
+    "shortTitle": "부산 4R",
     "isRec": true,
     "isOur": true,
     "badgeType": "STRIKE",
     "payoutType": "중·고배당",
     "expH": [
-      "8",
-      "11",
-      "5",
+      "3",
+      "6",
       "4",
+      "8",
       "1"
     ],
     "expInterest": "1",
-    "expInterestDesc": "3번 어디든지 (다실바 기수 안장 기습 전개)",
-    "expComment": "1번 베스트프리덤 마이아 안장 vs 5번 킹스파이시 조재로",
+    "expInterestDesc": "1번 정문골드원 (다크호스 ※복병 7%)",
+    "expComment": "3번 매직트리(29%) vs 6번 카우보이룩(29%) · 4번 고잉투윈(20%) 삼파전",
     "ai": {
-      "h1": "8",
-      "h2": "1",
-      "h3": "5",
-      "h4": "4"
+      "h1": "3",
+      "h2": "6",
+      "h3": "4",
+      "h4": "1"
     },
-    "aiReason": "1번 베스트프리덤 1게이트 마이아 완벽 선행축 + 5번·4번 주력 공략",
+    "aiReason": "3·6번 동률 인기 혼전 · 4번 고잉투윈 + 1번 정문골드원(다실바 ※복병) 승부",
     "combos": {
-      "sambok": "[축 8번] - [1, 5, 4번] (단 3구멍)",
-      "samssang": "[1착: 8번] ➔ [2착: 1, 5, 4] ➔ [3착: 1, 5, 4] (단 6구멍)"
+      "sambok": "[축 3번] - [6, 4, 1번] (단 3구멍)",
+      "samssang": "[1착: 3번] ➔ [2착: 6, 4, 1] ➔ [3착: 6, 4, 1] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2301,35 +2215,35 @@
     "id": "제주_4",
     "meet": "제주",
     "rcNo": 4,
-    "time": "14:50",
+    "time": "14:10",
     "dist": "1110m",
     "grade": "제4등급 2세이상",
-    "title": "제주 4R (1110m · 제4등급)",
+    "title": "제주 4R (1110m · 제4등급 승부)",
     "shortTitle": "제주 4R",
     "isRec": true,
     "isOur": true,
     "badgeType": "STRIKE",
     "payoutType": "중·고배당",
     "expH": [
+      "5",
       "9",
-      "1",
-      "4",
-      "10",
-      "3"
+      "7",
+      "3",
+      "6"
     ],
-    "expInterest": "9",
-    "expInterestDesc": "9번 늘찬 (강태풍 추천 대혼전 고배당 복병)",
-    "expComment": "4번 경성윈드 박성광 vs 1번 진한파도 전현준",
+    "expInterest": "6",
+    "expInterestDesc": "6번 황금라인 (다크호스 ※복병 8%)",
+    "expComment": "5번 전농황제(29%) vs 9번 천년수(21%) · 7번 한라원탑(19%)",
     "ai": {
-      "h1": "9",
-      "h2": "1",
-      "h3": "4",
-      "h4": "10"
+      "h1": "5",
+      "h2": "9",
+      "h3": "7",
+      "h4": "6"
     },
-    "aiReason": "강태풍 A급 승부: 4번 대가리 불안, 9번 늘찬·1번 지난파도·10번 팔호 배당 노림",
+    "aiReason": "5번 전농황제 +4kg 부중 부담 · 9번 천년수·7번 한라원탑 + 6번 ※감량 복병",
     "combos": {
-      "sambok": "[축 9번] - [1, 4, 10번] (단 3구멍)",
-      "samssang": "[1착: 9번] ➔ [2착: 1, 4, 10] ➔ [3착: 1, 4, 10] (단 6구멍)"
+      "sambok": "[축 5번] - [9, 7, 6번] (단 3구멍)",
+      "samssang": "[1착: 5번] ➔ [2착: 9, 7, 6] ➔ [3착: 9, 7, 6] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2341,38 +2255,38 @@
     }
   },
   {
-    "id": "서울_7",
-    "meet": "서울",
-    "rcNo": 7,
-    "time": "15:15",
-    "dist": "1700m",
-    "grade": "국5등급",
-    "title": "서울 7R (1700m · 국5등급 장거리)",
-    "shortTitle": "서울 7R",
+    "id": "부산_5",
+    "meet": "부산",
+    "rcNo": 5,
+    "time": "14:35",
+    "dist": "1800m",
+    "grade": "국OPEN 대상경주",
+    "title": "부산 5R (1800m · 브리더스컵 퀸 메인승부)",
+    "shortTitle": "부산 5R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "STRIKE",
+    "badgeType": "HIGH",
     "payoutType": "중·고배당",
     "expH": [
-      "6",
+      "14",
+      "1",
+      "13",
       "2",
-      "5",
-      "9",
-      "10"
+      "12"
     ],
-    "expInterest": "10",
-    "expInterestDesc": "9번 더선커밍 (조한별 안장 막판 탄력)",
-    "expComment": "4번 블랙러시안 코지 vs 11번 위너삭스 다실바",
+    "expInterest": "12",
+    "expInterestDesc": "12번 보령라이트퀸 (다크호스 ※복병 9%)",
+    "expComment": "14번 [서울]라온포레스트(31%) vs 1번 판타스틱밸류(서승운 24%) · 13번 클리어리위너(21%)",
     "ai": {
-      "h1": "6",
-      "h2": "2",
-      "h3": "5",
-      "h4": "10"
+      "h1": "14",
+      "h2": "1",
+      "h3": "13",
+      "h4": "12"
     },
-    "aiReason": "4번 블랙러시안 1700m 코스 경험 풍부 기둥축 + 11번 위너삭스 주력 압축",
+    "aiReason": "👑 [브리더스컵 퀸 대상경주] 서울 원정 14번 vs 부산 1번 서승운·13번 다실바 + 12번 ※복병",
     "combos": {
-      "sambok": "[축 6번] - [2, 5, 10번] (단 3구멍)",
-      "samssang": "[1착: 6번] ➔ [2착: 2, 5, 10] ➔ [3착: 2, 5, 10] (단 6구멍)"
+      "sambok": "[축 14번] - [1, 13, 12번] (단 3구멍)",
+      "samssang": "[1착: 14번] ➔ [2착: 1, 13, 12] ➔ [3착: 1, 13, 12] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2387,35 +2301,35 @@
     "id": "제주_5",
     "meet": "제주",
     "rcNo": 5,
-    "time": "15:40",
+    "time": "15:00",
     "dist": "1200m",
-    "grade": "제3등급",
-    "title": "제주 5R (1200m · 제3등급 준메인)",
+    "grade": "제4등급 2세이상",
+    "title": "제주 5R (1200m · 제4등급)",
     "shortTitle": "제주 5R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "MAIN",
+    "badgeType": "STRIKE",
     "payoutType": "중·고배당",
     "expH": [
-      "8",
-      "2",
+      "7",
       "4",
-      "10",
-      "3"
+      "2",
+      "5",
+      "6"
     ],
-    "expInterest": "8",
-    "expInterestDesc": "8번 몬딱 (강태풍 A급 추천 배당마) & 2번 태극성",
-    "expComment": "3번 제이킹 박성광 vs 1번 명품최강 문현진",
+    "expInterest": "6",
+    "expInterestDesc": "6번 블루칸 (다크호스 ※복병 11%)",
+    "expComment": "7번 돌격최강(박성광 30%) vs 4번 가온천하(20%) · 2번 우승기운(17%)",
     "ai": {
-      "h1": "8",
-      "h2": "2",
-      "h3": "4",
-      "h4": "10"
+      "h1": "7",
+      "h2": "4",
+      "h3": "2",
+      "h4": "6"
     },
-    "aiReason": "강태풍 A급 승부: 3번 제이킹 대가리 위험 지적! 8번 몬딱·2번 태극성·4번 전설무적 폭탄마 결합",
+    "aiReason": "7번 돌격최강 축 + 4번 가온천하(51kg 경량)·2번 우승기운 + 6번 블루칸 ※복병",
     "combos": {
-      "sambok": "[축 8번] - [2, 4, 10번] (단 3구멍)",
-      "samssang": "[1착: 8번] ➔ [2착: 2, 4, 10] ➔ [3착: 2, 4, 10] (단 6구멍)"
+      "sambok": "[축 7번] - [4, 2, 6번] (단 3구멍)",
+      "samssang": "[1착: 7번] ➔ [2착: 4, 2, 6] ➔ [3착: 4, 2, 6] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2427,38 +2341,38 @@
     }
   },
   {
-    "id": "서울_8",
-    "meet": "서울",
-    "rcNo": 8,
-    "time": "16:05",
-    "dist": "1800m",
-    "grade": "국4등급 연령오픈",
-    "title": "서울 8R (1800m · 국4등급 서울후반승부)",
-    "shortTitle": "서울 8R",
+    "id": "부산_6",
+    "meet": "부산",
+    "rcNo": 6,
+    "time": "15:25",
+    "dist": "1200m",
+    "grade": "혼OPEN G3대상",
+    "title": "부산 6R (1200m · KRA컵 스프린트 G3 특급승부)",
+    "shortTitle": "부산 6R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "STRIKE",
+    "badgeType": "HIGH",
     "payoutType": "중·고배당",
     "expH": [
-      "9",
+      "6",
+      "1",
       "2",
-      "8",
-      "7",
-      "10"
+      "12",
+      "5"
     ],
-    "expInterest": "10",
-    "expInterestDesc": "5번 금아포모스트 (장추열 안장 뚝심마)",
-    "expComment": "9번 프리메로 조재로 vs 8번 포에버길 최범현",
+    "expInterest": "5",
+    "expInterestDesc": "5번 [서울]실버레인 (다크호스 ※복병 6%)",
+    "expComment": "6번 위너클리어(서승운 28%) vs 1번 [서울]빈체로카발로(24%) · 2번 문학보이(10%)",
     "ai": {
-      "h1": "9",
-      "h2": "8",
+      "h1": "6",
+      "h2": "1",
       "h3": "2",
-      "h4": "10"
+      "h4": "5"
     },
-    "aiReason": "9번 프리메로 1800m 적임 기둥축 + 8번 포에버길 주력 동반입상",
+    "aiReason": "👑 [KRA컵 스프린트 G3] 16두 대격돌! 6번 위너클리어·1번 빈체로카발로 양축 + 2·5번 ※복병",
     "combos": {
-      "sambok": "[축 9번] - [8, 2, 10번] (단 3구멍)",
-      "samssang": "[1착: 9번] ➔ [2착: 8, 2, 10] ➔ [3착: 8, 2, 10] (단 6구멍)"
+      "sambok": "[축 6번] - [1, 2, 5번] (단 3구멍)",
+      "samssang": "[1착: 6번] ➔ [2착: 1, 2, 5] ➔ [3착: 1, 2, 5] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2473,35 +2387,35 @@
     "id": "제주_6",
     "meet": "제주",
     "rcNo": 6,
-    "time": "16:30",
-    "dist": "1400m",
-    "grade": "제1등급 2세이상",
-    "title": "제주 6R (1400m · 제1등급 제주피날레 메인특급)",
+    "time": "15:50",
+    "dist": "1200m",
+    "grade": "제3등급 2세이상",
+    "title": "제주 6R (1200m · 제3등급 중배당)",
     "shortTitle": "제주 6R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "MAIN",
+    "badgeType": "STRIKE",
     "payoutType": "중·고배당",
     "expH": [
+      "2",
       "1",
-      "6",
-      "5",
       "3",
+      "5",
       "8"
     ],
-    "expInterest": "6",
-    "expInterestDesc": "6번 새벽질주 (부중 높으나 앞선 무너질 때 추입 복병)",
-    "expComment": "1번 멘탈 박성광 1등급 패권 vs 2번 최대공약수 전현준",
+    "expInterest": "8",
+    "expInterestDesc": "8번 으뜸영웅 (다크호스 ※복병 8%)",
+    "expComment": "2번 새벽전설(27%) vs 1번 디아즈타임(51kg -8kg 파격감량 23%) · 3번 신화왕자(12%)",
     "ai": {
-      "h1": "1",
-      "h2": "6",
-      "h3": "5",
-      "h4": "3"
+      "h1": "2",
+      "h2": "1",
+      "h3": "3",
+      "h4": "8"
     },
-    "aiReason": "17개월 휴양마 4번 전격 제외! 1게이트 1번 멘탈 인코스 선행축 + 6번·5번·3번 압축",
+    "aiReason": "1번 디아즈타임 -8kg 파격 감량 주목 · 2번 새벽전설 동반 주력 + 3·8번 ※복병",
     "combos": {
-      "sambok": "[축 1번] - [6, 5, 3번] (단 3구멍)",
-      "samssang": "[1착: 1번] ➔ [2착: 6, 5, 3] ➔ [3착: 6, 5, 3] (단 6구멍)"
+      "sambok": "[축 2번] - [1, 3, 8번] (단 3구멍)",
+      "samssang": "[1착: 2번] ➔ [2착: 1, 3, 8] ➔ [3착: 1, 3, 8] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2513,38 +2427,81 @@
     }
   },
   {
-    "id": "서울_9",
-    "meet": "서울",
-    "rcNo": 9,
-    "time": "16:55",
-    "dist": "1200m",
-    "grade": "혼4등급 연령오픈",
-    "title": "서울 9R (1200m · 혼4등급 서울특급승부)",
-    "shortTitle": "서울 9R",
+    "id": "부산_7",
+    "meet": "부산",
+    "rcNo": 7,
+    "time": "16:15",
+    "dist": "1300m",
+    "grade": "국6등급 오픈",
+    "title": "부산 7R (1300m · 국6등급)",
+    "shortTitle": "부산 7R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "MAIN",
+    "badgeType": "STRIKE",
     "payoutType": "중·고배당",
     "expH": [
+      "11",
       "8",
+      "4",
       "7",
-      "6",
-      "9",
+      "1"
+    ],
+    "expInterest": "1",
+    "expInterestDesc": "1번 선데이퀸 (다크호스 ※복병 6%)",
+    "expComment": "11번 미스터선샤인(서승운 29%) vs 8번 브라보퀸(28%) · 4번 스피드범프(17%)",
+    "ai": {
+      "h1": "11",
+      "h2": "8",
+      "h3": "4",
+      "h4": "1"
+    },
+    "aiReason": "11번 서승운·8번 최시대 양강 접전 + 4번 조인권 + 1번 다실바 ※복병",
+    "combos": {
+      "sambok": "[축 11번] - [8, 4, 1번] (단 3구멍)",
+      "samssang": "[1착: 11번] ➔ [2착: 8, 4, 1] ➔ [3착: 8, 4, 1] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "제주_7",
+    "meet": "제주",
+    "rcNo": 7,
+    "time": "16:40",
+    "dist": "1300m",
+    "grade": "제2등급 2세이상",
+    "title": "제주 7R (1300m · 제주 2등급 피날레 메인승부)",
+    "shortTitle": "제주 7R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "HIGH",
+    "payoutType": "중·고배당",
+    "expH": [
+      "1",
+      "4",
+      "8",
+      "3",
       "5"
     ],
-    "expInterest": "8",
-    "expInterestDesc": "8번 라온더게이샤 (강태풍 메인 프리미엄 강력 노림수)",
-    "expComment": "5번 팡팡대로 장추열 vs 7번 싱싱모닝 유승완",
+    "expInterest": "5",
+    "expInterestDesc": "5번 천하짱 (다크호스 ※복병 9%)",
+    "expComment": "1번 노형로(26%) vs 4번 대보름(18%) · 8번 드림히트(18%) 대혼전",
     "ai": {
-      "h1": "8",
-      "h2": "7",
-      "h3": "6",
-      "h4": "9"
+      "h1": "1",
+      "h2": "4",
+      "h3": "8",
+      "h4": "5"
     },
-    "aiReason": "강태풍 메인 프리미엄: 인기 1위 5번 팡팡대로 근성 부족 배제, 8번 라온더게이샤·7번 싱싱모닝·9번 폭탄 타격",
+    "aiReason": "👑 [제주 피날레 메인] 1번 노형로 인코스 축 + 4·8번 동률 주력 + 5번 박성광(51.5kg) ※폭탄",
     "combos": {
-      "sambok": "[축 8번] - [7, 6, 9번] (단 3구멍)",
-      "samssang": "[1착: 8번] ➔ [2착: 7, 6, 9] ➔ [3착: 7, 6, 9] (단 6구멍)"
+      "sambok": "[축 1번] - [4, 8, 5번] (단 3구멍)",
+      "samssang": "[1착: 1번] ➔ [2착: 4, 8, 5] ➔ [3착: 4, 8, 5] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2556,81 +2513,124 @@
     }
   },
   {
-    "id": "서울_10",
-    "meet": "서울",
-    "rcNo": 10,
-    "time": "17:25",
-    "dist": "1200m",
-    "grade": "2등급",
-    "title": "서울 10R (1200m · 2등급 서울준메인 특급승부)",
-    "shortTitle": "서울 10R",
-    "isRec": true,
-    "isOur": true,
-    "badgeType": "MAIN",
-    "payoutType": "중·고배당",
-    "expH": [
-      "4",
-      "1",
-      "2",
-      "9",
-      "7"
-    ],
-    "expInterest": "4",
-    "expInterestDesc": "4번 스타트랙 (강태풍 메인 하이라이트 단독선행 찬스마)",
-    "expComment": "2번 라온플로렌스 최범현 vs 4번 스타트렉 푸르칸",
-    "ai": {
-      "h1": "4",
-      "h2": "1",
-      "h3": "2",
-      "h4": "9"
-    },
-    "aiReason": "강태풍 메인 하이라이트: 공백기 긴 7번 배제, 4번 스타트랙 단독선행 축 + 1번 마이티조이·9번 디아나 고배당 공략",
-    "combos": {
-      "sambok": "[축 4번] - [1, 2, 9번] (단 3구멍)",
-      "samssang": "[1착: 4번] ➔ [2착: 1, 2, 9] ➔ [3착: 1, 2, 9] (단 6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "서울_11",
-    "meet": "서울",
-    "rcNo": 11,
-    "time": "17:55",
+    "id": "부산_8",
+    "meet": "부산",
+    "rcNo": 8,
+    "time": "17:05",
     "dist": "1400m",
-    "grade": "혼3등급",
-    "title": "서울 11R (1400m · 혼3등급 토요 최종피날레 메인승부)",
-    "shortTitle": "서울 11R",
+    "grade": "국6등급 오픈",
+    "title": "부산 8R (1400m · 국6등급 대혼전)",
+    "shortTitle": "부산 8R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "MAIN",
+    "badgeType": "STRIKE",
     "payoutType": "중·고배당",
     "expH": [
       "10",
       "2",
-      "11",
+      "1",
       "9",
-      "6"
+      "11"
     ],
-    "expInterest": "8",
-    "expInterestDesc": "8번 바로나은 (별대박 강력 추천 푸르칸 초고배당 복병)",
-    "expComment": "9번 짜릿한행복 임다빈 vs 11번 마이티코드 마이아",
+    "expInterest": "11",
+    "expInterestDesc": "11번 유니언플래시 (다크호스 ※복병 11%)",
+    "expComment": "10번 오아시스섀클(51kg -4kg 감량 25%) vs 2번 라스트부활(15%) · 1번 챔프의향기(14%)",
     "ai": {
       "h1": "10",
-      "h2": "9",
-      "h3": "11",
-      "h4": "8"
+      "h2": "2",
+      "h3": "1",
+      "h4": "11"
     },
-    "aiReason": "👑 [토요경마 최종 피날레 메인승부] 9번 짜릿한행복 1착 기둥축 + 11번 마이티코드 주력 한방",
+    "aiReason": "1~5인기 박빙 대혼전! 10번 -4kg 감량 축 + 2·1번 주력 + 11번 진겸 ※복병",
     "combos": {
-      "sambok": "[축 10번] - [9, 11, 8번] (단 3구멍)",
-      "samssang": "[1착: 10번] ➔ [2착: 9, 11, 8] ➔ [3착: 9, 11, 8] (단 6구멍)"
+      "sambok": "[축 10번] - [2, 1, 11번] (단 3구멍)",
+      "samssang": "[1착: 10번] ➔ [2착: 2, 1, 11] ➔ [3착: 2, 1, 11] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "부산_9",
+    "meet": "부산",
+    "rcNo": 9,
+    "time": "17:30",
+    "dist": "1600m",
+    "grade": "국6등급 오픈",
+    "title": "부산 9R (1600m · 부산 1600m 메인승부)",
+    "shortTitle": "부산 9R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "HIGH",
+    "payoutType": "중·고배당",
+    "expH": [
+      "3",
+      "10",
+      "1",
+      "11",
+      "9"
+    ],
+    "expInterest": "9",
+    "expInterestDesc": "9번 매직오브퀸 (다크호스 ※복병 8%)",
+    "expComment": "3번 파워풀케이랜(조인권 30%) vs 10번 플렉스특급(21%) · 1번 스카이원(17%)",
+    "ai": {
+      "h1": "3",
+      "h2": "10",
+      "h3": "1",
+      "h4": "9"
+    },
+    "aiReason": "👑 [부산 9R 메인승부] 3번 파워풀케이랜 53kg 축 고정 + 10·1번 주력 + 9번 최시대 ※복병",
+    "combos": {
+      "sambok": "[축 3번] - [10, 1, 9번] (단 3구멍)",
+      "samssang": "[1착: 3번] ➔ [2착: 10, 1, 9] ➔ [3착: 10, 1, 9] (단 6구멍)"
+    },
+    "results": {
+      "status": "대기",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "trio": "",
+      "tri": ""
+    }
+  },
+  {
+    "id": "부산_10",
+    "meet": "부산",
+    "rcNo": 10,
+    "time": "17:55",
+    "dist": "1800m",
+    "grade": "국5등급 오픈",
+    "title": "부산 10R (1800m · 금요 최종 피날레 메인승부)",
+    "shortTitle": "부산 10R",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "HIGH",
+    "payoutType": "중·고배당",
+    "expH": [
+      "5",
+      "3",
+      "8",
+      "1",
+      "9"
+    ],
+    "expInterest": "1",
+    "expInterestDesc": "1번 플라잉스카이 (다크호스 ※복병 12%)",
+    "expComment": "5번 닥터에이트(31%) vs 3번 슈펙스매직(21%) · 8번 플렉스칸(17%) · 1번 플라잉스카이(12%)",
+    "ai": {
+      "h1": "5",
+      "h2": "3",
+      "h3": "8",
+      "h4": "1"
+    },
+    "aiReason": "👑 [금요 최종 피날레 메인승부] 5번 닥터에이트 축 + 3·8번 주력 + 1번 인코스 ※복병 12%",
+    "combos": {
+      "sambok": "[축 5번] - [3, 8, 1번] (단 3구멍)",
+      "samssang": "[1착: 5번] ➔ [2착: 3, 8, 1] ➔ [3착: 3, 8, 1] (단 6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2663,7 +2663,7 @@
       }
     }
 
-    let currentKey = "서울_1";
+    let currentKey = "부산_1";
     let currentFilter = "ALL";
     // ====== PWA 설치 및 모바일 최적화 엔진 ======
     let deferredInstallPrompt = null;
@@ -2759,7 +2759,7 @@
       const liveLink = window.location.href;
       return `[AI 신호등 가족 | 캡틴 & 김비서 실시간 디지털 전광판]
 
-동생아, 오늘 토요경마(서울 11R + 제주 6R)는 이 사이트 딱 켜놓고 봐라!
+동생아, 11/27(금) 금요경마(부산 10R + 제주 7R)는 이 사이트 딱 켜놓고 봐라!
 형이 김비서랑 밤새 정밀 분석해서 만든 실시간 라이브 전광판이다.
 로그인 없이 누르면 스마트폰에서 바로 열린다.
 
@@ -2922,7 +2922,7 @@ ${liveLink}
       ribbon.innerHTML = "";
 
       let filtered = RACES;
-      if (currentFilter === "서울") filtered = RACES.filter(r => r.meet === "서울");
+      if (currentFilter === "서울") filtered = RACES.filter(r => r.meet === "부산");
       else if (currentFilter === "제주") filtered = RACES.filter(r => r.meet === "제주");
       else if (currentFilter === "GO") filtered = RACES.filter(r => r.payoutType === "중·고배당");
 
@@ -2930,7 +2930,7 @@ ${liveLink}
 
       filtered.forEach(r => {
         const item = document.createElement("div");
-        const isSeoul = (r.meet === "서울");
+        const isSeoul = (r.meet === "부산");
         const td = calcTimeDiff(r.time);
         const isLive = (liveRace && liveRace.id === r.id);
         const isDone = (r.results && r.results.status === '확정');
@@ -2966,7 +2966,7 @@ ${liveLink}
       lines.push("================================");
       lines.push("【 서울경마 】");
 
-      let seoulList = RACES.filter(r => r.meet === "서울");
+      let seoulList = RACES.filter(r => r.meet === "부산");
       let seoulDone = 0;
       seoulList.forEach(r => {
         const res = r.results || {};
@@ -3023,7 +3023,7 @@ ${liveLink}
       const liveRace = getNextUpcomingRace();
 
       RACES.forEach(r => {
-        const isSeoul = (r.meet === "서울");
+        const isSeoul = (r.meet === "부산");
         const tbody = isSeoul ? seoulTbody : jejuTbody;
         const res = r.results || {};
         const isConfirmed = (res.status === "확정" && res.r1 && res.r2 && res.r3);
@@ -3161,7 +3161,7 @@ ${liveLink}
       const r = RACES.find(x => x.id === id);
       if (!r) return;
 
-      const isSeoul = (r.meet === "서울");
+      const isSeoul = (r.meet === "부산");
 
       // 액티브 스타일 갱신
       document.querySelectorAll(".r-btn").forEach(b => b.classList.remove("active"));
