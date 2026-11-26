@@ -308,7 +308,7 @@
       padding: 5px 9px;
       text-align: center;
       cursor: pointer;
-      min-width: 82px;
+      min-width: 108px;
       transition: all 0.15s;
     }
     .ribbon-item.meet-busan { background: #0B1933; border: 1.5px solid #1E40AF; }
@@ -1622,7 +1622,7 @@
     <div class="billboard-display">
       <div class="bb-top-bar">
         <div id="bb-action" class="bb-action-badge action-go">출격 승부 (베팅 GO)</div>
-        <div id="bb-payout" style="font-size:12px; font-weight:800; color:var(--gold);">[중·고배당 경주]</div>
+        <div id="bb-payout" style="font-size:20px; font-weight:950; padding:6px 15px; border-radius:10px; background:linear-gradient(135deg,#DC2626,#EF4444); color:#FFFFFF; border:2px solid #FCA5A5; box-shadow:0 0 18px rgba(239,68,68,0.75); letter-spacing:0.5px;">🔥 중·고배당 예상</div>
       </div>
 
       <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
@@ -1685,6 +1685,17 @@
         </div>
         <div class="picks-grid-3" id="bb-ai-grid"></div>
         <div class="stage-desc" id="bb-ai-desc" style="color:#A7F3D0;">--</div>
+      </div>
+
+      <!-- 📺 금요브리핑 유튜브 영상 요약 & 마번 반영 검토 -->
+      <div class="stage-section" id="bb-video-box" style="border-color: rgba(239,68,68,0.65); background: rgba(30, 15, 25, 0.85);">
+        <div class="stage-header" style="margin-bottom:8px;">
+          <div class="stage-title" id="bb-video-title" style="color:#FCA5A5; font-size:14.5px;">
+            <span>📺 [11/27 금요브리핑 영상 요약]</span>
+          </div>
+          <a href="https://www.youtube.com/watch?v=g91zbxXVFcA" target="_blank" style="font-size:11.5px; font-weight:900; color:#FFFFFF; background:#DC2626; padding:3px 9px; border-radius:6px; text-decoration:none; border:1px solid #FCA5A5;">▶ 원본 영상 보기 ↗</a>
+        </div>
+        <div class="stage-desc" id="bb-video-desc" style="color:#F8FAFC; font-size:13px; line-height:1.6;">--</div>
       </div>
 
       <!-- 3단계: 삼복·삼쌍 최소 구멍 수 조합 -->
@@ -1954,7 +1965,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "제주_1",
@@ -1996,7 +2011,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "부산_2",
@@ -2038,7 +2057,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "제주_2",
@@ -2051,7 +2074,7 @@
     "shortTitle": "제주 2R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "STRIKE",
+    "badgeType": "HIGH",
     "payoutType": "중·고배당",
     "expH": [
       "1",
@@ -2068,7 +2091,7 @@
       "h2": "4",
       "h3": "9"
     },
-    "aiReason": "👑 [우리팀 3두마 · 중·고배당 예상] 별대박 준메인! 8 전국챔프 축 + 4 우아우아(김기자 비인기 배당) + 9 세모당(김기자) / 인기 1·7·6 제외",
+    "aiReason": "🔥 [영상 A급 승부 일치 · 중·고배당] 인기 1·7·6 전면 불안! 저평가 8 전국챔프(축) + 4 우아우아(비인기 배당) + 9 세모당(배당마) / 인기 1·7·6 제외",
     "combos": {
       "sambok": "[3두 단통] 8 - 4 - 9 (단 1구멍)",
       "samssang": "[축 8번] ➔ [4, 9번] (2구멍) / 3두 박스 (6구멍)"
@@ -2080,7 +2103,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 A급 승부처 (영상 핵심)",
+    "videoBriefed": true,
+    "videoSummary": "인기1위 7 칭기즈칸(직전 미입상·축 신뢰 불가), 1 제우스(공백기·출주주기 깨짐), 6 사계절(특징 무) 등 인기마 전면 불안. 본래 배당마인 9 세모당·2 기탄까지 팔리는 이상 편성 → 저평가 비인기마 과감 공략 승부.",
+    "videoReview": "✅ 마번 반영: 영상 인기불안 1·7·6 완벽 제외 일치! 저평가 비인기 8 전국챔프(축) + 4 우아우아 + 9 세모당(배당 출신) 유지 및 [메인 승부(HIGH)] 격상."
   },
   {
     "id": "부산_3",
@@ -2122,7 +2149,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "제주_3",
@@ -2164,7 +2195,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "부산_4",
@@ -2206,7 +2241,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "제주_4",
@@ -2248,7 +2287,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "부산_5",
@@ -2290,7 +2333,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "제주_5",
@@ -2303,7 +2350,7 @@
     "shortTitle": "제주 5R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "STRIKE",
+    "badgeType": "HIGH",
     "payoutType": "중·고배당",
     "expH": [
       "7",
@@ -2320,7 +2367,7 @@
       "h2": "8",
       "h3": "5"
     },
-    "aiReason": "👑 [우리팀 3두마 · 중·고배당 예상] 3 천지태왕(별대박 삼복 축) 축 + 8 파별비거(김기자 원픽) + 5 강한파워(마돈나76) / 인기 7·4·6 기복마 제외",
+    "aiReason": "🔥 [영상 A급 승부 일치 · 중·고배당] 인기 7·2·4·6 불안! 저평가 비인기 3 천지태왕(축) + 8 파별비거(원픽) + 5 강한파워(마돈나76 보강) / 인기 7·2·4·6 제외",
     "combos": {
       "sambok": "[3두 단통] 3 - 8 - 5 (단 1구멍)",
       "samssang": "[축 3번] ➔ [8, 5번] (2구멍) / 3두 박스 (6구멍)"
@@ -2332,7 +2379,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 A급 승부처 (영상 핵심)",
+    "videoBriefed": true,
+    "videoSummary": "인기1위 7 돌격최강(월등하지 않음·앞선 느낌 무), 2 우승기운(18전 1승 한계), 4 가온천하·5 강한파워·6 블루칸 인기권 형성 → 저평가 비인기마 1두 노려볼 가치 충분한 A급 승부.",
+    "videoReview": "✅ 마번 반영: 영상 인기권(7·2·4·6) 완벽 제외! 영상 미언급 순수 비인기 3 천지태왕(축) + 8 파별비거 + 5 강한파워(연계 보강) 유지 및 [메인 승부(HIGH)] 격상."
   },
   {
     "id": "부산_6",
@@ -2374,7 +2425,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "제주_6",
@@ -2416,7 +2471,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "부산_7",
@@ -2458,7 +2517,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "제주_7",
@@ -2500,7 +2563,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   },
   {
     "id": "부산_8",
@@ -2513,7 +2580,7 @@
     "shortTitle": "부산 8R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "STRIKE",
+    "badgeType": "HIGH",
     "payoutType": "중·고배당",
     "expH": [
       "9",
@@ -2527,13 +2594,13 @@
     "expComment": "마돈나 AI: 9 소우패스트(84) 축 · 6 샤이닝클러치(81) · 4 레드킹(81) · 10 오아시스섀클(76)",
     "ai": {
       "h1": "5",
-      "h2": "9",
+      "h2": "6",
       "h3": "7"
     },
-    "aiReason": "👑 [우리팀 3두마 · 중·고배당 예상] 미승리마 대혼전! 5 애니원(별대박 삼복 축) 축 + 9 소우패스트(3중 교차·마돈나84) + 7 런포미(김주원 선행 배당) / 인기 1·2·10 제외",
+    "aiReason": "🔥 [영상 메인프리미엄 · 고배당 역발상] 인기 10·1·11·2·9 전면 배제! 5 애니원(축) + 6 샤이닝클러치(마돈나81 비인기 고배당) + 7 런포미(선행 배당)",
     "combos": {
-      "sambok": "[3두 단통] 5 - 9 - 7 (단 1구멍)",
-      "samssang": "[축 5번] ➔ [9, 7번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[3두 단통] 5 - 6 - 7 (단 1구멍)",
+      "samssang": "[축 5번] ➔ [6, 7번] (2구멍) / 3두 박스 (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2542,7 +2609,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 메인 프리미엄 최대승부 (영상 핵심)",
+    "videoBriefed": true,
+    "videoSummary": "대가리 10 오아시스서클(신인기수·이해 불가), 1 챔프의향기·11 유니언플래시(바닥), 2 라스트부활(바닥 추입), 9 소우패스트 인기권. 전력 편차 없는 대혼전으로 인기마 별 볼 일 없어 비인기 1두 과감 공략.",
+    "videoReview": "🔄 마번 업그레이드: 영상에서 인기권으로 지목한 10·1·11·2·9 전면 배제! 9번 대신 영상 미언급 순수 고배당 복병 6 샤이닝클러치(마돈나 2위 81점) 투입 → [5 - 6 - 7] 역발상 완성 + [HIGH] 격상!"
   },
   {
     "id": "부산_9",
@@ -2572,7 +2643,7 @@
       "h2": "9",
       "h3": "11"
     },
-    "aiReason": "🔥 [부산 9R 메인승부 · 중·고배당 예상] 6 밸류프레이(나대찬 백판 고배당) 축 + 9 매직오브퀸(김주원) + 11 시에라골드(마돈나82) / 인기 1·2·3·10 제외",
+    "aiReason": "🔥 [영상 메인하이라이트 일치 · 중·고배당] 대가리 3 위험·인기 1·2·3·10 제외! 6 밸류프레이(백판 고배당 축) + 9 매직오브퀸 + 11 시에라골드(마돈나82)",
     "combos": {
       "sambok": "[3두 단통] 6 - 9 - 11 (단 1구멍)",
       "samssang": "[축 6번] ➔ [9, 11번] (2구멍) / 3두 박스 (6구멍)"
@@ -2584,7 +2655,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 메인 하이라이트 최대승부 (영상 핵심)",
+    "videoBriefed": true,
+    "videoSummary": "8R과 유사한 대혼전·고배당 흐름(연속 폭발 가능). 대가리 3 파워풀케이레인(조인권 기승이나 빠질 위험 매우 높음), 10 플렉스특급·1 스카이원·11 시에라골드·2 에어나이스 인기권 → 저평가 비인기마 배당 접근.",
+    "videoReview": "✅ 마번 반영: 영상 위험 지목 3·10·1·2 완벽 제외! 백판 고배당 6 밸류프레이(축) + 비인기 9 매직오브퀸 + 11 시에라골드(마돈나82 연계) [6 - 9 - 11] 메인 승부 확정."
   },
   {
     "id": "부산_10",
@@ -2626,7 +2701,11 @@
       "r3": "",
       "trio": "",
       "tri": ""
-    }
+    },
+    "videoTag": "📺 금요브리핑 미언급 경주",
+    "videoBriefed": false,
+    "videoSummary": "11/27 금요브리핑 영상 핵심 4대 승부처(제주 2R·5R, 부산 8R·9R) 외 일반 경주입니다.",
+    "videoReview": "기존 마돈나 AI · 다크호스 · 우리팀 역발상 3두마 분석 기준을 그대로 유지합니다."
   }
 ];
 
@@ -2760,7 +2839,10 @@ ${liveLink}
 4. 부산 6R (15:25): 👑 12 - 2 - 3 (KRA컵 스프린트 G3)
 5. 부산 7R (16:15): 🔥 9 - 5 - 10 (3대 방송 메인승부)
 6. 제주 7R (16:40): 👑 4 - 3 - 5 (제주 피날레 메인)
-7. 부산 9R (17:30): 🔥 6 - 9 - 11 (부산 1600m 메인)
+7. 제주 2R (12:15): 🔥 8 - 4 - 9 (영상 A급 승부)
+8. 제주 5R (15:00): 🔥 3 - 8 - 5 (영상 A급 승부)
+9. 부산 8R (17:05): 🔥 5 - 6 - 7 (영상 메인프리미엄 고배당)
+10. 부산 9R (17:30): 🔥 6 - 9 - 11 (영상 메인하이라이트)
 8. 부산 10R (17:55): 👑 8 - 9 - 2 (금요 최종 피날레)
 
 📲 [스마트폰 홈화면에 1초 앱 설치하는 법]:
@@ -2941,7 +3023,7 @@ ${liveLink}
         item.innerHTML = `
           ${liveBadgeHtml}
           <div class="ribbon-name">${r.shortTitle}</div>
-          <div style="font-size:10px; font-weight:900; padding:1px 5px; border-radius:4px; margin:2px 0; background:${r.payoutType === '중·고배당' ? 'rgba(245,158,11,0.22)' : 'rgba(148,163,184,0.2)'}; color:${r.payoutType === '중·고배당' ? '#FDE047' : '#94A3B8'};">${r.payoutType === '중·고배당' ? '중·고배당 예상' : '저배당 예상'}</div>
+          <div style="font-size:13px; font-weight:950; padding:3px 7px; border-radius:6px; margin:3px 0; white-space:nowrap; background:${r.payoutType === '중·고배당' ? '#DC2626' : '#334155'}; color:${r.payoutType === '중·고배당' ? '#FFFFFF' : '#F8FAFC'}; border:1.5px solid ${r.payoutType === '중·고배당' ? '#FCA5A5' : '#94A3B8'}; box-shadow:${r.payoutType === '중·고배당' ? '0 0 10px rgba(239,68,68,0.65)' : 'none'};">${r.payoutType === '중·고배당' ? '중·고배당 예상' : '저배당 예상'}</div>
           <div class="ribbon-time">${r.time}</div>
           <div class="ribbon-countdown ${cdCls}" id="rb-cd-${r.id}">${td.short}</div>
         `;
@@ -3085,7 +3167,7 @@ ${liveLink}
         } else if (isLive) {
           hitResultHtml = '<span style="background:#EF4444; color:#fff; font-weight:900; padding:2px 6px; border-radius:4px; font-size:11px;">[출격진행]</span>';
         } else {
-          hitResultHtml = `<span style="display:inline-block; padding:2px 6px; border-radius:4px; font-size:10.5px; font-weight:900; background:${isGo ? 'rgba(245,158,11,0.2)' : 'rgba(100,116,139,0.2)'}; color:${isGo ? '#FDE047' : '#94A3B8'};">${isGo ? '중·고배당 예상' : '저배당 예상'}</span>`;
+          hitResultHtml = `<span style="display:inline-block; padding:4px 9px; border-radius:6px; font-size:13.5px; font-weight:950; white-space:nowrap; background:${isGo ? '#DC2626' : '#334155'}; color:${isGo ? '#FFFFFF' : '#F8FAFC'}; border:1.5px solid ${isGo ? '#FCA5A5' : '#94A3B8'}; box-shadow:${isGo ? '0 0 8px rgba(239,68,68,0.55)' : 'none'};">${isGo ? '중·고배당 예상' : '저배당 예상'}</span>`;
         }
 
         row.innerHTML = `
@@ -3186,16 +3268,16 @@ ${liveLink}
       if (isGo) {
         actionEl.className = r.badgeType === "HIGH" ? "bb-action-badge action-high" : "bb-action-badge action-go";
         actionEl.innerHTML = r.badgeType === "HIGH" ? "[캡틴 메인 출격!] (필승)" : "[캡틴 승부 출격!] (베팅 GO)";
-        payoutEl.innerText = "[중·고배당 예상]";
-        payoutEl.style.color = "#F59E0B";
+        payoutEl.innerHTML = "🔥 중·고배당 예상";
+        payoutEl.style.cssText = "font-size:21px; font-weight:950; padding:7px 16px; border-radius:10px; background:linear-gradient(135deg,#DC2626,#EF4444); color:#FFFFFF; border:2px solid #FCA5A5; box-shadow:0 0 20px rgba(239,68,68,0.85); letter-spacing:0.5px;";
 
         decEl.className = "decision-banner go";
         decText.innerHTML = `<strong>[오늘 캡틴 출격 승부!]</strong> ${r.aiReason}`;
       } else {
         actionEl.className = "bb-action-badge action-pass";
         actionEl.innerHTML = "[저배당 예상 · 관망]";
-        payoutEl.innerText = "[저배당 예상]";
-        payoutEl.style.color = "#94A3B8";
+        payoutEl.innerHTML = "저배당 예상";
+        payoutEl.style.cssText = "font-size:20px; font-weight:950; padding:7px 16px; border-radius:10px; background:#334155; color:#F8FAFC; border:2px solid #CBD5E1; box-shadow:0 0 12px rgba(148,163,184,0.45); letter-spacing:0.5px;";
 
         decEl.className = "decision-banner pass";
         decText.innerHTML = `<strong>[저배당 예상 · 관망 권고]</strong> ${r.aiReason}`;
@@ -3301,6 +3383,32 @@ ${liveLink}
       document.getElementById("bb-ai-desc").innerHTML = `
         <strong>AI팀 정밀 분석:</strong> ${r.aiReason}
       `;
+
+      // 📺 금요브리핑 유튜브 영상 요약 표출
+      const vBox = document.getElementById("bb-video-box");
+      const vTitle = document.getElementById("bb-video-title");
+      const vDesc = document.getElementById("bb-video-desc");
+      if (vBox && vTitle && vDesc) {
+        if (r.videoBriefed) {
+          vBox.style.borderColor = "#EF4444";
+          vBox.style.background = "linear-gradient(135deg, rgba(127,29,29,0.45), rgba(15,23,42,0.92))";
+          vTitle.style.color = "#FCA5A5";
+          vTitle.innerHTML = `<span>${r.videoTag || '📺 금요브리핑 핵심 승부처'}</span>`;
+          vDesc.innerHTML = `
+            <div style="margin-bottom:6px;"><strong style="color:#FDE047;">[영상 핵심 요약]</strong> ${r.videoSummary}</div>
+            <div style="color:#6EE7B7; font-weight:800;">${r.videoReview}</div>
+          `;
+        } else {
+          vBox.style.borderColor = "#334155";
+          vBox.style.background = "rgba(15, 23, 42, 0.75)";
+          vTitle.style.color = "#94A3B8";
+          vTitle.innerHTML = `<span>${r.videoTag || '📺 금요브리핑 미언급 경주'}</span>`;
+          vDesc.innerHTML = `
+            <div style="color:#CBD5E1; margin-bottom:4px;">${r.videoSummary || ''}</div>
+            <div style="color:#94A3B8; font-size:12px;">${r.videoReview || ''}</div>
+          `;
+        }
+      }
 
       if (isConfirmed && hitCount >= 2) {
         celebrateEl.style.display = "block";
