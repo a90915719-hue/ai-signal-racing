@@ -1251,35 +1251,50 @@
 
     .pick-cell.hit-rank-1 {
       border: 4px solid #F59E0B !important;
-      background: rgba(245, 158, 11, 0.32) !important;
-      box-shadow: 0 0 35px rgba(245, 158, 11, 0.95), inset 0 0 20px rgba(253, 230, 138, 0.5) !important;
+      background: linear-gradient(180deg, rgba(245,158,11,0.55) 0%, rgba(220,38,38,0.45) 100%) !important;
+      box-shadow: 0 0 30px #F59E0B, 0 0 60px rgba(239,68,68,0.9), inset 0 0 22px #FDE68A !important;
+      animation: hitGoldSparkle 1.0s infinite ease-in-out !important;
       z-index: 25 !important;
     }
     .pick-cell.hit-rank-1 .horse-circle {
       border: 4.5px solid #FFFFFF !important;
-      animation: neonGlowR1 1.3s infinite ease-in-out !important;
+      animation: neonGlowR1 1.0s infinite ease-in-out !important;
     }
 
     .pick-cell.hit-rank-2 {
-      border: 4px solid #0284C7 !important;
-      background: rgba(2, 132, 199, 0.32) !important;
-      box-shadow: 0 0 35px rgba(2, 132, 199, 0.95), inset 0 0 20px rgba(186, 230, 253, 0.5) !important;
+      border: 4px solid #06B6D4 !important;
+      background: linear-gradient(180deg, rgba(6,182,212,0.55) 0%, rgba(37,99,235,0.45) 100%) !important;
+      box-shadow: 0 0 30px #06B6D4, 0 0 60px rgba(59,130,246,0.9), inset 0 0 22px #A5F3FC !important;
+      animation: hitSilverSparkle 1.0s infinite ease-in-out !important;
       z-index: 25 !important;
     }
     .pick-cell.hit-rank-2 .horse-circle {
       border: 4.5px solid #FFFFFF !important;
-      animation: neonGlowR2 1.3s infinite ease-in-out !important;
+      animation: neonGlowR2 1.0s infinite ease-in-out !important;
     }
 
     .pick-cell.hit-rank-3 {
-      border: 4px solid #059669 !important;
-      background: rgba(5, 150, 105, 0.32) !important;
-      box-shadow: 0 0 35px rgba(5, 150, 105, 0.95), inset 0 0 20px rgba(167, 243, 208, 0.5) !important;
+      border: 4px solid #10B981 !important;
+      background: linear-gradient(180deg, rgba(16,185,129,0.55) 0%, rgba(5,150,105,0.45) 100%) !important;
+      box-shadow: 0 0 30px #10B981, 0 0 60px rgba(16,185,129,0.9), inset 0 0 22px #A7F3D0 !important;
+      animation: hitBronzeSparkle 1.0s infinite ease-in-out !important;
       z-index: 25 !important;
     }
     .pick-cell.hit-rank-3 .horse-circle {
       border: 4.5px solid #FFFFFF !important;
-      animation: neonGlowR3 1.3s infinite ease-in-out !important;
+      animation: neonGlowR3 1.0s infinite ease-in-out !important;
+    }
+    .hit-rank-badge {
+      animation: badgePulse 0.9s infinite ease-in-out !important;
+    }
+    .vr-hit-glow {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 6px;
+      background: rgba(245, 158, 11, 0.35);
+      border: 2px solid #FDE047;
+      box-shadow: 0 0 12px #F59E0B, 0 0 24px rgba(239, 68, 68, 0.8);
+      animation: badgePulse 1.0s infinite ease-in-out !important;
     }
 
   
@@ -3125,13 +3140,18 @@ ${liveLink}
         // 캡틴 하명: 이모티콘 100% 제거 & 마번만 3두 깔끔하게 표출!
         let result3HorsesHtml = "";
         if (isConfirmed) {
+          const r1Str = String(res.r1).trim(), r2Str = String(res.r2).trim(), r3Str = String(res.r3).trim();
+          const aiSet = aiPicks.map(x => String(x).trim());
+          const r1Glow = aiSet.includes(r1Str) ? 'vr-hit-glow' : '';
+          const r2Glow = aiSet.includes(r2Str) ? 'vr-hit-glow' : '';
+          const r3Glow = aiSet.includes(r3Str) ? 'vr-hit-glow' : '';
           result3HorsesHtml = `
-            <div style="font-size:19px; font-weight:950; letter-spacing:2px; text-align:center; font-family:'Chakra Petch', Pretendard, monospace; line-height:1.2;">
-              <span style="color:#FDE047; font-weight:950; text-shadow:0 0 8px rgba(253,224,71,0.5);">${res.r1}</span>
-              <span style="color:#64748B; margin:0 4px; font-size:15px;">-</span>
-              <span style="color:#38BDF8; font-weight:950; text-shadow:0 0 8px rgba(56,189,248,0.5);">${res.r2}</span>
-              <span style="color:#64748B; margin:0 4px; font-size:15px;">-</span>
-              <span style="color:#34D399; font-weight:950; text-shadow:0 0 8px rgba(52,211,153,0.5);">${res.r3}</span>
+            <div style="font-size:19px; font-weight:950; letter-spacing:2px; text-align:center; font-family:'Chakra Petch', Pretendard, monospace; line-height:1.3;">
+              <span class="${r1Glow}" style="color:#FDE047; font-weight:950; text-shadow:0 0 10px rgba(253,224,71,0.8);">${r1Str}</span>
+              <span style="color:#64748B; margin:0 3px; font-size:15px;">-</span>
+              <span class="${r2Glow}" style="color:#38BDF8; font-weight:950; text-shadow:0 0 10px rgba(56,189,248,0.8);">${r2Str}</span>
+              <span style="color:#64748B; margin:0 3px; font-size:15px;">-</span>
+              <span class="${r3Glow}" style="color:#34D399; font-weight:950; text-shadow:0 0 10px rgba(52,211,153,0.8);">${r3Str}</span>
             </div>
           `;
         } else if (isLive) {
@@ -3336,9 +3356,10 @@ ${liveLink}
         let hitClass = "";
         let hitBadge = "";
         if (isConfirmed) {
-          if (n === res.r1) { hitClass = "hit-rank-1"; hitBadge = '<div class="hit-rank-badge badge-r1">1착 적중</div>'; }
-          else if (n === res.r2) { hitClass = "hit-rank-2"; hitBadge = '<div class="hit-rank-badge badge-r2">2착 적중</div>'; }
-          else if (n === res.r3) { hitClass = "hit-rank-3"; hitBadge = '<div class="hit-rank-badge badge-r3">3착 적중</div>'; }
+          const ns = String(n).trim();
+          if (ns === String(res.r1).trim()) { hitClass = "hit-rank-1"; hitBadge = '<div class="hit-rank-badge badge-r1">🔥 1착 적중</div>'; }
+          else if (ns === String(res.r2).trim()) { hitClass = "hit-rank-2"; hitBadge = '<div class="hit-rank-badge badge-r2">⚡ 2착 적중</div>'; }
+          else if (ns === String(res.r3).trim()) { hitClass = "hit-rank-3"; hitBadge = '<div class="hit-rank-badge badge-r3">✨ 3착 적중</div>'; }
         }
 
         return `
@@ -3373,9 +3394,10 @@ ${liveLink}
         let hitClass = "";
         let hitBadge = "";
         if (isConfirmed) {
-          if (item.num === res.r1) { hitClass = "hit-rank-1"; hitBadge = '<div class="hit-rank-badge badge-r1">1착 적중</div>'; hitCount++; }
-          else if (item.num === res.r2) { hitClass = "hit-rank-2"; hitBadge = '<div class="hit-rank-badge badge-r2">2착 적중</div>'; hitCount++; }
-          else if (item.num === res.r3) { hitClass = "hit-rank-3"; hitBadge = '<div class="hit-rank-badge badge-r3">3착 적중</div>'; hitCount++; }
+          const ns = String(item.num || '').trim();
+          if (ns && ns === String(res.r1).trim()) { hitClass = "hit-rank-1"; hitBadge = '<div class="hit-rank-badge badge-r1">🔥 1착 적중</div>'; hitCount++; }
+          else if (ns && ns === String(res.r2).trim()) { hitClass = "hit-rank-2"; hitBadge = '<div class="hit-rank-badge badge-r2">⚡ 2착 적중</div>'; hitCount++; }
+          else if (ns && ns === String(res.r3).trim()) { hitClass = "hit-rank-3"; hitBadge = '<div class="hit-rank-badge badge-r3">✨ 3착 적중</div>'; hitCount++; }
         }
 
         return `
@@ -3420,9 +3442,13 @@ ${liveLink}
         }
       }
 
-      if (isConfirmed && hitCount >= 2) {
+      if (isConfirmed && (hitCount >= 1 || totalHits >= 1)) {
         celebrateEl.style.display = "block";
-        celebrateEl.innerHTML = `<strong>[적중 성공!]</strong> 김비서 AI팀 추천마 중 <b>총 ${hitCount}두 착순 진입 적중!</b>`;
+        if (hitCount >= 1) {
+          celebrateEl.innerHTML = `🎉 <strong>[우리팀 ${hitCount}두 적중 불꽃 점등!]</strong> 1·2·3착 적중 마번에 네온 불빛이 켜졌습니다!`;
+        } else {
+          celebrateEl.innerHTML = `✨ <strong>[1단계 참고마 ${totalHits}두 착순 진입!]</strong> 적중 마번에 네온 불빛이 켜졌습니다!`;
+        }
       } else {
         celebrateEl.style.display = "none";
       }
