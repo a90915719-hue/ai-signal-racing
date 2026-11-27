@@ -1563,6 +1563,65 @@
     .vr-master-table th:nth-child(2), .vr-master-table td:nth-child(2) { width: 45% !important; }
     .vr-master-table th:nth-child(3), .vr-master-table td:nth-child(3) { width: 30% !important; }
 
+  
+    /* 👑 우리팀 절대 축마 초강력 강조 스타일 (캡틴 지시) */
+    .pick-cell.axis-king {
+      border: 3px solid #F59E0B !important;
+      background: linear-gradient(160deg, rgba(245, 158, 11, 0.34) 0%, rgba(180, 83, 9, 0.18) 100%) !important;
+      box-shadow: 0 0 24px rgba(245, 158, 11, 0.6), inset 0 0 14px rgba(253, 230, 138, 0.25) !important;
+      position: relative;
+      transform: translateY(-2px);
+    }
+    .axis-crown-ribbon {
+      background: linear-gradient(90deg, #F59E0B, #FBBF24, #F59E0B);
+      color: #0B132B;
+      font-size: 12px;
+      font-weight: 950;
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-bottom: 5px;
+      display: inline-block;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.8);
+      letter-spacing: 0.3px;
+    }
+    .horse-name-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: #E2E8F0;
+      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .pick-cell.axis-king .horse-name-label {
+      color: #FDE68A;
+      font-size: 13px;
+      font-weight: 950;
+    }
+    .expert-video-box {
+      margin-top: 8px;
+      padding: 11px 13px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.94), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      border-left: 4px solid #F59E0B;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.58;
+      color: #F1F5F9;
+    }
+    .expert-source-pill {
+      display: inline-block;
+      background: linear-gradient(135deg, #7C3AED, #2563EB);
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+      border: 1px solid rgba(196, 181, 253, 0.65);
+    }
+
   </style>
 
   <link rel="manifest" href="manifest.json">
@@ -1947,115 +2006,42 @@
     "time": "10:35",
     "dist": "1000m",
     "grade": "국6등급",
-    "title": "서울 1R (1000m · 국6등급 · 저배당 관망)",
+    "title": "서울 1R (1000m · 국6 · 별대박 준메인)",
     "shortTitle": "서울 1R",
-    "isRec": false,
-    "isOur": false,
-    "badgeType": "NONE",
-    "payoutType": "저배당",
-    "expH": [
-      "11",
-      "7",
-      "1",
-      "2",
-      "8"
-    ],
-    "expInterest": "8",
-    "expInterestDesc": "8번 자유의날개 (체크 10.9 · 저평가 변수) | ⚠️인기경계 제외: 5 신한제너럴",
-    "expComment": "마돈나 AI: 11 실버트러스(28.5) · 7 나르샤빅터(24.5) · 1 아너스드림(23.0) · 2 파워풀헤일로(16.6)",
-    "ai": {
-      "h1": "11",
-      "h2": "7",
-      "h3": "8"
-    },
-    "aiReason": "📊 [황금 3두마 · 저배당 예상 (이변온도:냉각 0.0%, 관망권고)] 축 11 실버트러스(28.5) + 주력 7 나르샤빅터(24.5) + 변수 8 자유의날개(10.9) / ⚠️거품인기 제외(5)",
-    "combos": {
-      "sambok": "[3두 단통] 11 - 7 - 8 (단 1구멍)",
-      "samssang": "[축 11번] ➔ [7, 8번] (2구멍) / 3두 박스 (6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "서울_2",
-    "meet": "서울",
-    "rcNo": 2,
-    "time": "11:00",
-    "dist": "1200m",
-    "grade": "국6등급",
-    "title": "서울 2R (1200m · 국6등급 · 과열 메인승부)",
-    "shortTitle": "서울 2R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "HIGH",
+    "badgeType": "MIDHIGH",
     "payoutType": "중·고배당",
+    "experts": "📺 별대박 준메인",
+    "videoSummary": "🎙️ <b>[별대박 준메인]</b> 1번 아너스드림(서승운 · 18조 2두 출격) 선행마 없는 편성 인코스 기습 선행 최유력! 병합훈련 9번 선오브제주 동반 체크.",
+    "horseNames": {
+      "1": "아너스드림",
+      "11": "실버트러스",
+      "7": "나르샤빅터",
+      "8": "자유의날개",
+      "2": "파워풀헤일로",
+      "9": "선오브제주"
+    },
     "expH": [
-      "7",
-      "6",
       "1",
-      "8",
-      "5"
-    ],
-    "expInterest": "8",
-    "expInterestDesc": "8번 매직터치 (체크 12.4 · 저평가 변수) | ⚠️인기경계 제외: 10 리슨투런던",
-    "expComment": "마돈나 AI: 7 베스트프렌드(45.0) · 6 포인트윈드(31.8) · 1 이클립스가든(12.5) · 8 매직터치(12.4)",
-    "ai": {
-      "h1": "7",
-      "h2": "6",
-      "h3": "8"
-    },
-    "aiReason": "🔥 [황금 3두마 · 중·고배당 예상 (이변온도:과열 37.5%)] 축 7 베스트프렌드(45.0) + 주력 6 포인트윈드(31.8) + 고배당변수 8 매직터치(12.4) / ⚠️거품인기 제외(10)",
-    "combos": {
-      "sambok": "[3두 단통] 7 - 6 - 8 (단 1구멍)",
-      "samssang": "[축 7번] ➔ [6, 8번] (2구멍) / 3두 박스 (6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "서울_3",
-    "meet": "서울",
-    "rcNo": 3,
-    "time": "11:25",
-    "dist": "1300m",
-    "grade": "국6등급",
-    "title": "서울 3R (1300m · 국6등급 · 과열 메인승부)",
-    "shortTitle": "서울 3R",
-    "isRec": true,
-    "isOur": true,
-    "badgeType": "HIGH",
-    "payoutType": "중·고배당",
-    "expH": [
-      "8",
       "11",
       "7",
-      "3",
-      "5"
+      "8",
+      "9"
     ],
-    "expInterest": "5",
-    "expInterestDesc": "5번 고스트윈드 (체크 8.6 · 저평가 변수) | ⚠️인기경계 제외: 10 한화륭",
-    "expComment": "마돈나 AI: 8 선라이즈킹(34.9) · 11 플라잉치프(20.1) · 7 케이엔베스트(21.7) · 3 루움축제(16.0)",
+    "expInterest": "9",
+    "expInterestDesc": "9번 선오브제주 (18조 동반출격 · 병합훈련) | ⚠️인기거품 제외: 5 신한제너럴",
+    "expComment": "별대박 준메인 축 1 아너스드림(서승운) + 마돈나 상위 11 실버트러스(28.5) · 7 나르샤빅터(24.5) · 8 자유의날개",
     "ai": {
-      "h1": "8",
-      "h2": "7",
-      "h3": "5"
+      "h1": "1",
+      "h2": "11",
+      "h3": "7",
+      "h4": "8"
     },
-    "aiReason": "🔥 [황금 3두마 · 중·고배당 예상 (이변온도:과열 62.5%)] 축 8 선라이즈킹(34.9) + 주력 7 케이엔베스트(21.7) + 고배당변수 5 고스트윈드(8.6) / ⚠️거품인기 제외(10)",
+    "aiReason": "👑 [축 1번 아너스드림 (서승운)] 별대박 준메인 강력 노림수! 선행 없는 편성 인코스 기습 + 마돈나 상위 11·7·8 조합 (인기거품 5 제외)",
     "combos": {
-      "sambok": "[3두 단통] 8 - 7 - 5 (단 1구멍)",
-      "samssang": "[축 8번] ➔ [7, 5번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 1번] ➔ 11 · 7 · 8 (3구멍)",
+      "samssang": "[👑 축 1번] ➔ [11, 7, 8번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2073,31 +2059,41 @@
     "time": "12:05",
     "dist": "900m",
     "grade": "제6등급",
-    "title": "제주 1R (900m · 제6등급 · 저배당 관망)",
+    "title": "제주 1R (900m · 제6 · 🔥별대박+장태풍 동시선정)",
     "shortTitle": "제주 1R",
-    "isRec": false,
-    "isOur": false,
-    "badgeType": "NONE",
-    "payoutType": "저배당",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "HIGH",
+    "payoutType": "고배당",
+    "experts": "🔥🔥 별대박 준메인 + 장태풍 A급",
+    "videoSummary": "🎙️ <b>[별대박 준메인]</b> 1번 일대지존(임재광 · 4조 신마승률 1위 · 1번 게이트 최적) 강력 축!<br>🎙️ <b>[장태풍 A급]</b> 인기 3 바다왕자(애매)·1 일대지존·8 직진기 사이에 낄 복병 4 아라천마급 변수 포착!",
+    "horseNames": {
+      "1": "일대지존",
+      "3": "바다왕자",
+      "8": "직진기",
+      "4": "아라천마",
+      "9": "지배자"
+    },
     "expH": [
+      "1",
       "3",
       "8",
       "9",
-      "4",
-      "7"
+      "4"
     ],
     "expInterest": "4",
-    "expInterestDesc": "4번 아라천마 (체크 8.0 · 저평가 변수) | ⚠️인기경계 제외: 1 일대지존",
-    "expComment": "마돈나 AI: 3 바다왕자(45.0) · 8 직진기(32.2) · 9 지배자(16.5) · 4 아라천마(8.0)",
+    "expInterestDesc": "4번 아라천마 (데뷔전 잠재력 · 복병 변수) | 9번 지배자 8개월 공백 경계",
+    "expComment": "두 예상가 동시 선정! 별대박 축 1 일대지존(임재광) + 장태풍 주력권 3 바다왕자 · 8 직진기 + 복병 4 아라천마",
     "ai": {
-      "h1": "3",
-      "h2": "8",
-      "h3": "4"
+      "h1": "1",
+      "h2": "3",
+      "h3": "8",
+      "h4": "4"
     },
-    "aiReason": "📊 [황금 3두마 · 저배당 예상 (이변온도:평온 12.5%, 관망권고)] 축 3 바다왕자(45.0) + 주력 8 직진기(32.2) + 변수 4 아라천마(8.0) / ⚠️거품인기 제외(1)",
+    "aiReason": "👑 [축 1번 일대지존 (임재광)] 별대박·장태풍 동시 선정 승부처! 4조 신마승률 1위 1번 축 + 3·8 주력 + 4 아라천마 고배당 변수",
     "combos": {
-      "sambok": "[3두 단통] 3 - 8 - 4 (단 1구멍)",
-      "samssang": "[축 3번] ➔ [8, 4번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 1번] ➔ 3 · 8 · 4 (3구멍)",
+      "samssang": "[👑 축 1번] ➔ [3, 8, 4번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2115,157 +2111,42 @@
     "time": "12:45",
     "dist": "1300m",
     "grade": "국5등급",
-    "title": "서울 4R (1300m · 국5등급 · 고온 중배당)",
+    "title": "서울 4R (1300m · 국5 · 별대박 조용한승부)",
     "shortTitle": "서울 4R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "STRIKE",
-    "payoutType": "중·고배당",
+    "badgeType": "HIGH",
+    "payoutType": "고배당",
+    "experts": "📺 별대박 조용한 승부",
+    "videoSummary": "🎙️ <b>[별대박 조용한 승부]</b> 인기 4번 삼정셰프 경계! <b>3번 위즈포인트(조성환 -5kg 감량)</b> 선라이즈킹 병합 최상 · 홀짝 패턴 상 오늘 가는 차례!",
+    "horseNames": {
+      "3": "위즈포인트",
+      "5": "순간의파이터",
+      "6": "플라잉파티",
+      "7": "스톰크러시",
+      "8": "비바참",
+      "4": "삼정셰프"
+    },
     "expH": [
-      "5",
       "3",
+      "5",
       "6",
       "8",
       "7"
     ],
     "expInterest": "7",
-    "expInterestDesc": "7번 스톰크러시 (체크 11.3 · 저평가 변수) | ⚠️인기경계 제외: 4 삼정셰프, 2 스위트송",
-    "expComment": "마돈나 AI: 5 순간의파이터(21.5) · 3 위즈포인트(18.8) · 6 플라잉파티(17.7) · 8 비바참(17.2)",
+    "expInterestDesc": "7번 스톰크러시 (체크 11.3 · 저평가 고배당) | ⚠️인기경계 제외: 4 삼정셰프, 2 스위트송",
+    "expComment": "별대박 축 3 위즈포인트(-5kg 감량 선행/선입) + 마돈나 상위 5 순간의파이터 · 6 플라잉파티 · 7 스톰크러시",
     "ai": {
-      "h1": "5",
-      "h2": "6",
-      "h3": "7"
+      "h1": "3",
+      "h2": "5",
+      "h3": "6",
+      "h4": "7"
     },
-    "aiReason": "👑 [황금 3두마 · 중·고배당 예상 (이변온도:고온 25.0%)] 축 5 순간의파이터(21.5) + 주력 6 플라잉파티(17.7) + 고배당변수 7 스톰크러시(11.3) / ⚠️거품인기 제외(4,2)",
+    "aiReason": "👑 [축 3번 위즈포인트 (조성환 -5kg)] 별대박 조용한 승부 원픽! 홀짝 반등 패턴 + 인기거품 4 삼정셰프 제외 역발상 고배당",
     "combos": {
-      "sambok": "[3두 단통] 5 - 6 - 7 (단 1구멍)",
-      "samssang": "[축 5번] ➔ [6, 7번] (2구멍) / 3두 박스 (6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "제주_2",
-    "meet": "제주",
-    "rcNo": 2,
-    "time": "13:10",
-    "dist": "900m",
-    "grade": "제5등급",
-    "title": "제주 2R (900m · 제5등급 · 과열 메인승부)",
-    "shortTitle": "제주 2R",
-    "isRec": true,
-    "isOur": true,
-    "badgeType": "HIGH",
-    "payoutType": "중·고배당",
-    "expH": [
-      "10",
-      "7",
-      "9",
-      "1",
-      "3"
-    ],
-    "expInterest": "3",
-    "expInterestDesc": "3번 색달최고 (체크 15.6 · 저평가 변수)",
-    "expComment": "마돈나 AI: 10 대지사랑(30.8) · 7 사군자(23.1) · 9 천산(23.5) · 1 청룡바람(21.4)",
-    "ai": {
-      "h1": "10",
-      "h2": "9",
-      "h3": "3"
-    },
-    "aiReason": "🔥 [황금 3두마 · 중·고배당 예상 (이변온도:과열 50.0%)] 축 10 대지사랑(30.8) + 주력 9 천산(23.5) + 고배당변수 3 색달최고(15.6)",
-    "combos": {
-      "sambok": "[3두 단통] 10 - 9 - 3 (단 1구멍)",
-      "samssang": "[축 10번] ➔ [9, 3번] (2구멍) / 3두 박스 (6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "서울_5",
-    "meet": "서울",
-    "rcNo": 5,
-    "time": "13:35",
-    "dist": "1200m",
-    "grade": "국5등급",
-    "title": "서울 5R (1200m · 국5등급 · 저배당 관망)",
-    "shortTitle": "서울 5R",
-    "isRec": false,
-    "isOur": false,
-    "badgeType": "NONE",
-    "payoutType": "저배당",
-    "expH": [
-      "9",
-      "10",
-      "4",
-      "11",
-      "6"
-    ],
-    "expInterest": "6",
-    "expInterestDesc": "6번 나스카불청객 (체크 7.5 · 저평가 변수) | ⚠️인기경계 제외: 3 라온카리스걸",
-    "expComment": "마돈나 AI: 9 런투윈(45.0) · 10 아파트(31.6) · 4 금빛영웅(14.3) · 11 영광의스카이(13.1)",
-    "ai": {
-      "h1": "9",
-      "h2": "10",
-      "h3": "6"
-    },
-    "aiReason": "📊 [황금 3두마 · 저배당 예상 (이변온도:평온 12.5%, 관망권고)] 축 9 런투윈(45.0) + 주력 10 아파트(31.6) + 변수 6 나스카불청객(7.5) / ⚠️거품인기 제외(3)",
-    "combos": {
-      "sambok": "[3두 단통] 9 - 10 - 6 (단 1구멍)",
-      "samssang": "[축 9번] ➔ [10, 6번] (2구멍) / 3두 박스 (6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "제주_3",
-    "meet": "제주",
-    "rcNo": 3,
-    "time": "14:00",
-    "dist": "1110m",
-    "grade": "제5등급",
-    "title": "제주 3R (1110m · 제5등급 · 고온 중배당)",
-    "shortTitle": "제주 3R",
-    "isRec": true,
-    "isOur": true,
-    "badgeType": "STRIKE",
-    "payoutType": "중·고배당",
-    "expH": [
-      "4",
-      "1",
-      "6",
-      "3",
-      "10"
-    ],
-    "expInterest": "10",
-    "expInterestDesc": "10번 온누리 (체크 10.6 · 저평가 변수) | ⚠️인기경계 제외: 9 성산돌풍",
-    "expComment": "마돈나 AI: 4 웅진미소(45.0) · 1 백두전사(17.6) · 6 자유시대(14.2) · 3 신천여제(15.6)",
-    "ai": {
-      "h1": "4",
-      "h2": "6",
-      "h3": "10"
-    },
-    "aiReason": "👑 [황금 3두마 · 중·고배당 예상 (이변온도:고온 37.5%)] 축 4 웅진미소(45.0) + 주력 6 자유시대(14.2) + 고배당변수 10 온누리(10.6) / ⚠️거품인기 제외(9)",
-    "combos": {
-      "sambok": "[3두 단통] 4 - 6 - 10 (단 1구멍)",
-      "samssang": "[축 4번] ➔ [6, 10번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 3번] ➔ 5 · 6 · 7 (3구멍)",
+      "samssang": "[👑 축 3번] ➔ [5, 6, 7번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2283,31 +2164,41 @@
     "time": "14:25",
     "dist": "1800m",
     "grade": "국5등급",
-    "title": "서울 6R (1800m · 국5등급 · 고온 중배당)",
+    "title": "서울 6R (1800m · 국5 · 🔥별대박 고래사냥)",
     "shortTitle": "서울 6R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "STRIKE",
-    "payoutType": "중·고배당",
+    "badgeType": "HIGH",
+    "payoutType": "고배당",
+    "experts": "🐋 별대박 고래사냥 승부",
+    "videoSummary": "🎙️ <b>[별대박 고래사냥]</b> 인기1위 7 파워풀아크틱(늦추입 위험), 4 투어킹(홀짝 빠질차례), 9 하이퍼엑스(바닥추입), 5 걸작크라운(인기 시 불안) 모두 경계 → 비인기 관리마 초고배당 사냥!",
+    "horseNames": {
+      "10": "크로마이트",
+      "6": "이안퍼펙트",
+      "11": "강철전사",
+      "4": "투어킹",
+      "9": "하이퍼엑스"
+    },
     "expH": [
-      "4",
       "10",
-      "9",
       "6",
-      "11"
+      "11",
+      "4",
+      "9"
     ],
     "expInterest": "11",
-    "expInterestDesc": "11번 강철전사 (체크 9.4 · 저평가 변수) | ⚠️인기경계 제외: 7 파워풀아크틱, 5 걸작크라운",
-    "expComment": "마돈나 AI: 4 투어킹(41.6) · 10 크로마이트(17.8) · 9 하이퍼엑스(13.5) · 6 이안퍼펙트(14.2)",
+    "expInterestDesc": "11번 강철전사 (저평가 고배당 똥말) | ⚠️별대박 경고 제외: 7 파워풀아크틱, 5 걸작크라운",
+    "expComment": "별대박 고래사냥 역발상! 인기 7·5 제외 → 비인기 상위 10 크로마이트 · 6 이안퍼펙트 · 11 강철전사 핵심 공략",
     "ai": {
-      "h1": "4",
-      "h2": "9",
-      "h3": "11"
+      "h1": "10",
+      "h2": "6",
+      "h3": "11",
+      "h4": "4"
     },
-    "aiReason": "👑 [황금 3두마 · 중·고배당 예상 (이변온도:고온 25.0%)] 축 4 투어킹(41.6) + 주력 9 하이퍼엑스(13.5) + 고배당변수 11 강철전사(9.4) / ⚠️거품인기 제외(7,5)",
+    "aiReason": "👑 [축 10번 크로마이트] 별대박 고래사냥! 늦추입·홀짝 인기마(7·5) 과감 제외 + 10번 축에 6 이안퍼펙트·11 강철전사 고배당 폭격",
     "combos": {
-      "sambok": "[3두 단통] 4 - 9 - 11 (단 1구멍)",
-      "samssang": "[축 4번] ➔ [9, 11번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 10번] ➔ 6 · 11 · 4 (3구멍)",
+      "samssang": "[👑 축 10번] ➔ [6, 11, 4번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2325,73 +2216,41 @@
     "time": "14:50",
     "dist": "1110m",
     "grade": "제4등급",
-    "title": "제주 4R (1110m · 제4등급)",
+    "title": "제주 4R (1110m · 제4 · 🔥별대박 고래사냥)",
     "shortTitle": "제주 4R",
     "isRec": true,
     "isOur": true,
-    "badgeType": "STRIKE",
-    "payoutType": "중·고배당",
+    "badgeType": "HIGH",
+    "payoutType": "고배당",
+    "experts": "🐋 별대박 고래사냥 승부",
+    "videoSummary": "🎙️ <b>[별대박 고래사냥]</b> 10 전승맨(승군전 외곽), 7 뉴페이스맨(직전 대가리 4착), 5 광명히트, 4 장타일류 인기권 대혼전 → 비인기 배당마 고래사냥 한방!",
+    "horseNames": {
+      "9": "글라가게",
+      "5": "광명히트",
+      "10": "전승맨",
+      "3": "영원최고",
+      "4": "장타일류"
+    },
     "expH": [
-      "10",
-      "7",
+      "9",
       "5",
-      "9",
-      "4"
-    ],
-    "expInterest": "9",
-    "expInterestDesc": "9번 글라가게 (체크 13.8 · 저평가 변수)",
-    "expComment": "마돈나 AI: 10 전승맨(29.9) · 7 뉴페이스맨(25.0) · 5 광명히트(24.4) · 9 글라가게(13.8)",
-    "ai": {
-      "h1": "10",
-      "h2": "5",
-      "h3": "9"
-    },
-    "aiReason": "👑 [황금 3두마 · 중·고배당 예상 (이변온도:미열 25.0%)] 축 10 전승맨(29.9) + 주력 5 광명히트(24.4) + 고배당변수 9 글라가게(13.8)",
-    "combos": {
-      "sambok": "[3두 단통] 10 - 5 - 9 (단 1구멍)",
-      "samssang": "[축 10번] ➔ [5, 9번] (2구멍) / 3두 박스 (6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "서울_7",
-    "meet": "서울",
-    "rcNo": 7,
-    "time": "15:15",
-    "dist": "1700m",
-    "grade": "국4등급",
-    "title": "서울 7R (1700m · 국4등급 · 고온 중배당)",
-    "shortTitle": "서울 7R",
-    "isRec": true,
-    "isOur": true,
-    "badgeType": "STRIKE",
-    "payoutType": "중·고배당",
-    "expH": [
-      "8",
-      "9",
-      "4",
       "10",
-      "1"
+      "4",
+      "3"
     ],
-    "expInterest": "10",
-    "expInterestDesc": "10번 비상벨 (체크 6.8 · 관망) | ⚠️인기경계 제외: 3 해피투게더, 7 마이티비트",
-    "expComment": "마돈나 AI: 8 타이거망치(45.0) · 9 명진불패(15.8) · 4 라이트윙(11.3) · 10 비상벨(6.8)",
+    "expInterest": "3",
+    "expInterestDesc": "3번 영원최고 (인코스 복병 똥말) | ⚠️인기경계: 7 뉴페이스맨(직전 부진)",
+    "expComment": "별대박 고래사냥 혼전! 7 뉴페이스맨 경계 → 저평가 복병 9 글라가게 축 + 5 광명히트 · 10 전승맨 · 3 영원최고",
     "ai": {
-      "h1": "8",
-      "h2": "9",
-      "h3": "10"
+      "h1": "9",
+      "h2": "5",
+      "h3": "10",
+      "h4": "3"
     },
-    "aiReason": "👑 [황금 3두마 · 중·고배당 예상 (이변온도:고온 25.0%)] 축 8 타이거망치(45.0) + 주력 9 명진불패(15.8) + 고배당변수 10 비상벨(6.8) / ⚠️거품인기 제외(3,7)",
+    "aiReason": "👑 [축 9번 글라가게] 별대박 제주 고래사냥! 인기권(10·7·4) 혼전 틈새 저평가 9번 축 + 5·10 주력 + 3 영원최고 고배당 변수",
     "combos": {
-      "sambok": "[3두 단통] 8 - 9 - 10 (단 1구멍)",
-      "samssang": "[축 8번] ➔ [9, 10번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 9번] ➔ 5 · 10 · 3 (3구멍)",
+      "samssang": "[👑 축 9번] ➔ [5, 10, 3번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2408,32 +2267,42 @@
     "rcNo": 5,
     "time": "15:40",
     "dist": "1610m",
-    "grade": "제OPEN",
-    "title": "제주 5R (1610m · 제OPEN · 제34회 제주일마배)",
+    "grade": "제주일마배(대상)",
+    "title": "제주 5R (1610m · 제주일마배 · 별대박 강력확신)",
     "shortTitle": "제주 5R",
-    "isRec": false,
-    "isOur": false,
-    "badgeType": "NONE",
-    "payoutType": "저배당",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "MIDHIGH",
+    "payoutType": "중·고배당",
+    "experts": "📺 별대박 대상경주 확신픽",
+    "videoSummary": "🎙️ <b>[별대박 대상경주]</b> 1610m 적정거리 <b>1번 사상최강(임재광 · 4조 동반출격)</b> 강력 확신! 직전 불량주로 추입 폭발 → 1마일 거리 연장 최적!",
+    "horseNames": {
+      "1": "사상최강",
+      "8": "수사대",
+      "4": "원당봉",
+      "6": "새벽바람",
+      "5": "오라드림"
+    },
     "expH": [
+      "1",
       "8",
       "4",
-      "1",
       "5",
       "6"
     ],
     "expInterest": "6",
-    "expInterestDesc": "6번 새벽바람 (체크 10.7 · 저평가 변수)",
-    "expComment": "마돈나 AI: 8 수사대(30.3) · 4 원당봉(20.9) · 1 사상최강(21.1) · 5 오라드림(16.2)",
+    "expInterestDesc": "6번 새벽바람 (체크 10.7 · 대상경주 고배당 변수)",
+    "expComment": "별대박 대상경주 확신 축 1 사상최강(임재광) + 인기권 8 수사대 · 4 원당봉 + 변수 6 새벽바람",
     "ai": {
-      "h1": "8",
-      "h2": "4",
-      "h3": "6"
+      "h1": "1",
+      "h2": "8",
+      "h3": "4",
+      "h4": "6"
     },
-    "aiReason": "📊 [황금 3두마 · 저배당 예상 (이변온도:냉각 0.0%, 관망권고)] 축 8 수사대(30.3) + 주력 4 원당봉(20.9) + 변수 6 새벽바람(10.7)",
+    "aiReason": "👑 [축 1번 사상최강 (임재광)] 별대박 제주일마배 확신 원픽! 4조 동반출격 + 1610m 거리최적 추입 축 + 8·4·6 조합",
     "combos": {
-      "sambok": "[3두 단통] 8 - 4 - 6 (단 1구멍)",
-      "samssang": "[축 8번] ➔ [4, 6번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 1번] ➔ 8 · 4 · 6 (3구멍)",
+      "samssang": "[👑 축 1번] ➔ [8, 4, 6번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2451,31 +2320,41 @@
     "time": "16:10",
     "dist": "1200m",
     "grade": "혼4등급",
-    "title": "서울 8R (1200m · 혼4등급 · 과열 메인승부)",
+    "title": "서울 8R (1200m · 혼4 · 🔥별대박 천지개벽승부)",
     "shortTitle": "서울 8R",
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
+    "payoutType": "고배당",
+    "experts": "⚡ 별대박 천지개벽 승부",
+    "videoSummary": "🎙️ <b>[별대박 천지개벽]</b> 선행마 난타전! 인기 10 빈센트캐시(휴양·외곽), 11 이클립스보스(외곽) 불리 → <b>2번 핫피버(코지)</b> 승군전 저평가, 선행·선입 다 되는 최강 관리마!",
+    "horseNames": {
+      "2": "핫피버",
+      "8": "최고골드",
+      "9": "파이널고",
+      "10": "빈센트캐시",
+      "11": "이클립스보스"
+    },
     "expH": [
-      "10",
-      "11",
+      "2",
       "8",
       "9",
-      "2"
+      "10",
+      "11"
     ],
     "expInterest": "9",
-    "expInterestDesc": "9번 파이널고 (체크 13.0 · 저평가 변수) | ⚠️인기경계 제외: 3 나르샤고트",
-    "expComment": "마돈나 AI: 10 빈센트캐시(28.5) · 11 이클립스보스(19.8) · 8 최고골드(17.3) · 9 파이널고(13.0)",
+    "expInterestDesc": "9번 파이널고 (유일한 추입마 · 선행 난타전 어부지리 변수) | ⚠️제외: 3 나르샤고트",
+    "expComment": "별대박 천지개벽 축 2 핫피버(코지) + 선행난타전 뒷심 9 파이널고 · 8 최고골드 + 방어 10 빈센트캐시",
     "ai": {
-      "h1": "10",
+      "h1": "2",
       "h2": "8",
-      "h3": "9"
+      "h3": "9",
+      "h4": "10"
     },
-    "aiReason": "🔥 [황금 3두마 · 중·고배당 예상 (이변온도:과열 37.5%)] 축 10 빈센트캐시(28.5) + 주력 8 최고골드(17.3) + 고배당변수 9 파이널고(13.0) / ⚠️거품인기 제외(3)",
+    "aiReason": "👑 [축 2번 핫피버 (코지)] 별대박 천지개벽 원픽! 선행 난타전 속 앞·뒤 다 되는 2번 축 + 유일 추입 9 파이널고 · 8 최고골드 고배당",
     "combos": {
-      "sambok": "[3두 단통] 10 - 8 - 9 (단 1구멍)",
-      "samssang": "[축 10번] ➔ [8, 9번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 2번] ➔ 8 · 9 · 10 (3구멍)",
+      "samssang": "[👑 축 2번] ➔ [8, 9, 10번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2493,73 +2372,41 @@
     "time": "16:35",
     "dist": "1200m",
     "grade": "제3등급",
-    "title": "제주 6R (1200m · 제3등급 · 저배당 관망)",
+    "title": "제주 6R (1200m · 제3 · 🔥🔥양대 예상가 메인승부)",
     "shortTitle": "제주 6R",
-    "isRec": false,
-    "isOur": false,
-    "badgeType": "NONE",
-    "payoutType": "저배당",
-    "expH": [
-      "1",
-      "5",
-      "10",
-      "7",
-      "3"
-    ],
-    "expInterest": "3",
-    "expInterestDesc": "3번 신대륙 (체크 13.6 · 저평가 변수) | ⚠️인기경계 제외: 6 백호전사",
-    "expComment": "마돈나 AI: 1 불야성(29.4) · 5 천하비상(22.5) · 10 천상의별(18.7) · 7 일품걸(17.0)",
-    "ai": {
-      "h1": "1",
-      "h2": "5",
-      "h3": "3"
-    },
-    "aiReason": "📊 [황금 3두마 · 저배당 예상 (이변온도:냉각 0.0%, 관망권고)] 축 1 불야성(29.4) + 주력 5 천하비상(22.5) + 변수 3 신대륙(13.6) / ⚠️거품인기 제외(6)",
-    "combos": {
-      "sambok": "[3두 단통] 1 - 5 - 3 (단 1구멍)",
-      "samssang": "[축 1번] ➔ [5, 3번] (2구멍) / 3두 박스 (6구멍)"
-    },
-    "results": {
-      "status": "대기",
-      "r1": "",
-      "r2": "",
-      "r3": "",
-      "trio": "",
-      "tri": ""
-    }
-  },
-  {
-    "id": "서울_9",
-    "meet": "서울",
-    "rcNo": 9,
-    "time": "17:00",
-    "dist": "1800m",
-    "grade": "2등급",
-    "title": "서울 9R (1800m · 2등급 · 과열 메인승부)",
-    "shortTitle": "서울 9R",
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
-    "expH": [
-      "5",
-      "8",
-      "7",
-      "2",
-      "3"
-    ],
-    "expInterest": "6",
-    "expInterestDesc": "6번 이클립스더킹 (체크 14.3 · 끝걸음)",
-    "expComment": "마돈나 AI: 5 정상히어로(23.1) · 8 학산다크호스(23.8) · 7 케이드래곤(19.4) · 2 탄성의반석(18.2)",
-    "ai": {
-      "h1": "5",
-      "h2": "7",
-      "h3": "6"
+    "payoutType": "고배당",
+    "experts": "🔥🔥 별대박 A+메인 + 장태풍 메인프리미엄",
+    "videoSummary": "🎙️ <b>[별대박 A+메인]</b> 인기 5 천하비상(출전주기 길어 과대인기) 경계! 1200m 주폭 완성된 비인기 관리마 메인 승부!<br>🎙️ <b>[장태풍 메인프리미엄]</b> 5 천하비상·1 불야성(늦추입) 불안 → 백호전사 제압한 <b>4번 전농미르</b> 최근 걸음 최상 + 비인기 대가리급 승부!",
+    "horseNames": {
+      "4": "전농미르",
+      "3": "신대륙",
+      "10": "천상의별",
+      "1": "불야성",
+      "7": "일품걸"
     },
-    "aiReason": "🔥 [황금 3두마 · 중·고배당 예상 (이변온도:과열 37.5%)] 축 5 정상히어로(23.1) + 주력 7 케이드래곤(19.4) + 고배당변수 6 이클립스더킹(14.3)",
+    "expH": [
+      "4",
+      "3",
+      "10",
+      "1",
+      "7"
+    ],
+    "expInterest": "3",
+    "expInterestDesc": "3번 신대륙 (체크 13.6 · 비인기 초고배당) | ⚠️인기경계 제외: 5 천하비상, 6 백호전사",
+    "expComment": "양대 예상가 메인 총출동! 인기 5 천하비상 깨는 4 전농미르 축 + 3 신대륙 · 10 천상의별 · 1 불야성",
+    "ai": {
+      "h1": "4",
+      "h2": "3",
+      "h3": "10",
+      "h4": "1"
+    },
+    "aiReason": "👑 [축 4번 전농미르] 별대박 A+메인 · 장태풍 메인프리미엄 동시 선정! 인기 5 천하비상 제외 + 최근걸음 최상 4번 축에 3·10·1 초고배당",
     "combos": {
-      "sambok": "[3두 단통] 5 - 7 - 6 (단 1구멍)",
-      "samssang": "[축 5번] ➔ [7, 6번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 4번] ➔ 3 · 10 · 1 (3구멍)",
+      "samssang": "[👑 축 4번] ➔ [3, 10, 1번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2577,31 +2424,41 @@
     "time": "17:25",
     "dist": "1400m",
     "grade": "혼4등급",
-    "title": "서울 10R (1400m · 혼4등급 · 과열 메인승부)",
+    "title": "서울 10R (1400m · 혼4 · 🔥🔥양대 예상가 동시승부)",
     "shortTitle": "서울 10R",
     "isRec": true,
     "isOur": true,
     "badgeType": "HIGH",
-    "payoutType": "중·고배당",
-    "expH": [
-      "11",
-      "6",
-      "2",
-      "7",
-      "3"
-    ],
-    "expInterest": "2",
-    "expInterestDesc": "2번 스피어스 (체크 15.2 · 저평가 변수)",
-    "expComment": "마돈나 AI: 11 라온블레이드(43.7) · 6 윈캐처(33.4) · 2 스피어스(15.2) · 7 대동용마(9.1)",
-    "ai": {
-      "h1": "11",
-      "h2": "6",
-      "h3": "2"
+    "payoutType": "고배당",
+    "experts": "🔥🔥 별대박 A+메인 + 장태풍 A급",
+    "videoSummary": "🎙️ <b>[별대박 A+메인 + 장태풍 A급 완벽일치!]</b> 인기 3두 <b>2 스피어스(우승없음·위험), 6 윈캐처(홀짝·부중상승, 2-6 없는마권), 11 라온블레이드(휴양·외곽)</b> 동반입상 절대 불인정! 구조적 불완전 혼전 → 비인기 관리마 폭발!",
+    "horseNames": {
+      "7": "대동용마",
+      "3": "클림트월드",
+      "8": "마이티원더",
+      "11": "라온블레이드",
+      "9": "드림리메인"
     },
-    "aiReason": "🔥 [황금 3두마 · 중·고배당 예상 (이변온도:과열 37.5%)] 축 11 라온블레이드(43.7) + 주력 6 윈캐처(33.4) + 고배당변수 2 스피어스(15.2)",
+    "expH": [
+      "7",
+      "3",
+      "8",
+      "9",
+      "11"
+    ],
+    "expInterest": "8",
+    "expInterestDesc": "8번 마이티원더 · 9번 드림리메인 (초고배당 복병) | ⚠️양대 예상가 공통 제외: 2 스피어스, 6 윈캐처",
+    "expComment": "별대박·장태풍 100% 일치! 인기 2·6 제외 → 최근 2연승 7 대동용마 축 + 3 클림트월드 · 8 마이티원더 · 11 방어",
+    "ai": {
+      "h1": "7",
+      "h2": "3",
+      "h3": "8",
+      "h4": "11"
+    },
+    "aiReason": "👑 [축 7번 대동용마] 별대박 A+메인 · 장태풍 A급 완벽 일치! 거품인기 2·6 과감 제외 + 2연승 7번 축에 3·8 비인기 초고배당 승부",
     "combos": {
-      "sambok": "[3두 단통] 11 - 6 - 2 (단 1구멍)",
-      "samssang": "[축 11번] ➔ [6, 2번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 7번] ➔ 3 · 8 · 11 (3구멍)",
+      "samssang": "[👑 축 7번] ➔ [3, 8, 11번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2619,31 +2476,41 @@
     "time": "17:55",
     "dist": "1400m",
     "grade": "혼3등급",
-    "title": "서울 11R (1400m · 혼3등급 · 저배당 관망)",
+    "title": "서울 11R (1400m · 혼3 · 🔥🔥장태풍 하이라이트+별대박)",
     "shortTitle": "서울 11R",
-    "isRec": false,
-    "isOur": false,
-    "badgeType": "NONE",
-    "payoutType": "저배당",
+    "isRec": true,
+    "isOur": true,
+    "badgeType": "HIGH",
+    "payoutType": "고배당",
+    "experts": "🔥🔥 장태풍 메인하이라이트 + 별대박 파이널",
+    "videoSummary": "🎙️ <b>[별대박 파이널]</b> 인기 1 남산벨트·5 닌자타이거 경계! <b>11번 치프스타(조재로 · 승률50%)</b> 1400m 긴 직선주로 외곽 선행장악 강력 추천!<br>🎙️ <b>[장태풍 하이라이트]</b> 1 남산벨트 1·2착 불가 · 5 의문 → <b>11 치프스타 + 9 라온더어펌드(최범현 기수 대운·주력!) + 7 러브인서울 + 8 모닝원더!</b>",
+    "horseNames": {
+      "11": "치프스타",
+      "9": "라온더어펌드",
+      "7": "러브인서울",
+      "8": "모닝원더",
+      "6": "검이불루"
+    },
     "expH": [
       "11",
-      "1",
       "9",
       "7",
-      "8"
+      "8",
+      "6"
     ],
     "expInterest": "8",
-    "expInterestDesc": "8번 모닝원더 (체크 13.4 · 저평가 변수) | ⚠️인기경계 제외: 5 닌자타이거",
-    "expComment": "마돈나 AI: 11 치프스타(31.2) · 1 남산벨트(17.6) · 9 라온더어펌드(18.4) · 7 러브인서울(15.9)",
+    "expInterestDesc": "8번 모닝원더 (장태풍 복병 체크) | ⚠️양대 예상가 공통 제외: 1 남산벨트, 5 닌자타이거",
+    "expComment": "별대박·장태풍 완벽 합의! 인기 1·5 제외 → 11 치프스타 축 + 최범현 대운 9 라온더어펌드 + 7 러브인서울 + 8 모닝원더",
     "ai": {
       "h1": "11",
-      "h2": "1",
-      "h3": "8"
+      "h2": "9",
+      "h3": "7",
+      "h4": "8"
     },
-    "aiReason": "📊 [황금 3두마 · 저배당 예상 (이변온도:평온 12.5%, 관망권고)] 축 11 치프스타(31.2) + 주력 1 남산벨트(17.6) + 변수 8 모닝원더(13.4) / ⚠️거품인기 제외(5)",
+    "aiReason": "👑 [축 11번 치프스타 (조재로)] 장태풍 메인하이라이트 · 별대박 파이널 완벽 일치! 인기 1·5 제외 + 11 축 · 9 최범현 주력 · 7·8 대박 승부",
     "combos": {
-      "sambok": "[3두 단통] 11 - 1 - 8 (단 1구멍)",
-      "samssang": "[축 11번] ➔ [1, 8번] (2구멍) / 3두 박스 (6구멍)"
+      "sambok": "[👑 축 11번] ➔ 9 · 7 · 8 (3구멍)",
+      "samssang": "[👑 축 11번] ➔ [9, 7, 8번] (6구멍)"
     },
     "results": {
       "status": "대기",
@@ -2770,30 +2637,20 @@
     // ====== 카카오톡 스마트 공유 엔진 ======
     function getKakaoShareText() {
       const liveLink = window.location.href;
-      return `[AI 신호등 가족 | 캡틴 & 김비서 실시간 디지털 전광판]
+      return `[AI 신호등 가족 | 별대박·장태풍 엄선 11/28(토) 실시간 전광판]
 
-동생아, 11/28(토) 토요경마(서울 11R + 제주 6R)는 이 사이트 딱 켜놓고 봐라!
-형이 김비서랑 밤새 정밀 분석해서 만든 실시간 라이브 전광판이다.
-로그인 없이 누르면 스마트폰에서 바로 열린다.
+동생아, 오늘 11/28(토) 토요경마는 별대박·장태풍 두 예상가 핵심 승부처 10개만 엄선 + 👑절대 축마 세팅 완료했다!
 
 🔗 [실시간 전광판 바로열기]:
 ${liveLink}
 
-🔥 [11/28(토) 우리팀 황금 3두마 과열 중·고배당 승부처]:
-1. 서울 2R (11:00): 🔥 7 - 6 - 8 (과열 중·고배당 예상)
-2. 서울 3R (11:25): 🔥 8 - 7 - 5 (과열 중·고배당 예상)
-3. 제주 2R (13:10): 🔥 10 - 9 - 3 (과열 중·고배당 예상)
-4. 서울 8R (16:10): 🔥 10 - 8 - 9 (과열 중·고배당 예상)
-5. 서울 9R (17:00): 🔥 5 - 7 - 6 (과열 중·고배당 예상)
-6. 서울 10R (17:25): 🔥 11 - 6 - 2 (과열 중·고배당 예상)
+🔥 [별대박 + 장태풍 동시 선정 최강 메인 승부처]:
+• 제주 1R (12:05): 👑축 1 일대지존 ➔ 3 · 8 · 4
+• 제주 6R (16:35): 👑축 4 전농미르 ➔ 3 · 10 · 1
+• 서울 10R (17:25): 👑축 7 대동용마 ➔ 3 · 8 · 11
+• 서울 11R (17:55): 👑축 11 치프스타 ➔ 9 · 7 · 8
 
-📲 [스마트폰 홈화면에 1초 앱 설치하는 법]:
-• 갤럭시(크롬): 위 링크 누르고 우측 상단 점 3개 [⋮] ➔ [홈 화면에 추가] 누르면 스마트폰 바탕화면에 앱 아이콘 바로 생성!
-• 아이폰(사파리): 화면 하단 중앙 공유버튼 [⬆] ➔ [홈 화면에 추가] 누르면 끝!
-(※ 카톡에서 열렸을 때는 우측 상단 점 3개 [⋮] ➔ [다른 브라우저로 열기] 누르면 바로 설치됨!)
-
-⏱️ 전광판 켜두면 각 경기마다 몇 분 남았는지 실시간 카운트다운 가동!
-오늘 중·고배당 승부경주 꽉 잡아서 대박 나자!`;
+📲 전광판 켜두면 1·2·3착 확정 시 적중 마번에 네온 불빛 자동 점등!`;
     }
 
     function openKakaoModal() {
@@ -3291,33 +3148,39 @@ ${liveLink}
           else if (ns === String(res.r3).trim()) { hitClass = "hit-rank-3"; hitBadge = '<div class="hit-rank-badge badge-r3">✨ 3착 적중</div>'; }
         }
 
+                const isAxisNum = (String(n).trim() === String(ai.h1 || '').trim());
+        const hName = (r.horseNames && r.horseNames[String(n)]) ? r.horseNames[String(n)] : '';
         return `
-          <div class="pick-cell ${hitClass} ${(!hitClass && isInterest) ? 'interest' : ''}">
+          <div class="pick-cell ${hitClass} ${(!hitClass && isAxisNum) ? 'axis-king' : ((!hitClass && isInterest) ? 'interest' : '')}">
             ${hitBadge}
-            <div class="cell-tag">${isInterest ? '5픽 (관심)' : (idx+1)+'픽'}</div>
+            ${isAxisNum ? `<div class="axis-crown-ribbon">👑 축마</div>` : `<div class="cell-tag">${isInterest ? '5픽 (관심)' : (idx+1)+'픽'}</div>`}
             <div class="horse-circle digital" style="background:${colorStyle.bg}; color:${colorStyle.color}; border-color:${colorStyle.border}; box-shadow:0 0 10px ${colorStyle.shadow};">
               ${n}
             </div>
-            <div class="cell-sub">${isInterest ? '관심마' : (idx===0?'추천':'대항')}</div>
+            ${hName ? `<div class="horse-name-label">${hName}</div>` : ''}
+            <div class="cell-sub">${isAxisNum ? '핵심축' : (isInterest ? '관심마' : '대항')}</div>
           </div>
         `;
       }).join("");
 
       document.getElementById("bb-exp-desc").innerHTML = `
-        <strong>예상가 총평:</strong> ${r.expComment}<br>
-        <strong>끝자리 관심마 핵심:</strong> <span style="color:var(--gold); font-weight:bold;">${r.expInterestDesc}</span>
+        <div class="expert-video-box">
+          <div class="expert-source-pill">${r.experts || '📺 별대박 · 장태풍 엄선'}</div>
+          <div>${r.videoSummary || r.expComment}</div>
+          <div style="margin-top:6px; color:var(--gold-light); font-weight:700;">★ 핵심 변수: ${r.expInterestDesc}</div>
+        </div>
       `;
 
       // 2단: 우리팀 3두(오전) / 4두(오후 연계·보험 보강) 동적 표출
       let hitCount = 0;
       const aiGrid = document.getElementById("bb-ai-grid");
       const aiList = [
-        { num: ai.h1, tag: "1순위 (축마)", sub: "핵심 축마", cls: "axis" },
-        { num: ai.h2, tag: "2순위 (복병)", sub: "교차 복병", cls: "interest" },
-        { num: ai.h3, tag: "3순위 (배당)", sub: "고배당 변수", cls: "interest" }
+        { num: ai.h1, tag: "👑 절대 축마", sub: "반드시 축 고정", cls: "axis-king", isAxis: true },
+        { num: ai.h2, tag: "2순위 (주력)", sub: "핵심 상대마", cls: "interest", isAxis: false },
+        { num: ai.h3, tag: "3순위 (복병)", sub: "중·고배당", cls: "interest", isAxis: false }
       ];
       if (ai.h4) {
-        aiList.push({ num: ai.h4, tag: "4순위 (연계)", sub: "당일연계·보험", cls: "axis" });
+        aiList.push({ num: ai.h4, tag: "4순위 (배당)", sub: "고배당·연계", cls: "axis", isAxis: false });
         aiGrid.className = "picks-grid-4";
       } else {
         aiGrid.className = "picks-grid-3";
@@ -3325,6 +3188,7 @@ ${liveLink}
 
       aiGrid.innerHTML = aiList.map(item => {
         const colorStyle = getHorseColor(item.num);
+        const hName = (r.horseNames && r.horseNames[String(item.num)]) ? r.horseNames[String(item.num)] : '';
 
         let hitClass = "";
         let hitBadge = "";
@@ -3338,11 +3202,12 @@ ${liveLink}
         return `
           <div class="pick-cell ${hitClass} ${(!hitClass && item.cls) ? item.cls : ''}">
             ${hitBadge}
-            <div class="cell-tag">${item.tag}</div>
-            <div class="horse-circle digital" style="background:${colorStyle.bg}; color:${colorStyle.color}; border-color:${colorStyle.border}; box-shadow:0 0 10px ${colorStyle.shadow};">
-              ${item.num || '-'}
+            ${item.isAxis ? `<div class="axis-crown-ribbon">👑 절대 축마</div>` : `<div class="cell-tag">${item.tag}</div>`}
+            <div class="horse-circle digital" style="background:${colorStyle.bg}; color:${colorStyle.color}; border-color:${colorStyle.border}; box-shadow:0 0 ${item.isAxis ? '18px' : '12px'} ${colorStyle.shadow};">
+              ${item.num}
             </div>
-            <div class="cell-sub">${item.sub}</div>
+            ${hName ? `<div class="horse-name-label">${hName}</div>` : ''}
+            <div class="cell-sub" style="${item.isAxis ? 'color:#FDE68A; font-weight:900;' : ''}">${item.sub}</div>
           </div>
         `;
       }).join("");
