@@ -1126,18 +1126,9 @@
 
     @media (max-width: 600px) {
       .picks-grid-4 .horse-circle {
-        width: 62px !important;
-        height: 62px !important;
-        font-size: 35px !important;
-      }
-      .picks-grid-5 .horse-circle {
         width: 52px !important;
         height: 52px !important;
-        font-size: 29px !important;
-      }
-      .pick-cell {
-        padding: 8px 3px !important;
-        min-height: 125px !important;
+        font-size: 28px !important;
       }
       .res-pill {
         padding: 3px 6px;
@@ -1627,23 +1618,56 @@
       border: 1px solid rgba(196, 181, 253, 0.65);
     }
 
-    /* 📱 모바일 5두·4두 마번 규격 완벽 맞춤 (삐져나옴 방지) */
-    @media (max-width: 600px) {
-      .picks-grid-5 { gap: 4px !important; }
-      .picks-grid-5 .pick-cell { padding: 7px 2px !important; border-radius: 10px !important; }
-      .picks-grid-5 .horse-circle { width: 34px !important; height: 34px !important; font-size: 17px !important; margin: 4px auto !important; border-width: 1.5px !important; }
-      .picks-grid-5 .axis-crown-ribbon { font-size: 9px !important; padding: 2px 4px !important; margin-bottom: 3px !important; letter-spacing: 0 !important; }
-      .picks-grid-5 .cell-tag { font-size: 9.5px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .picks-grid-5 .horse-name-label { font-size: 10px !important; margin-top: 2px !important; }
-      .picks-grid-5 .cell-sub { font-size: 9px !important; }
-      .picks-grid-5 .hit-rank-badge { font-size: 8.5px !important; padding: 1px 4px !important; top: 2px !important; right: 2px !important; }
-
-      .picks-grid-4 { gap: 6px !important; }
-      .picks-grid-4 .pick-cell { padding: 8px 3px !important; border-radius: 12px !important; }
-      .picks-grid-4 .horse-circle { width: 40px !important; height: 40px !important; font-size: 20px !important; margin: 5px auto !important; }
-      .picks-grid-4 .axis-crown-ribbon { font-size: 10px !important; padding: 2px 6px !important; }
-      .picks-grid-4 .cell-tag { font-size: 10px !important; }
-      .picks-grid-4 .horse-name-label { font-size: 11px !important; }
+    /* 📱 모바일 5두 마번 초컴팩트 1줄 5칸 완벽 고정 (4두 마번은 기존 유지) */
+    @media (max-width: 640px) {
+      .picks-grid-5 {
+        display: grid !important;
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+        gap: 3px !important;
+        width: 100% !important;
+        margin-bottom: 4px !important;
+      }
+      .picks-grid-5 .pick-cell {
+        padding: 5px 1px !important;
+        min-height: 0 !important;
+        height: auto !important;
+        border-radius: 8px !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+      }
+      .picks-grid-5 .horse-circle {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 15px !important;
+        margin: 3px auto !important;
+        border-width: 1.5px !important;
+      }
+      .picks-grid-5 .axis-crown-ribbon {
+        font-size: 8.5px !important;
+        padding: 1px 3px !important;
+        margin-bottom: 2px !important;
+        letter-spacing: 0 !important;
+        white-space: nowrap !important;
+      }
+      .picks-grid-5 .cell-tag {
+        font-size: 9px !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+      }
+      .picks-grid-5 .horse-name-label {
+        font-size: 9px !important;
+        margin-top: 2px !important;
+        line-height: 1.15 !important;
+      }
+      .picks-grid-5 .cell-sub {
+        display: none !important;
+      }
+      .picks-grid-5 .hit-rank-badge {
+        font-size: 8px !important;
+        padding: 1px 3px !important;
+        top: 1px !important;
+        right: 1px !important;
+      }
     }
 
   </style>
