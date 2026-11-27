@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ai-signal-racing-gh-v3-madonna';
+const CACHE_NAME = 'ai-signal-racing-gh-v4-live-hit';
 const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
