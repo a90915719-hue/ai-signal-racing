@@ -1,39 +1,21 @@
 {
-  "id": "./",
-  "name": "AI 신호등 가족 | 캡틴 & 김비서 실시간 경마 전광판",
-  "short_name": "AI신호등경마",
-  "description": "서울 · 부산 · 제주 전 경주 4두 압축 AI 신호등 실시간 디지털 전광판",
-  "start_url": "./",
-  "scope": "./",
+  "name": "AI 신호등 실시간 경마 전광판",
+  "short_name": "AI신호등",
+  "description": "별대박·장태풍 엄선 중·고배당 실시간 경마 전광판",
+  "start_url": "./index.html",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#070B14",
   "theme_color": "#070B14",
-  "lang": "ko",
   "icons": [
     {
-      "src": "./icon-192.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "./icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "./icon-512.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     }
   ]
 }
