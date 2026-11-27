@@ -1681,10 +1681,10 @@
     <!-- 상단 퀵 트랙 리본 (부산 / 제주 / 타임 한눈에!) -->
     <div class="quick-ribbon-container">
       <div class="track-tabs">
-        <button class="track-tab-btn active" onclick="filterTrack('ALL', event)">🌟 전체 17경주</button>
-        <button class="track-tab-btn" onclick="filterTrack('GO', event)">출격승부(14R)</button>
-        <button class="track-tab-btn tab-busan" onclick="filterTrack('부산', event)">서울(10R)</button>
-        <button class="track-tab-btn tab-jeju" onclick="filterTrack('제주', event)">제주경마(7R)</button>
+        <button class="track-tab-btn active" onclick="filterTrack('ALL', event)">🌟 전체</button>
+        <button class="track-tab-btn" onclick="filterTrack('GO', event)">🔥 승부처</button>
+        <button class="track-tab-btn tab-busan" onclick="filterTrack('서울', event)">🏇 서울</button>
+        <button class="track-tab-btn tab-jeju" onclick="filterTrack('제주', event)">🍊 제주</button>
       </div>
       <div class="quick-ribbon" id="quickRibbon"></div>
     </div>
@@ -1726,62 +1726,43 @@
         </div>
       </div>
 
-      <!-- 출격 판정 배너 -->
-      <div id="bb-decision" class="decision-banner go">
-        <span style="font-size:18px;">🎯</span>
-        <span id="bb-decision-text">오늘 캡틴 출격 승부!</span>
-      </div>
-
       <!-- 적중 시에만 나타나는 대형 축하 배너 -->
       <div id="bb-hit-celebrate" class="hit-celebrate-banner">
-        🎉 [대적중 성공!] 축마 및 추천마가 1·2·3착 착순에 진입하여 번쩍번쩍 네온 불꽃이 점등되었습니다!
+        🎉 [대적중 성공!] 적중 마번에 네온 불꽃이 점등되었습니다!
       </div>
 
-      <!-- 1단계: 외부 전문가 / AI99 실시간 예상지 5두 마번 -->
-      <div class="stage-section" style="border-color: rgba(245,158,11,0.6);">
-        <div class="stage-header">
-          <div class="stage-title" style="color:var(--gold);">
-            <span>🔮 [1단계] 코리아레이스 마돈나 AI 무료 예상지 5두 (참고용)</span>
-          </div>
-          <span style="font-size:11px; color:#94A3B8;">확정 착순 진입 시 불꽃 점등</span>
-        </div>
-        <div class="picks-grid-5" id="bb-exp-grid"></div>
-        <div class="stage-desc" id="bb-exp-desc">--</div>
-      </div>
-
-      <!-- 2단계: 김비서 AI팀 분석 4두 칼압축 마번 -->
-      <div class="stage-section" style="border-color: rgba(16,185,129,0.7);">
-        <div class="stage-header">
+      <!-- 1순위: 우리팀 최종 마번 (모바일 최상단 배치 · 예상평 완전 제거) -->
+      <div class="stage-section" style="border-color: rgba(16,185,129,0.75);">
+        <div class="stage-header" style="margin-bottom:8px;">
           <div class="stage-title" style="color:var(--green);">
-            <span>👑 [2단계] 우리팀 최종 칼압축 마번 (오전 3두 ➔ 오후 4두 연계·확률 보강)</span>
+            <span>👑 우리팀 최종 마번</span>
           </div>
-          <span style="font-size:11px; color:#A7F3D0;">결과 1·2·3착 적중 시 자동 점등</span>
+          <span style="font-size:11px; color:#A7F3D0;">적중 시 불꽃 점등</span>
         </div>
         <div class="picks-grid-3" id="bb-ai-grid"></div>
-        <div class="stage-desc" id="bb-ai-desc" style="color:#A7F3D0;">--</div>
       </div>
 
-      <!-- 📺 금요브리핑 유튜브 영상 요약 & 마번 반영 검토 -->
-      <div class="stage-section" id="bb-video-box" style="border-color: rgba(239,68,68,0.65); background: rgba(30, 15, 25, 0.85);">
-        <div class="stage-header" style="margin-bottom:8px;">
-          <div class="stage-title" id="bb-video-title" style="color:#FCA5A5; font-size:14.5px;">
-            <span>📺 [11/28 토요브리핑 영상 요약]</span>
-          </div>
-          <a href="https://www.youtube.com/watch?v=g91zbxXVFcA" target="_blank" style="font-size:11.5px; font-weight:900; color:#FFFFFF; background:#DC2626; padding:3px 9px; border-radius:6px; text-decoration:none; border:1px solid #FCA5A5;">▶ 원본 영상 보기 ↗</a>
-        </div>
-        <div class="stage-desc" id="bb-video-desc" style="color:#F8FAFC; font-size:13px; line-height:1.6;">--</div>
-      </div>
-
-      <!-- 3단계: 삼복·삼쌍 최소 구멍 수 조합 -->
+      <!-- 삼복·삼쌍 조합 -->
       <div class="combo-grid">
         <div class="combo-box" style="border-color: rgba(16,185,129,0.4);">
-          <div class="combo-tag">🎯 삼복승 3두마 초압축 (단 1구멍)</div>
+          <div class="combo-tag">🎯 삼복승</div>
           <div class="combo-val digital" id="bb-combo-bok">--</div>
         </div>
         <div class="combo-box" style="border-color: rgba(245,158,11,0.4);">
-          <div class="combo-tag">🔥 삼쌍승 3두마 고배당 (2~6구멍)</div>
+          <div class="combo-tag">🔥 삼쌍승</div>
           <div class="combo-val digital" id="bb-combo-ssang">--</div>
         </div>
+      </div>
+
+      <!-- 참고 5두 마번 (설명 없이 마번만 깔끔하게) -->
+      <div class="stage-section" style="border-color: rgba(245,158,11,0.5); margin-top:10px; margin-bottom:0;">
+        <div class="stage-header" style="margin-bottom:8px;">
+          <div class="stage-title" style="color:var(--gold); font-size:13.5px;">
+            <span>📌 참고 5두 마번</span>
+          </div>
+          <span style="font-size:11px; color:#94A3B8;">확정 시 자동 점등</span>
+        </div>
+        <div class="picks-grid-5" id="bb-exp-grid"></div>
       </div>
     </div>
 
@@ -1851,17 +1832,8 @@
       </div>
 
       <div style="margin-top:10px; font-size:11.5px; color:#94A3B8; text-align:right;">
-        ※ 경주 행을 클릭하시면 상단 전광판 상세 분석으로 즉시 이동합니다
+        ※ 경주 행을 클릭하시면 상단 마번으로 이동합니다
       </div>
-    </div>
-
-    <!-- 캡틴 영구 필승 수칙 -->
-    <div class="policy-box">
-      <strong style="color:#FDE68A; font-size:13px;">👑 [캡틴 영구 승부 지침 요약]</strong><br>
-      1. <b>하루 17경주 중 오직 『제주 1R / 부산 4·9·10R 등 중·고배당 승부경주』만 선별 타격!</b> 저배당 경주는 무조건 관망(패스).<br>
-      2. <b>오직 삼복승 & 삼쌍승만 집중:</b> 단 3구멍(삼복) / 단 6구멍(삼쌍)으로 환수율 극대화.<br>
-      3. <b>1등 최유력마를 축으로 고정:</b> 흔들림 없는 1착 기둥축 선정.<br>
-      4. <b>경주 종료 후 다크호스 확정 착순이 수신되면 적중 마번에만 네온 불꽃이 점등됩니다!</b>
     </div>
 
   </div>
@@ -3092,28 +3064,19 @@ ${liveLink}
 
       if (isHigh) {
         actionEl.className = "bb-action-badge action-high";
-        actionEl.innerHTML = "[캡틴 고배당 메인 출격!] (필승)";
+        actionEl.innerHTML = "[고배당 메인 승부]";
         payoutEl.innerHTML = "🔥 고배당 예상";
-        payoutEl.style.cssText = "font-size:21px; font-weight:950; padding:7px 16px; border-radius:10px; background:linear-gradient(135deg,#DC2626,#EF4444); color:#FFFFFF; border:2px solid #FCA5A5; box-shadow:0 0 20px rgba(239,68,68,0.85); letter-spacing:0.5px;";
-
-        decEl.className = "decision-banner go";
-        decText.innerHTML = `<strong>[오늘 캡틴 고배당 핵심 승부!]</strong> ${r.aiReason}`;
+        payoutEl.style.cssText = "font-size:19px; font-weight:950; padding:6px 14px; border-radius:10px; background:linear-gradient(135deg,#DC2626,#EF4444); color:#FFFFFF; border:2px solid #FCA5A5; box-shadow:0 0 18px rgba(239,68,68,0.85); letter-spacing:0.5px;";
       } else if (isMidHigh) {
         actionEl.className = "bb-action-badge action-go";
-        actionEl.innerHTML = "[캡틴 중·고배당 출격!] (베팅 GO)";
+        actionEl.innerHTML = "[중·고배당 승부]";
         payoutEl.innerHTML = "⚡ 중·고배당 예상";
-        payoutEl.style.cssText = "font-size:21px; font-weight:950; padding:7px 16px; border-radius:10px; background:linear-gradient(135deg,#F59E0B,#D97706); color:#0B132B; border:2px solid #FEF08A; box-shadow:0 0 18px rgba(245,158,11,0.75); letter-spacing:0.5px;";
-
-        decEl.className = "decision-banner go";
-        decText.innerHTML = `<strong>[오늘 캡틴 중·고배당 승부!]</strong> ${r.aiReason}`;
+        payoutEl.style.cssText = "font-size:19px; font-weight:950; padding:6px 14px; border-radius:10px; background:linear-gradient(135deg,#F59E0B,#D97706); color:#0B132B; border:2px solid #FEF08A; box-shadow:0 0 16px rgba(245,158,11,0.75); letter-spacing:0.5px;";
       } else {
         actionEl.className = "bb-action-badge action-pass";
-        actionEl.innerHTML = "[저배당 예상 · 관망]";
+        actionEl.innerHTML = "[저배당 · 관망]";
         payoutEl.innerHTML = "저배당 예상";
-        payoutEl.style.cssText = "font-size:20px; font-weight:950; padding:7px 16px; border-radius:10px; background:#334155; color:#F8FAFC; border:2px solid #CBD5E1; box-shadow:0 0 12px rgba(148,163,184,0.45); letter-spacing:0.5px;";
-
-        decEl.className = "decision-banner pass";
-        decText.innerHTML = `<strong>[저배당 예상 · 관망 권고]</strong> ${r.aiReason}`;
+        payoutEl.style.cssText = "font-size:18px; font-weight:950; padding:6px 14px; border-radius:10px; background:#334155; color:#F8FAFC; border:2px solid #CBD5E1; box-shadow:0 0 10px rgba(148,163,184,0.45); letter-spacing:0.5px;";
       }
 
       // 다크호스 결과 상태 확인
@@ -3186,13 +3149,8 @@ ${liveLink}
         `;
       }).join("");
 
-      document.getElementById("bb-exp-desc").innerHTML = `
-        <div class="expert-video-box">
-          <div class="expert-source-pill">${r.experts || '📺 별대박 · 장태풍 엄선'}</div>
-          <div>${r.videoSummary || r.expComment}</div>
-          <div style="margin-top:6px; color:var(--gold-light); font-weight:700;">★ 핵심 변수: ${r.expInterestDesc}</div>
-        </div>
-      `;
+      const expDescEl = document.getElementById("bb-exp-desc");
+      if (expDescEl) expDescEl.innerHTML = "";
 
       // 2단: 우리팀 3두(오전) / 4두(오후 연계·보험 보강) 동적 표출
       let hitCount = 0;
@@ -3235,9 +3193,8 @@ ${liveLink}
         `;
       }).join("");
 
-      document.getElementById("bb-ai-desc").innerHTML = `
-        <strong>AI팀 정밀 분석:</strong> ${r.aiReason}
-      `;
+      const aiDescEl = document.getElementById("bb-ai-desc");
+      if (aiDescEl) aiDescEl.innerHTML = "";
 
       // 📺 금요브리핑 유튜브 영상 요약 표출
       const vBox = document.getElementById("bb-video-box");
