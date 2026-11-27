@@ -1618,7 +1618,7 @@
       border: 1px solid rgba(196, 181, 253, 0.65);
     }
 
-    /* 📱 모바일 5두 마번 초컴팩트 1줄 5칸 완벽 고정 (4두 마번은 기존 유지) */
+    /* 📱 모바일 5두 마번: 바깥 박스 여백만 줄이고 마번 숫자는 원래대로 큼직·선명하게! */
     @media (max-width: 640px) {
       .picks-grid-5 {
         display: grid !important;
@@ -1631,31 +1631,32 @@
         padding: 5px 1px !important;
         min-height: 0 !important;
         height: auto !important;
-        border-radius: 8px !important;
+        border-radius: 9px !important;
         min-width: 0 !important;
         overflow: hidden !important;
       }
       .picks-grid-5 .horse-circle {
-        width: 28px !important;
-        height: 28px !important;
-        font-size: 15px !important;
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 24px !important;
+        font-weight: 950 !important;
         margin: 3px auto !important;
-        border-width: 1.5px !important;
+        border-width: 2px !important;
       }
       .picks-grid-5 .axis-crown-ribbon {
-        font-size: 8.5px !important;
-        padding: 1px 3px !important;
+        font-size: 9px !important;
+        padding: 1px 4px !important;
         margin-bottom: 2px !important;
         letter-spacing: 0 !important;
         white-space: nowrap !important;
       }
       .picks-grid-5 .cell-tag {
-        font-size: 9px !important;
+        font-size: 9.5px !important;
         line-height: 1.2 !important;
         white-space: nowrap !important;
       }
       .picks-grid-5 .horse-name-label {
-        font-size: 9px !important;
+        font-size: 10px !important;
         margin-top: 2px !important;
         line-height: 1.15 !important;
       }
@@ -1663,8 +1664,8 @@
         display: none !important;
       }
       .picks-grid-5 .hit-rank-badge {
-        font-size: 8px !important;
-        padding: 1px 3px !important;
+        font-size: 8.5px !important;
+        padding: 1px 4px !important;
         top: 1px !important;
         right: 1px !important;
       }
@@ -1779,7 +1780,18 @@
         🎉 [대적중 성공!] 적중 마번에 네온 불꽃이 점등되었습니다!
       </div>
 
-      <!-- 1순위: 우리팀 최종 마번 (모바일 최상단 배치 · 예상평 완전 제거) -->
+      <!-- 1단: 예상가 참고 5두 마번 (상단 배치) -->
+      <div class="stage-section" style="border-color: rgba(245,158,11,0.55); margin-bottom:10px;">
+        <div class="stage-header" style="margin-bottom:6px;">
+          <div class="stage-title" style="color:var(--gold); font-size:13.5px;">
+            <span>📌 예상가 참고 5두 마번</span>
+          </div>
+          <span style="font-size:11px; color:#94A3B8;">확정 시 자동 점등</span>
+        </div>
+        <div class="picks-grid-5" id="bb-exp-grid"></div>
+      </div>
+
+      <!-- 2단: 우리팀 최종 마번 (예상가 마번 바로 아래 배치) -->
       <div class="stage-section" style="border-color: rgba(16,185,129,0.75);">
         <div class="stage-header" style="margin-bottom:8px;">
           <div class="stage-title" style="color:var(--green);">
@@ -1800,17 +1812,6 @@
           <div class="combo-tag">🔥 삼쌍승</div>
           <div class="combo-val digital" id="bb-combo-ssang">--</div>
         </div>
-      </div>
-
-      <!-- 참고 5두 마번 (설명 없이 마번만 깔끔하게) -->
-      <div class="stage-section" style="border-color: rgba(245,158,11,0.5); margin-top:10px; margin-bottom:0;">
-        <div class="stage-header" style="margin-bottom:8px;">
-          <div class="stage-title" style="color:var(--gold); font-size:13.5px;">
-            <span>📌 참고 5두 마번</span>
-          </div>
-          <span style="font-size:11px; color:#94A3B8;">확정 시 자동 점등</span>
-        </div>
-        <div class="picks-grid-5" id="bb-exp-grid"></div>
       </div>
     </div>
 
