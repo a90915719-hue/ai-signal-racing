@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ai-signal-racing-20261128-1448';
+const CACHE_NAME = 'ai-signal-racing-20261128-1459';
 self.addEventListener('install', e => { self.skipWaiting(); });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))));
