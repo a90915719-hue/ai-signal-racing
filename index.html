@@ -3805,7 +3805,42 @@ ${liveLink}
     const initRace = getNextUpcomingRace();
     selectRace(initRace ? initRace.id : "서울_1", false);
     updateClock();
-    setInterval(updateClock, 1000); // 10초마다 시계 및 자동 전환 체크
+    setInterval(updateClock, 1000);
+
+    // 🔄 60초마다 최신 확정 결과 자동 무음 동기화 (폰에서 새로고침 안 눌러도 결과 자동 점등!)
+    async function pollLatestResults() {
+      try {
+        const res = await fetch('./index.html?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return;
+        const txt = await res.text();
+        const m = txt.match(/const\s+RACES\s*=\s*(\[[\s\S]*?\]);/);
+        if (!m) return;
+        const fresh = JSON.parse(m[1]);
+        let changed = false;
+        fresh.forEach(fr => {
+          const cur = RACES.find(x => x.id === fr.id);
+          if (cur && JSON.stringify(cur.results) !== JSON.stringify(fr.results)) {
+            cur.results = fr.results;
+            changed = true;
+          }
+          if (cur && JSON.stringify(cur.ai) !== JSON.stringify(fr.ai)) {
+            cur.ai = fr.ai;
+            cur.combos = fr.combos;
+            changed = true;
+          }
+        });
+        if (changed) {
+          renderMasterTable();
+          renderQuickRibbon();
+          selectRace(currentKey, userManuallySelected);
+          showToast('🏁 최신 확정 결과가 자동 반영되었습니다!');
+        }
+      } catch (e) {}
+    }
+    setInterval(pollLatestResults, 60000);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') pollLatestResults();
+    });
   </script>
 </body>
 </html>
