@@ -3848,7 +3848,7 @@ ${liveLink}
         }
       } catch (e) {}
     }
-    setInterval(pollLatestResults, 60000);
+    setInterval(pollLatestResults, 30000);
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') pollLatestResults();
     });
